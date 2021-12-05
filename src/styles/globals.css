@@ -1,47 +1,62 @@
 body {
-   font-family: SF Pro Display;
+   font-family: 'SF Pro Display Regular' sans-serif;
+   background-color: #fafafa;
 }
 
 h1 {
+   font-family: 'SF Pro Display Bold';
    font-weight: 700;
    font-size: 64px;
    line-height: 76px;
+   letter-spacing: -0.05em;
 }
 
 h1 {
+   font-family: 'SF Pro Display Bold';
    font-weight: 700;
    font-size: 56px;
    line-height: 67px;
+   letter-spacing: -0.05em;
 }
 
 h3 {
+   font-family: 'SF Pro Display Bold';
    font-weight: 700;
    font-size: 48px;
    line-height: 57px;
+   letter-spacing: -0.05em;
 }
 
 h4 {
+   font-family: 'SF Pro Display Bold';
    font-weight: 700;
    font-size: 40px;
    line-height: 48px;
+   letter-spacing: -0.05em;
 }
 
 h5 {
+   font-family: 'SF Pro Display Bold';
    font-weight: 700;
    font-size: 32px;
-   line-height: 38px; 
+   line-height: 38px;
+   letter-spacing: -0.05em;
 }
 
 h6 {
+   font-family: 'SF Pro Display Bold';
    font-weight: 700;
    font-size: 24px;
    line-height: 29px;
+   letter-spacing: -0.05em;
 }
 
 .h7 {
+   font-family: 'SF Pro Display Bold';
    font-weight: 700;
    font-size: 20px;
    line-height: 24px;
+   letter-spacing: -0.035em;
 }
 
 .spreadText {
@@ -50,9 +65,11 @@ h6 {
 }
 
 .bodyBold {
+   font-family: 'SF Pro Display Bold';
    font-weight: 700;
    font-size: 16px;
    line-height: 19px;
+   letter-spacing: -0.025em;
 }
 
 .body {
@@ -61,9 +78,11 @@ h6 {
 }
 
 .smallBold {
+   font-family: 'SF Pro Display Bold';
    font-weight: 700;
    font-size: 14px;
    line-height: 17px;
+   letter-spacing: -0.025em;
 }
 
 .small {
@@ -72,6 +91,7 @@ h6 {
 }
 
 .tinyBold {
+   font-family: 'SF Pro Display Bold';
    font-weight: 700;
    font-size: 12px;
    line-height: 14px;
@@ -80,4 +100,29 @@ h6 {
 .tiny {
    font-size: 12px;
    line-height: 14px;
+}
+
+/* Fonts */
+@font-face {
+   font-family: 'SF Pro Display Regular';
+   font-style: normal;
+   font-weight: normal;
+   src: local('SF Pro Display Regular'),
+      url('./fonts/SFPRODISPLAYREGULAR.woff') format('woff');
+}
+
+@font-face {
+   font-family: 'SF Pro Display Medium';
+   font-style: normal;
+   font-weight: normal;
+   src: local('SF Pro Display Medium'),
+      url('./fonts/SFPRODISPLAYMEDIUM.woff') format('woff');
+}
+
+@font-face {
+   font-family: 'SF Pro Display Bold';
+   font-style: normal;
+   font-weight: normal;
+   src: local('SF Pro Display Bold'),
+      url('./fonts/SFPRODISPLAYBOLD.woff') format('woff');
 }
