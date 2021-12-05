@@ -1,16 +1,12 @@
 import tw from 'twin.macro';
 import Link from 'next/link';
-import {
-   Avatar,
-   ListItem,
-   ListItemAvatar,
-   ListItemText,
-   Button,
-} from '@mui/material';
+import { Button } from '@mui/material';
 
 import Layout from '../Layout';
 import { StarSVG } from '../SVG-Icons';
 import CoinTable from '../CoinTable.jsx';
+import Watchlist from '../Watchlist.jsx';
+import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 
 const Home = () => {
    return (
@@ -18,6 +14,7 @@ const Home = () => {
          {/* Watchlist */}
          {coins.length !== 0 && (
             <WishlistWrapper>
+               {/* Section title */}
                <div css={[tw`flex items-center justify-between`]}>
                   <p
                      css={[tw`flex items-center space-x-5`]}
@@ -38,36 +35,16 @@ const Home = () => {
                   </Link>
                </div>
 
+               {/* WatchList */}
                <Wishlist>
                   {coins.map(({ name, symbol, price }, index) => {
+                     const FormattedPrice = CurrentcyFormatter(price);
                      return (
-                        <CoinWrapper>
-                           <div css={[tw`text-right mb-1`]}>
-                              <StarSVG />
-                           </div>
-
-                           <ListItem sx={{ padding: 0, marginBottom: '10px' }}>
-                              <ListItemAvatar>
-                                 <Avatar>
-                                    <StarSVG />
-                                 </Avatar>
-                              </ListItemAvatar>
-                              <ListItemText
-                                 primary={
-                                    <>
-                                       <CoinName>{name}</CoinName>
-                                    </>
-                                 }
-                                 secondary={
-                                    <>
-                                       <CoinABBR>{symbol}</CoinABBR>
-                                    </>
-                                 }
-                              />
-                           </ListItem>
-
-                           <Price>${price}</Price>
-                        </CoinWrapper>
+                        <Watchlist
+                           name={name}
+                           symbol={symbol}
+                           formattedPrice={FormattedPrice}
+                        />
                      );
                   })}
                </Wishlist>
@@ -76,6 +53,8 @@ const Home = () => {
 
          {/* All coins */}
          <div>
+            {/* Section title */}
+
             <div css={[tw`flex items-center justify-between mb-10`]}>
                <p className='bodyBold'>All Coins</p>
 
@@ -129,9 +108,5 @@ const coins = [
 // Tailwind Styles
 const WishlistWrapper = tw.div`space-y-8 lg:(mb-14)`;
 const Wishlist = tw.div`grid grid-cols-5 gap-6`;
-const CoinWrapper = tw.div`bg-white rounded-[20px] px-5 py-4 `;
-const CoinName = tw.p`text-[18px] text-dark-darker leading-[28px]`;
-const CoinABBR = tw.p`capitalize text-[#505780] text-[14px] leading-[17px] tracking-[-0.025em]`;
-const Price = tw.p`text-[24px] leading-[29px] tracking-[-0.025em] text-dark-darker mb-2`;
 
 export default Home;

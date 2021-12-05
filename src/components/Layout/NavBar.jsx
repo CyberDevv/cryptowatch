@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 
 import { Logo, SearchSVG } from '../SVG-Icons';
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
    return (
       <Nav>
          {/* Logo */}
@@ -23,9 +23,11 @@ const NavBar = () => {
 
             <Stack spacing={3} direction='row'>
                <NavButton variant='contained'>Connect Wallet</NavButton>
-               <NavButton sx={{ bgcolor: '#EBF2FA', color: '#4C6FFF' }}>
-                  Sign in
-               </NavButton>
+               {!user && (
+                  <NavButton sx={{ bgcolor: '#EBF2FA', color: '#4C6FFF' }}>
+                     Sign in
+                  </NavButton>
+               )}
             </Stack>
          </div>
       </Nav>

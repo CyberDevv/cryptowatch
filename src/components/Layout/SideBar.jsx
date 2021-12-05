@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { SVGIcons } from '../SVG-Icons';
 
-const SideBar = () => {
+const SideBar = ({ user }) => {
    const [active, setActive] = useState('Home');
    return (
       <Nav>
@@ -40,12 +40,14 @@ const SideBar = () => {
                svg={<SVGIcons active={active} settings />}
                label='Settings'
             />
-            <NavItemComponent
-               active={active}
-               link='/'
-               svg={<SVGIcons active={active} logout />}
-               label='Log out'
-            />
+            {user && (
+               <NavItemComponent
+                  active={active}
+                  link='/'
+                  svg={<SVGIcons active={active} logout />}
+                  label='Log out'
+               />
+            )}
          </NavMenu>
       </Nav>
    );

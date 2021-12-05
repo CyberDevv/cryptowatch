@@ -2,6 +2,7 @@ import tw from 'twin.macro';
 import { Avatar, IconButton } from '@mui/material';
 
 import { StarOutlinedSVG, HamburgerSVG } from './SVG-Icons';
+import CurrencyFormatter from '../utils/CurrencyFormatter.js';
 
 const CoinTable = () => {
    return (
@@ -33,12 +34,7 @@ const CoinTable = () => {
                   last7Days,
                   symbol,
                }) => {
-                  let formatter = new Intl.NumberFormat('en-US', {
-                     style: 'currency',
-                     currency: 'USD',
-                  });
-
-                  let FormattedCurrentPrice = formatter.format(currentPrice);
+                  const FormattedCurrentPrice = CurrencyFormatter(currentPrice);
                   return (
                      <TableBody key={id}>
                         {/* add to watchlist button */}
