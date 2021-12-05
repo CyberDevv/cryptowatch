@@ -19,6 +19,6 @@ const index = ({ children }) => {
 // Tailwind styles
 const MainWrapper = tw.div`py-5`;
 const Div = tw.main`flex`;
-const Main = tw.main`w-full lg:(px-[40px]) xl:(px-[60px])`;
+const Main = tw.main`w-full lg:(px-[40px]) xl:(px-[40px])`;
 
 export default index;
