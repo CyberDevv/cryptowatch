@@ -135,3 +135,30 @@ export const SVGIcons = ({
       );
    }
 };
+
+export const SearchSVG = () => {
+   return (
+      <SvgIcon
+         viewBox='0 0 14 14'
+         sx={{ width: '14px', height: '14px', fill: 'none' }}
+      >
+         <ellipse
+            cx='6.86381'
+            cy='6.86387'
+            rx='5.24333'
+            ry='5.24333'
+            stroke='#929292'
+            stroke-width='1.5'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+         />
+         <path
+            d='M10.5106 10.783L12.5663 12.8334'
+            stroke='#929292'
+            stroke-width='1.5'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+         />
+      </SvgIcon>
+   );
+};

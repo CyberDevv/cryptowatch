@@ -6,17 +6,19 @@ import SideBar from './SideBar.jsx';
 const index = ({ children }) => {
    return (
       <MainWrapper>
-         <SideBar />
-         <Main>
-            <NavBar />
-            {children}
-         </Main>
+         <NavBar />
+         <Div>
+            <SideBar />
+
+            <Main>{children}</Main>
+         </Div>
       </MainWrapper>
    );
 };
 
 // Tailwind styles
-const MainWrapper = tw.div`flex`;
-const Main = tw.main``;
+const MainWrapper = tw.div`py-5`;
+const Div = tw.main`flex`;
+const Main = tw.main`w-full lg:(px-[40px]) xl:(px-[60px])`;
 
 export default index;

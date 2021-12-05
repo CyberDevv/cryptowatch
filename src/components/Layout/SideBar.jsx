@@ -2,19 +2,12 @@ import tw from 'twin.macro';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { Logo, HomeSVG, PlaceholderSVG, SVGIcons } from '../SVG-Icons';
+import { SVGIcons } from '../SVG-Icons';
 
 const SideBar = () => {
    const [active, setActive] = useState('Home');
    return (
       <Nav>
-         {/* Logo */}
-         <Link href='/'>
-            <LogoAnchor>
-               <Logo />
-            </LogoAnchor>
-         </Link>
-
          {/* NavMenu */}
          <NavMenu>
             <NavItemComponent
@@ -76,9 +69,8 @@ const NavItemComponent = ({ active, label, svg, link }) => {
 };
 
 // tailwind Styles
-const Nav = tw.nav`lg:(w-[180px] min-w-[180px] py-12 ml-6) xl:(w-[211px] min-w-[211px])`;
-const LogoAnchor = tw.a`ml-4`;
-const NavMenu = tw.ul`lg:(my-[70px] space-y-10)`;
+const Nav = tw.nav`lg:(w-[180px] min-w-[180px] ml-6) xl:(w-[211px] min-w-[211px])`;
+const NavMenu = tw.ul`lg:(space-y-10)`;
 const NavItem = tw.li``;
 const Anchor = tw.a`cursor-pointer flex items-center lg:(space-x-4) letter-spacing[-0.025em]`;
 
