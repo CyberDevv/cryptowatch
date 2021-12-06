@@ -1,19 +1,20 @@
 import tw from 'twin.macro';
+import Image from 'next/image';
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 
 import { StarSVG } from './SVG-Icons';
 
-const Watchlist = ({ name, symbol, formattedPrice }) => {
+const Watchlist = ({ name, symbol, formattedPrice, image }) => {
    return (
-      <CoinWrapper>
+      <>
          <div css={[tw`text-right mb-1`]}>
             <StarSVG />
          </div>
 
          <ListItem sx={{ padding: 0, marginBottom: '10px' }}>
             <ListItemAvatar>
-               <Avatar>
-                  <StarSVG />
+               <Avatar sx={{ bgcolor: 'transparent' }}>
+                  <Image src={image} layout='fill' />
                </Avatar>
             </ListItemAvatar>
             <ListItemText
@@ -31,14 +32,13 @@ const Watchlist = ({ name, symbol, formattedPrice }) => {
          </ListItem>
 
          <Price>{formattedPrice}</Price>
-      </CoinWrapper>
+      </>
    );
 };
 
 // Tailwind styles
-const CoinWrapper = tw.div`bg-white rounded-[20px] px-5 py-4 `;
 const CoinName = tw.p`text-[18px] text-dark-darker leading-[28px]`;
-const CoinABBR = tw.p`capitalize text-[#505780] text-[14px] leading-[17px] tracking-[-0.025em]`;
+const CoinABBR = tw.p`uppercase text-[#505780] text-[14px] leading-[17px] tracking-[-0.025em]`;
 const Price = tw.p`text-[24px] leading-[29px] tracking-[-0.025em] text-dark-darker mb-2`;
 
 export default Watchlist;

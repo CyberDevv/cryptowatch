@@ -1,11 +1,20 @@
 import tw from 'twin.macro';
 import Link from 'next/link';
-import { Button, Stack } from '@mui/material';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
+import { Button, Stack } from '@mui/material';
 
+import SigninModal from './SignInModal.jsx';
+import SignupModal from './SignupModal.jsx';
 import { Logo, SearchSVG } from '../SVG-Icons';
 
 const NavBar = ({ user }) => {
+   const [signUpOpened, setSignUpOpened] = useState(false);
+   const [signInOpened, setSignInOpened] = useState(false);
+
+   const handleClickOpen = () => {
+      setSignUpOpened(true);
+   };
    return (
       <Nav>
          {/* Logo */}
@@ -16,20 +25,53 @@ const NavBar = ({ user }) => {
          </Link>
 
          <div css={[tw`flex justify-between items-center w-full`]}>
+            {/* Search input */}
             <InputWrapper>
                <SearchSVG />
                <Input type='text' placeholder='Search' />
             </InputWrapper>
 
+            {/* Buttons */}
+
             <Stack spacing={3} direction='row'>
-               <NavButton variant='contained'>Connect Wallet</NavButton>
+               {/* connect wallet */}
+               {user && (
+                  <NavButton variant='contained'>Connect Wallet</NavButton>
+               )}
+
+               {/* sign in */}
                {!user && (
-                  <NavButton sx={{ bgcolor: '#EBF2FA', color: '#4C6FFF' }}>
+                  <NavButton
+                     onClick={() => setSignInOpened(true)}
+                     sx={{ bgcolor: '#EBF2FA', color: '#4C6FFF' }}
+                  >
                      Sign in
+                  </NavButton>
+               )}
+
+               {/* Sign up */}
+               {!user && (
+                  <NavButton
+                     onClick={() => setSignUpOpened(true)}
+                     sx={{ bgcolor: '#EBF2FA', color: '#4C6FFF' }}
+                  >
+                     Create an Account
                   </NavButton>
                )}
             </Stack>
          </div>
+
+         {/* Sign in modal */}
+         <SigninModal
+            setSignInOpened={setSignInOpened}
+            signInOpened={signInOpened}
+         />
+
+         {/* Sign in modal */}
+         <SignupModal
+            setSignUpOpened={setSignUpOpened}
+            signUpOpened={signUpOpened}
+         />
       </Nav>
    );
 };

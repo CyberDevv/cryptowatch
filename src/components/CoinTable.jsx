@@ -1,10 +1,12 @@
 import tw from 'twin.macro';
+import Image from 'next/image';
 import { Avatar, IconButton } from '@mui/material';
 
+import Sparkline from './Sparkline.jsx';
 import { StarOutlinedSVG, HamburgerSVG } from './SVG-Icons';
 import CurrencyFormatter from '../utils/CurrencyFormatter.js';
 
-const CoinTable = () => {
+const CoinTable = ({ coins }) => {
    return (
       <TableWrapper>
          <TableHeader>
@@ -15,60 +17,117 @@ const CoinTable = () => {
             <TableHeaderText>#</TableHeaderText>
             <TableHeaderText>Currency</TableHeaderText>
             <TableHeaderText>Current Price</TableHeaderText>
+            <TableHeaderText>1hr</TableHeaderText>
             <TableHeaderText>24hr</TableHeaderText>
             <TableHeaderText>7d</TableHeaderText>
-            <TableHeaderText>1m</TableHeaderText>
             <TableHeaderText>Last 7 days</TableHeaderText>
             <TableHeaderText></TableHeaderText>
          </TableHeader>
 
          <TableBodyWrapper>
-            {coinsDetails.map(
-               ({
-                  id,
-                  currency,
-                  currentPrice,
-                  last24Hours,
-                  last7days,
-                  last1min,
-                  last7Days,
-                  symbol,
-               }) => {
-                  const FormattedCurrentPrice = CurrencyFormatter(currentPrice);
-                  return (
-                     <TableBody key={id}>
-                        {/* add to watchlist button */}
-                        <IconButton>
-                           <StarOutlinedSVG />
-                        </IconButton>
+            {coins
+               .slice(0, 5)
+               .map(
+                  (
+                     {
+                        id,
+                        name,
+                        current_price,
+                        price_change_percentage_24h,
+                        price_change_percentage_1h_in_currency,
+                        price_change_percentage_7d_in_currency,
+                        symbol,
+                        image,
+                        sparkline_in_7d: { price },
+                     },
+                     index
+                  ) => {
+                     const FormattedCurrentPrice =
+                        CurrencyFormatter(current_price);
+                     return (
+                        <TableBody key={id}>
+                           {/* add to watchlist button */}
+                           <IconButton>
+                              <StarOutlinedSVG />
+                           </IconButton>
 
-                        {/* id */}
-                        <TableBodyText>{id}</TableBodyText>
+                           {/* S/N */}
+                           <TableBodyText>{index + 1}</TableBodyText>
 
-                        {/* Currency */}
-                        <div css={[tw`flex items-center space-x-4`]}>
-                           <Avatar
-                              alt='Remy Sharp'
-                              src='/static/images/avatar/1.jpg'
-                              sx={{ width: '32px', height: '32px' }}
-                           />
+                           {/* Currency */}
+                           <div css={[tw`flex items-center space-x-4`]}>
+                              <Avatar
+                                 sx={{
+                                    width: '32px',
+                                    height: '32px',
+                                    bgcolor: 'transparent',
+                                 }}
+                              >
+                                 <Image src={image} alt={name} layout='fill' />
+                              </Avatar>
+                              <TableBodyText>
+                                 {`${name} ${symbol.toUpperCase()}`}
+                              </TableBodyText>
+                           </div>
+
+                           {/* price*/}
                            <TableBodyText>
-                              {`${currency} ${symbol.toUpperCase()}`}
+                              {FormattedCurrentPrice}
                            </TableBodyText>
-                        </div>
 
-                        <TableBodyText>{FormattedCurrentPrice}</TableBodyText>
-                        <TableBodyText>{last24Hours}</TableBodyText>
-                        <TableBodyText>{last7days}</TableBodyText>
-                        <TableBodyText>{last1min}</TableBodyText>
-                        <TableBodyText>{last7Days}</TableBodyText>
-                        <IconButton>
-                           <HamburgerSVG />
-                        </IconButton>
-                     </TableBody>
-                  );
-               }
-            )}
+                           {/* last 1h */}
+                           <TableBodyText
+                              css={[
+                                 price_change_percentage_1h_in_currency < 0
+                                    ? tw`text-[#E52F15]`
+                                    : tw`text-[#66CB9F]`,
+                              ]}
+                           >
+                              {parseFloat(
+                                 price_change_percentage_1h_in_currency
+                              ).toFixed(1)}
+                              %
+                           </TableBodyText>
+
+                           {/* last 24hr */}
+                           <TableBodyText
+                              css={[
+                                 price_change_percentage_24h < 0
+                                    ? tw`text-[#E52F15]`
+                                    : tw`text-[#66CB9F]`,
+                              ]}
+                           >
+                              {parseFloat(price_change_percentage_24h).toFixed(
+                                 1
+                              )}
+                              %
+                           </TableBodyText>
+
+                           {/* last 7d */}
+                           <TableBodyText
+                              css={[
+                                 price_change_percentage_7d_in_currency < 0
+                                    ? tw`text-[#E52F15]`
+                                    : tw`text-[#66CB9F]`,
+                              ]}
+                           >
+                              {parseFloat(
+                                 price_change_percentage_7d_in_currency
+                              ).toFixed(1)}
+                              %
+                           </TableBodyText>
+
+                           {/* graph for last 7 days */}
+                           <Sparkline price={price} />
+
+                           {/* Hamburger */}
+                           <IconButton>
+                              <HamburgerSVG />
+                           </IconButton>
+                        </TableBody>
+                     );
+                  }
+               )}
          </TableBodyWrapper>
       </TableWrapper>
    );
