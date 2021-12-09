@@ -1,6 +1,5 @@
 import tw from 'twin.macro';
 import { useState } from 'react';
-import { styled } from '@mui/system';
 import { Button, Dialog, DialogActions } from '@mui/material';
 
 import { CloseSVG } from '../SVG-Icons';
@@ -14,7 +13,7 @@ const SignUpModal = ({ setSignUpOpened, signUpOpened }) => {
       setSignUpOpened(false);
    };
    return (
-      <Dialog maxWidth='lg' open={signUpOpened} onClose={handleClose}>
+      <Dialog maxWidth='md' open={signUpOpened} onClose={handleClose}>
          <ModalWrapper>
             {/* Signup methods */}
             {!withEmailModal && (

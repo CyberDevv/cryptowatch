@@ -16,24 +16,30 @@ const SideBar = ({ user }) => {
                svg={<SVGIcons active={active} home />}
                label='Home'
             />
-            <NavItemComponent
-               active={active}
-               link='/'
-               svg={<SVGIcons active={active} watchlist />}
-               label='Watchlist'
-            />
-            <NavItemComponent
-               active={active}
-               link='/'
-               svg={<SVGIcons active={active} wallet />}
-               label='Wallet'
-            />
-            <NavItemComponent
-               active={active}
-               link='/'
-               svg={<SVGIcons active={active} priceAlerts />}
-               label='Price Alerts'
-            />
+            {user && (
+               <NavItemComponent
+                  active={active}
+                  link='/'
+                  svg={<SVGIcons active={active} watchlist />}
+                  label='Watchlist'
+               />
+            )}
+            {user && (
+               <NavItemComponent
+                  active={active}
+                  link='/'
+                  svg={<SVGIcons active={active} wallet />}
+                  label='Wallet'
+               />
+            )}
+            {user && (
+               <NavItemComponent
+                  active={active}
+                  link='/'
+                  svg={<SVGIcons active={active} priceAlerts />}
+                  label='Price Alerts'
+               />
+            )}
             <NavItemComponent
                active={active}
                link='/'
