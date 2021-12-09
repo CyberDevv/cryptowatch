@@ -6,6 +6,11 @@ import { SVGIcons } from '../SVG-Icons';
 
 const SideBar = ({ user }) => {
    const [active, setActive] = useState('Home');
+
+   const handleLogout = (e) => {
+      e.preventDefault()
+   }
+   
    return (
       <Nav>
          {/* NavMenu */}
@@ -35,24 +40,26 @@ const SideBar = ({ user }) => {
             {user && (
                <NavItemComponent
                   active={active}
-                  link='/'
+                  link='priceAlerts'
                   svg={<SVGIcons active={active} priceAlerts />}
                   label='Price Alerts'
                />
             )}
             <NavItemComponent
                active={active}
-               link='/'
+               link='settings'
                svg={<SVGIcons active={active} settings />}
                label='Settings'
             />
             {user && (
-               <NavItemComponent
-                  active={active}
-                  link='/'
-                  svg={<SVGIcons active={active} logout />}
-                  label='Log out'
-               />
+               <button onClick={handleLogout}>
+                  <NavItemComponent
+                     active={active}
+                     link='/'
+                     svg={<SVGIcons active={active} logout />}
+                     label='Log out'
+                  />
+               </button>
             )}
          </NavMenu>
       </Nav>
