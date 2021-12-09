@@ -1,38 +1,47 @@
 import tw from 'twin.macro';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 
 import { StarSVG } from './SVG-Icons';
 
 const Watchlist = ({ name, symbol, formattedPrice, image }) => {
    return (
-      <>
-         <div css={[tw`text-right mb-1`]}>
-            <StarSVG />
-         </div>
+      <div
+         css={[
+            tw` cursor-pointer px-5 py-4 h-full`,
+         ]}
+      >
+         <Link href='/'>
+            <a>
+               <div css={[tw`text-right mb-1`]}>
+                  <StarSVG />
+               </div>
 
-         <ListItem sx={{ padding: 0, marginBottom: '10px' }}>
-            <ListItemAvatar>
-               <Avatar sx={{ bgcolor: 'transparent' }}>
-                  <Image src={image} layout='fill' />
-               </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-               primary={
-                  <>
-                     <CoinName>{name}</CoinName>
-                  </>
-               }
-               secondary={
-                  <>
-                     <CoinABBR>{symbol}</CoinABBR>
-                  </>
-               }
-            />
-         </ListItem>
+               <ListItem sx={{ padding: 0, marginBottom: '10px' }}>
+                  <ListItemAvatar>
+                     <Avatar sx={{ bgcolor: 'transparent' }}>
+                        <Image src={image} layout='fill' />
+                     </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                     primary={
+                        <>
+                           <CoinName>{name}</CoinName>
+                        </>
+                     }
+                     secondary={
+                        <>
+                           <CoinABBR>{symbol}</CoinABBR>
+                        </>
+                     }
+                  />
+               </ListItem>
 
-         <Price>{formattedPrice}</Price>
-      </>
+               <Price>{formattedPrice}</Price>
+            </a>
+         </Link>
+      </div>
    );
 };
 

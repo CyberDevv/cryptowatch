@@ -8,11 +8,11 @@ import CoinTable from '../CoinTable.jsx';
 import Watchlist from '../Watchlist.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 
-const Home = ({ coins }) => {
+const Home = ({ coins, user }) => {
    return (
       <Layout>
          {/* Watchlist */}
-         {coins.length !== 0 && (
+         {user && coins.length !== 0 && (
             <WishlistWrapper>
                {/* Section title */}
                <div css={[tw`flex items-center justify-between`]}>
@@ -23,7 +23,7 @@ const Home = ({ coins }) => {
                      <span>Watchlist</span> <StarSVG />
                   </p>
 
-                  <Link href='/'>
+                  <Link href='watchList'>
                      <a>
                         <Button
                            className='smallBold'
@@ -77,43 +77,15 @@ const Home = ({ coins }) => {
             </div>
 
             {/* coin Table */}
-            <CoinTable coins= {coins} />
+            <CoinTable coins={coins} />
          </div>
       </Layout>
    );
 };
 
-// const coins = [
-//    {
-//       name: 'Bitcoin',
-//       symbol: 'Btc',
-//       price: 55000,
-//    },
-//    {
-//       name: 'Ethereum',
-//       symbol: 'eth',
-//       price: 4234,
-//    },
-//    {
-//       name: 'Solana',
-//       symbol: 'Sol',
-//       price: 219,
-//    },
-//    {
-//       name: 'Matic',
-//       symbol: 'Mat',
-//       price: 1.2,
-//    },
-//    {
-//       name: 'Ripple',
-//       symbol: 'XPR',
-//       price: 0.8,
-//    },
-// ];
-
 // Tailwind Styles
 const WishlistWrapper = tw.div`space-y-8 lg:(mb-14)`;
 const Wishlist = tw.div`grid grid-cols-5 gap-6`;
-const CoinWrapper = tw.div`bg-white rounded-[20px] px-5 py-4 `;
+const CoinWrapper = tw.div`bg-white rounded-[20px] overflow-hidden hover:(shadow-lg) transition-shadow duration-300 `;
 
 export default Home;

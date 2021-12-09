@@ -19,7 +19,7 @@ const SideBar = ({ user }) => {
             {user && (
                <NavItemComponent
                   active={active}
-                  link='/'
+                  link='watchList'
                   svg={<SVGIcons active={active} watchlist />}
                   label='Watchlist'
                />

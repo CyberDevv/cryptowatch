@@ -26,7 +26,7 @@ const CoinTable = ({ coins }) => {
 
          <TableBodyWrapper>
             {coins
-               .slice(0, 5)
+               .slice(0, 8)
                .map(
                   (
                      {

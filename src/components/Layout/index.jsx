@@ -4,7 +4,7 @@ import NavBar from './NavBar.jsx';
 import SideBar from './SideBar.jsx';
 
 const Layout = ({ children }) => {
-   const user = null;
+   const user = 'null';
    return (
       <MainWrapper>
          <NavBar user={user} />
