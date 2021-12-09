@@ -43,7 +43,11 @@ const NavBar = ({ user }) => {
                {!user && (
                   <NavButton
                      onClick={() => setSignInOpened(true)}
-                     sx={{ bgcolor: '#EBF2FA', color: '#4C6FFF' }}
+                     sx={{
+                        bgcolor: '#EBF2FA',
+                        color: '#4C6FFF',
+                        paddingX: '24px',
+                     }}
                   >
                      Sign in
                   </NavButton>
