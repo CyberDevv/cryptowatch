@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
+import { useState } from 'react';
 import {
-   alertClasses,
    Button,
    Checkbox,
    FormControlLabel,
@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 
 import FormField from '../FormField.jsx';
-import { useState } from 'react';
 
 const EmailSignInMethod = ({ setWithEmailModal }) => {
    const [forgotPassModal, setForgotPassModal] = useState(false);

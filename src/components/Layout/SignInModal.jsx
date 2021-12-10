@@ -1,11 +1,10 @@
 import tw from 'twin.macro';
+import { useState } from 'react';
 import { Button, Dialog, DialogActions } from '@mui/material';
 
-import EmailSigInpMethod from './EmailSigInpMethod.jsx';
 import { CloseSVG} from '../SVG-Icons';
 import SignInMethods from './SignInMethods.jsx';
-import { styled } from '@mui/system';
-import { useState } from 'react';
+import EmailSigInpMethod from './EmailSigInpMethod.jsx';
 
 const SignInModal = ({ setSignInOpened, signInOpened }) => {
    const [withEmailModal, setWithEmailModal] = useState(false);

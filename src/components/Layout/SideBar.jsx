@@ -32,14 +32,6 @@ const SideBar = ({ user }) => {
             {user && (
                <NavItemComponent
                   active={active}
-                  link='/'
-                  svg={<SVGIcons active={active} wallet />}
-                  label='Wallet'
-               />
-            )}
-            {user && (
-               <NavItemComponent
-                  active={active}
                   link='priceAlerts'
                   svg={<SVGIcons active={active} priceAlerts />}
                   label='Price Alerts'
