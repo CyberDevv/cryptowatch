@@ -34,11 +34,6 @@ const NavBar = ({ user }) => {
             {/* Buttons */}
 
             <Stack spacing={3} direction='row'>
-               {/* connect wallet */}
-               {user && (
-                  <NavButton variant='contained'>Connect Wallet</NavButton>
-               )}
-
                {/* sign in */}
                {!user && (
                   <NavButton

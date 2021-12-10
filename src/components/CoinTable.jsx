@@ -133,59 +133,6 @@ const CoinTable = ({ coins }) => {
    );
 };
 
-const coinsDetails = [
-   {
-      id: 1,
-      currency: 'Bitcoin',
-      symbol: 'btc',
-      currentPrice: 56000,
-      last24Hours: '+20',
-      last7days: '+5',
-      last1min: '+50',
-      last7Days: [20, 49, 43, 84, 23, 21, 43],
-   },
-   {
-      id: 2,
-      currency: 'Ethereum',
-      symbol: 'Eth',
-      currentPrice: 6000,
-      last24Hours: '+20',
-      last7days: '+5',
-      last1min: '+50',
-      last7Days: [20, 49, 43, 84, 23, 21, 43],
-   },
-   {
-      id: 3,
-      currency: 'NEO',
-      symbol: 'NEO',
-      currentPrice: 0.8,
-      last24Hours: '+20',
-      last7days: '+5',
-      last1min: '+50',
-      last7Days: [20, 49, 43, 84, 23, 21, 43],
-   },
-   {
-      id: 4,
-      currency: 'Bicoincash',
-      symbol: 'bsc',
-      currentPrice: 56000,
-      last24Hours: '+20',
-      last7days: '+5',
-      last1min: '+50',
-      last7Days: [20, 49, 43, 84, 23, 21, 43],
-   },
-   {
-      id: 5,
-      currency: 'Litecoin',
-      symbol: 'lte',
-      currentPrice: 56000,
-      last24Hours: '+20',
-      last7days: '+5',
-      last1min: '+50',
-      last7Days: [20, 49, 43, 84, 23, 21, 43],
-   },
-];
-
 // tailwind styles
 const TableWrapper = tw.div`divide-y-2 space-y-2`;
 const TableGrid = tw.ul`grid justify-items-start divide-dark-gray items-center grid-template-columns[40px 0.3fr 2fr 1fr 0.7fr 0.7fr 0.7fr 1fr 0.2fr ]`;

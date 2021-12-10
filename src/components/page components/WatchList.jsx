@@ -13,14 +13,9 @@ const WatchList = ({ coins, user }) => {
          {coins.length !== 0 && (
             <WishlistWrapper>
                {/* Section title */}
-               <div css={[tw`flex items-center justify-between`]}>
-                  <p
-                     css={[tw`flex items-center space-x-5`]}
-                     className='bodyBold'
-                  >
-                     <span>Watchlist</span> <StarSVG />
-                  </p>
-               </div>
+               <p css={[tw`flex items-center space-x-5`]} className='bodyBold'>
+                  <span>Watchlist</span> <StarSVG />
+               </p>
 
                {/* WatchList */}
                <Wishlist>
