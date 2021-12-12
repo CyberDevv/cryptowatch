@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
 };
 
 // Tailwind styles
-const MainWrapper = tw.div`py-5`;
+const MainWrapper = tw.div`py-5 overflow-x-hidden`;
 const Div = tw.main`flex`;
 const Main = tw.main`w-full lg:(px-[40px]) xl:(px-[40px])`;
 

@@ -28,6 +28,7 @@ const WatchList = ({ coins, user }) => {
                               symbol={symbol}
                               formattedPrice={FormattedPrice}
                               image={image}
+                              id={id}
                            />
                         </CoinWrapper>
                      );

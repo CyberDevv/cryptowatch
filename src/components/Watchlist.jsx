@@ -5,14 +5,10 @@ import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 
 import { StarSVG } from './SVG-Icons';
 
-const Watchlist = ({ name, symbol, formattedPrice, image }) => {
+const Watchlist = ({ id, name, symbol, formattedPrice, image }) => {
    return (
-      <div
-         css={[
-            tw` cursor-pointer px-5 py-4 h-full`,
-         ]}
-      >
-         <Link href='/'>
+      <div css={[tw` cursor-pointer px-5 py-4 h-full`]}>
+         <Link href={`watchList/${id}`}>
             <a>
                <div css={[tw`text-right mb-1`]}>
                   <StarSVG />

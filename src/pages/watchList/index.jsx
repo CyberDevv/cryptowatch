@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Head from 'next/head';
 
-import WatchList from '../components/page components/WatchList.jsx';
+import WatchList from '../../components/page components/WatchList.jsx';
 
 const WatchListComponent = ({coins, user}) => {
    return (
