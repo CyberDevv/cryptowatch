@@ -111,6 +111,18 @@ h6 {
    letter-spacing: -0.025em;
 }
 
+.active {
+   color: #3754db;
+}
+
+.active a {
+   fill: #3754db;
+}
+
+.active:hover {
+   color: #3754db;
+}
+
 /* Fonts */
 @font-face {
    font-family: 'SF Pro Display Regular';

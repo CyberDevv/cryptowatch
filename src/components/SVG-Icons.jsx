@@ -16,11 +16,10 @@ export const Logo = () => {
 };
 
 export const SVGIcons = ({
-   active,
    home,
-   watchlist,
+   watchlist,   settings,
+
    priceAlerts,
-   settings,
    logout,
 }) => {
    if (home) {
@@ -28,7 +27,6 @@ export const SVGIcons = ({
          <SvgIcon
             viewBox='0 0 18 18'
             sx={{
-               color: `${active === 'Home' ? '#3754DB' : '#999999'}`,
                width: '18px',
                height: '18px',
             }}
@@ -51,7 +49,6 @@ export const SVGIcons = ({
          <SvgIcon
             viewBox='0 0 21 20'
             sx={{
-               color: `${active === 'Watchlist' ? '#3754DB' : '#999999'}`,
                width: '21px',
                height: '20px',
             }}
@@ -66,7 +63,6 @@ export const SVGIcons = ({
          <SvgIcon
             viewBox='0 0 16 16'
             sx={{
-               color: `${active === 'Settings' ? '#3754DB' : '#999999'}`,
                width: '16px',
                height: '16px',
             }}
@@ -85,7 +81,6 @@ export const SVGIcons = ({
          <SvgIcon
             viewBox='0 0 20 20'
             sx={{
-               color: `${active === 'Price Alerts' ? '#3754DB' : '#999999'}`,
                width: '20px',
                height: '20px',
             }}
@@ -305,4 +300,4 @@ export const WhiteStarSVG = () => {
          />
       </SvgIcon>
    );
-}
+};

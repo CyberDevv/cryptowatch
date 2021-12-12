@@ -2,53 +2,43 @@ import tw from 'twin.macro';
 import Link from 'next/link';
 import { useState } from 'react';
 
+import ActiveLink from '../ActiveClass';
 import { SVGIcons } from '../SVG-Icons';
 
 const SideBar = ({ user }) => {
-   const [active, setActive] = useState('Home');
-
    const handleLogout = (e) => {
-      e.preventDefault()
-   }
-   
+      e.preventDefault();
+   };
+
    return (
       <Nav>
          {/* NavMenu */}
          <NavMenu>
-            <NavItemComponent
-               active={active}
-               link='/'
-               svg={<SVGIcons active={active} home />}
-               label='Home'
-            />
+            <NavItemComponent link='/' svg={<SVGIcons home />} label='Home' />
             {user && (
                <NavItemComponent
-                  active={active}
-                  link='watchList'
-                  svg={<SVGIcons active={active} watchlist />}
+                  link='/watchList'
+                  svg={<SVGIcons watchlist />}
                   label='Watchlist'
                />
             )}
             {user && (
                <NavItemComponent
-                  active={active}
-                  link='priceAlerts'
-                  svg={<SVGIcons active={active} priceAlerts />}
+                  link='/priceAlerts'
+                  svg={<SVGIcons priceAlerts />}
                   label='Price Alerts'
                />
             )}
             <NavItemComponent
-               active={active}
-               link='settings'
-               svg={<SVGIcons active={active} settings />}
+               link='/settings'
+               svg={<SVGIcons settings />}
                label='Settings'
             />
             {user && (
                <button onClick={handleLogout}>
                   <NavItemComponent
-                     active={active}
-                     link='/'
-                     svg={<SVGIcons active={active} logout />}
+                     link=''
+                     svg={<SVGIcons logout />}
                      label='Log out'
                   />
                </button>
@@ -58,19 +48,15 @@ const SideBar = ({ user }) => {
    );
 };
 
-const NavItemComponent = ({ active, label, svg, link }) => {
+const NavItemComponent = ({ label, svg, link }) => {
    return (
       <NavItem>
-         <Link href={link}>
-            <Anchor
-               css={[
-                  active === label ? tw`text-primary-blue` : tw`text-dark-gray`,
-               ]}
-            >
+         <ActiveLink activeClassName='active' href={link}>
+            <Anchor css={[tw`text-dark-gray`]}>
                {svg}
                <p className='small'>{label}</p>
             </Anchor>
-         </Link>
+         </ActiveLink>
       </NavItem>
    );
 };
@@ -79,6 +65,6 @@ const NavItemComponent = ({ active, label, svg, link }) => {
 const Nav = tw.nav`lg:(w-[180px] min-w-[180px] ml-6) xl:(w-[211px] min-w-[211px])`;
 const NavMenu = tw.ul`lg:(space-y-10)`;
 const NavItem = tw.li``;
-const Anchor = tw.a`cursor-pointer flex items-center lg:(space-x-4) letter-spacing[-0.025em]`;
+const Anchor = tw.a` hover:(text-dark-black transition-colors duration-300) cursor-pointer flex items-center lg:(space-x-4) letter-spacing[-0.025em]`;
 
 export default SideBar;
