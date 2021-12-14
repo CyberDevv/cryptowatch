@@ -1,6 +1,4 @@
 import tw from 'twin.macro';
-import Link from 'next/link';
-import { useState } from 'react';
 
 import ActiveLink from '../ActiveClass';
 import { SVGIcons } from '../SVG-Icons';

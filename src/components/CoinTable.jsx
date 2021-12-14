@@ -1,4 +1,5 @@
 import tw from 'twin.macro';
+import Link from 'next/link';
 import Image from 'next/image';
 import { Avatar, IconButton } from '@mui/material';
 
@@ -55,20 +56,28 @@ const CoinTable = ({ coins }) => {
                            <TableBodyText>{index + 1}</TableBodyText>
 
                            {/* Currency */}
-                           <div css={[tw`flex items-center space-x-4`]}>
-                              <Avatar
-                                 sx={{
-                                    width: '32px',
-                                    height: '32px',
-                                    bgcolor: 'transparent',
-                                 }}
-                              >
-                                 <Image src={image} alt={name} layout='fill' />
-                              </Avatar>
-                              <TableBodyText>
-                                 {`${name} ${symbol.toUpperCase()}`}
-                              </TableBodyText>
-                           </div>
+                           <Link href={`coins/${id}`}>
+                              <a>
+                                 <div css={[tw`flex items-center space-x-4`]}>
+                                    <Avatar
+                                       sx={{
+                                          width: '32px',
+                                          height: '32px',
+                                          bgcolor: 'transparent',
+                                       }}
+                                    >
+                                       <Image
+                                          src={image}
+                                          alt={name}
+                                          layout='fill'
+                                       />
+                                    </Avatar>
+                                    <TableBodyText>
+                                       {`${name} ${symbol.toUpperCase()}`}
+                                    </TableBodyText>
+                                 </div>
+                              </a>
+                           </Link>
 
                            {/* price*/}
                            <TableBodyText>

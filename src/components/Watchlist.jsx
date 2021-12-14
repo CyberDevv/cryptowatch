@@ -8,7 +8,7 @@ import { StarSVG } from './SVG-Icons';
 const Watchlist = ({ id, name, symbol, formattedPrice, image }) => {
    return (
       <div css={[tw` cursor-pointer px-5 py-4 h-full`]}>
-         <Link href={`watchList/${id}`}>
+         <Link href={`coins/${id}`}>
             <a>
                <div css={[tw`text-right mb-1`]}>
                   <StarSVG />

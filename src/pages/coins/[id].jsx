@@ -33,7 +33,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
    // const url = `https://api.coingecko.com/api/v3/coins/${params.id}`;
 
-   const url = `https://api.coingecko.com/api/v3/coins/${params.id}?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=true`;
+   const url = `https://api.coingecko.com/api/v3/coins/${params.id}?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`;
    const sevenDUrl = `https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=7`;
 
    const res = await (await axios(url)).data;
