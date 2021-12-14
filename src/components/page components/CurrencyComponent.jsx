@@ -144,7 +144,7 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
             maxWidth='md'
             onClose={() => setPriceAlertModalOpened(false)}
             open={priceAlertModalOpened}
-            sx={{textAlign: 'center' }}
+            sx={{ textAlign: 'center' }}
          >
             <div css={[tw`p-7 pt-[58px]`]}>
                <h6 css={[tw`text-dark-black letter-spacing[0]`]}>
@@ -239,7 +239,7 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
                      fontWeight: 'bold',
                      textTransform: 'none',
                      borderRadius: '8px',
-                     boxShadow: 'none'
+                     boxShadow: 'none',
                   }}
                   variant='contained'
                >
@@ -249,21 +249,37 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
                {/* Close button */}
                <DialogActions
                   sx={{
-                     position: 'absolute',
-                     right: 26,
-                     top: 26,
                      padding: 0,
                   }}
                >
                   <Button
                      sx={{
+                        position: 'absolute',
                         borderRadius: '999px',
                         height: '25px',
                         minWidth: 25,
+                        right: 26,
+                        top: 26,
                      }}
                      onClick={() => setPriceAlertModalOpened(false)}
                   >
                      <CloseSVG />
+                  </Button>
+
+                  <Button
+                     sx={{
+                        position: 'absolute',
+                        borderRadius: '999px',
+                        height: '25px',
+                        minWidth: 25,
+                        right: 26,
+                        bottom: 35,
+                     }}
+                     onClick={() => setPriceAlertModalOpened(false)}
+                  >
+                     <Link href='/priceAlerts'>
+                        <a>View all</a>
+                     </Link>
                   </Button>
                </DialogActions>
             </div>
