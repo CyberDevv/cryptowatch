@@ -17,7 +17,7 @@ const Watchlist = ({ id, name, symbol, formattedPrice, image }) => {
                <ListItem sx={{ padding: 0, marginBottom: '10px' }}>
                   <ListItemAvatar>
                      <Avatar sx={{ bgcolor: 'transparent' }}>
-                        <Image src={image} layout='fill' />
+                        <Image src={image} alt= {name} layout='fill' />
                      </Avatar>
                   </ListItemAvatar>
                   <ListItemText

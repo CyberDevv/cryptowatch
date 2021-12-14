@@ -18,7 +18,7 @@ const NavBar = ({ user }) => {
    return (
       <Nav>
          {/* Logo */}
-         <Link href='/'>
+         <Link href='/' passHref>
             <LogoAnchor>
                <Logo />
             </LogoAnchor>

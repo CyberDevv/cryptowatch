@@ -280,8 +280,8 @@ export const SettingsComponentSVG = () => {
                y2='18.781'
                gradientUnits='userSpaceOnUse'
             >
-               <stop stop-color='#D665FF' />
-               <stop offset='1' stop-color='#4C6FFF' />
+               <stop stopColor='#D665FF' />
+               <stop offset='1' stopColor='#4C6FFF' />
             </linearGradient>
          </defs>
       </SvgIcon>

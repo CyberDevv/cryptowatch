@@ -65,7 +65,7 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
                <ListItem sx={{ padding: 0, marginTop: '24px' }}>
                   <ListItemAvatar>
                      <Avatar sx={{ bgcolor: 'transparent' }}>
-                        <Image src={image.small} layout='fill' />
+                        <Image src={image.small} layout='fill' alt= {name} />
                      </Avatar>
                   </ListItemAvatar>
                   <ListItemText

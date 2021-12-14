@@ -167,11 +167,12 @@ const PriceAlert = () => {
 
             {/* Download section */}
             <DownnloadPannel>
-               <a href='/'>
+               <a href='https://www.centuryleap.com'>
                   <Image
                      src='/images/download app.png'
                      width={504}
                      height={400}
+                     alt= "Download for other devices"
                   />
                </a>
             </DownnloadPannel>
