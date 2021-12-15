@@ -29,6 +29,7 @@ import { styled } from '@mui/system';
 
 const CurrencyComponent = ({ coin, sevenDres }) => {
    const [priceAlertModalOpened, setPriceAlertModalOpened] = useState(false);
+   const [AmountAlertk, setAmountAlert] = useState('');
    const handleSetAlert = (e) => {
       e.preventDefault();
 
@@ -41,6 +42,21 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
       e.preventDefault();
 
       setPriceAlertModalOpened; // Your code should be in here
+   };
+
+   const handlePricePercentSetters = (percent) => {
+      let currentPrice = coin.market_data.current_price.usd;
+
+      if (percent < 0) {
+         let percentage = percent / 100;
+         let amount = currentPrice * percentage;
+         setAmountAlert(parseFloat(Math.abs(amount)).toFixed(2));
+      }
+      else {
+         let percentage = (percent / 100) + 1;
+         let amount = currentPrice * percentage;
+         setAmountAlert(parseFloat(Math.abs(amount)).toFixed(2));
+      }
    };
 
    const {
@@ -65,7 +81,7 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
                <ListItem sx={{ padding: 0, marginTop: '24px' }}>
                   <ListItemAvatar>
                      <Avatar sx={{ bgcolor: 'transparent' }}>
-                        <Image src={image.small} layout='fill' alt= {name} />
+                        <Image src={image.small} layout='fill' alt={name} />
                      </Avatar>
                   </ListItemAvatar>
                   <ListItemText
@@ -158,16 +174,40 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
                {/* predefined prices */}
                <Stack direction='row' spacing='48px'>
                   <Stack direction='row' spacing='8px'>
-                     <PreDefinedPriceButton>-50%</PreDefinedPriceButton>
-                     <PreDefinedPriceButton>-20%</PreDefinedPriceButton>
-                     <PreDefinedPriceButton>-10%</PreDefinedPriceButton>
-                     <PreDefinedPriceButton>-5%</PreDefinedPriceButton>
+                     <PreDefinedPriceButton
+                        onClick={() => handlePricePercentSetters(-50)}
+                     >
+                        -50%
+                     </PreDefinedPriceButton>
+                     <PreDefinedPriceButton
+                        onClick={() => handlePricePercentSetters(-20)}
+                     >
+                        -20%
+                     </PreDefinedPriceButton>
+                     <PreDefinedPriceButton
+                        onClick={() => handlePricePercentSetters(-10)}
+                     >
+                        -10%
+                     </PreDefinedPriceButton>
+                     <PreDefinedPriceButton
+                        onClick={() => handlePricePercentSetters(-5)}
+                     >
+                        -5%
+                     </PreDefinedPriceButton>
                   </Stack>
                   <Stack direction='row' spacing='8px'>
-                     <ButtonGreen>5%</ButtonGreen>
-                     <ButtonGreen>10%</ButtonGreen>
-                     <ButtonGreen>20%</ButtonGreen>
-                     <ButtonGreen>50%</ButtonGreen>
+                     <ButtonGreen onClick={() => handlePricePercentSetters(5)}>
+                        5%
+                     </ButtonGreen>
+                     <ButtonGreen onClick={() => handlePricePercentSetters(10)}>
+                        10%
+                     </ButtonGreen>
+                     <ButtonGreen onClick={() => handlePricePercentSetters(20)}>
+                        20%
+                     </ButtonGreen>
+                     <ButtonGreen onClick={() => handlePricePercentSetters(50)}>
+                        50%
+                     </ButtonGreen>
                   </Stack>
                </Stack>
 
@@ -199,6 +239,8 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
 
                   {/* A;mount */}
                   <TextField
+                     value={AmountAlertk}
+                     onChange={(e) => setAmountAlert(e.target.value)}
                      sx={{ m: 1, width: '25ch' }}
                      InputProps={{
                         startAdornment: (
