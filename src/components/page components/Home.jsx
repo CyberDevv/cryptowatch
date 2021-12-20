@@ -8,7 +8,7 @@ import CoinTable from '../CoinTable.jsx';
 import Watchlist from '../Watchlist.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 
-const Home = ({ coins, user }) => {
+const Home = ({ coins, user, page }) => {
    return (
       <Layout>
          {/* Watchlist */}
@@ -78,7 +78,7 @@ const Home = ({ coins, user }) => {
             </div>
 
             {/* coin Table */}
-            <CoinTable coins={coins} />
+            <CoinTable coins={coins} page={page} />
          </div>
       </Layout>
    );

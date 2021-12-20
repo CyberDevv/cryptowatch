@@ -6,8 +6,12 @@ import { Avatar, IconButton } from '@mui/material';
 import Sparkline from './Sparkline.jsx';
 import { StarOutlinedSVG, HamburgerSVG } from './SVG-Icons';
 import CurrencyFormatter from '../utils/CurrencyFormatter.js';
+import { useRouter } from 'next/router';
 
 const CoinTable = ({ coins }) => {
+   const router = useRouter();
+   const { page } = router.query;
+   // const page = parseInt(query.get('page') || '1', 10);
    return (
       <TableWrapper>
          <TableHeader>
@@ -138,6 +142,10 @@ const CoinTable = ({ coins }) => {
                   }
                )}
          </TableBodyWrapper>
+
+         <Link href={`?page=${parseInt(page) + 1}`}>
+            <a>Next</a>
+         </Link>
       </TableWrapper>
    );
 };
