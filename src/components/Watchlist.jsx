@@ -1,7 +1,13 @@
 import tw from 'twin.macro';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
+import {
+   Avatar,
+   ListItem,
+   ListItemAvatar,
+   ListItemText,
+   Typography,
+} from '@mui/material';
 
 import { StarSVG } from './SVG-Icons';
 
@@ -17,20 +23,12 @@ const Watchlist = ({ id, name, symbol, formattedPrice, image }) => {
                <ListItem sx={{ padding: 0, marginBottom: '10px' }}>
                   <ListItemAvatar>
                      <Avatar sx={{ bgcolor: 'transparent' }}>
-                        <Image src={image} alt= {name} layout='fill' />
+                        <Image src={image} alt={name} layout='fill' />
                      </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                     primary={
-                        <>
-                           <CoinName>{name}</CoinName>
-                        </>
-                     }
-                     secondary={
-                        <>
-                           <CoinABBR>{symbol}</CoinABBR>
-                        </>
-                     }
+                     primary={<CoinName>{name}</CoinName>}
+                     secondary={<CoinABBR>{symbol}</CoinABBR>}
                   />
                </ListItem>
 

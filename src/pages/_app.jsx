@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
          <Provider store={store}>
             <NextNProgress height={5} />
             <GlobalStyles />
-            <Component user={user} {...pageProps} />
+            <Component {...pageProps} />
          </Provider>
       </>
    );

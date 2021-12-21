@@ -10,7 +10,7 @@ const WatchListComponent = ({coins, user}) => {
             <title>Watch | CryptoWatch</title>
          </Head>
 
-         <WatchList user= {user} coins={coins} />
+         <WatchList coins={coins} />
       </>
    );
 };

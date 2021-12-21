@@ -3,14 +3,14 @@ import Head from 'next/head';
 
 import Settings from '../components/page components/Settings.jsx';
 
-const SettingsComponent = ({ coins, user }) => {
+const SettingsComponent = ({ coins }) => {
    return (
       <>
          <Head>
             <title>Settings | CryptoWatch</title>
          </Head>
 
-         <Settings user={user} />
+         <Settings />
       </>
    );
 };

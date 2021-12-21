@@ -4,12 +4,11 @@ import NavBar from './NavBar.jsx';
 import SideBar from './SideBar.jsx';
 
 const Layout = ({ children }) => {
-   const user = 'null';
    return (
       <MainWrapper>
-         <NavBar user={user} />
+         <NavBar />
          <Div>
-            <SideBar user={user} />
+            <SideBar />
 
             <Main>{children}</Main>
          </Div>

@@ -1,6 +1,7 @@
 import tw from 'twin.macro';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';
 
@@ -10,14 +11,13 @@ import { Logo, SearchSVG } from '../SVG-Icons';
 
 const coins = [{ name: 'bitcoin' }, { name: 'solana' }, { name: 'ethereum' }];
 
-const NavBar = ({ user }) => {
+const NavBar = () => {
    const [signUpOpened, setSignUpOpened] = useState(false);
    const [signInOpened, setSignInOpened] = useState(false);
 
-   const handleClickOpen = () => {
-      setSignUpOpened(true);
-   };
-
+   // Gets the user from the store
+   const user = useSelector((state) => state.user.value);
+   
    return (
       <Nav>
          {/* Logo */}
@@ -52,8 +52,8 @@ const NavBar = ({ user }) => {
                            fontSize: '13px',
                            outline: 'none',
                            '&::before': {
-                              content: 'none'
-                           }
+                              content: 'none',
+                           },
                         }}
                      />
                   )}
@@ -78,7 +78,7 @@ const NavBar = ({ user }) => {
                )}
 
                {/* Sign up */}
-               {!user && (
+               {!user.name && (
                   <NavButton
                      onClick={() => setSignUpOpened(true)}
                      sx={{ bgcolor: '#EBF2FA', color: '#4C6FFF' }}

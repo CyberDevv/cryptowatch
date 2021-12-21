@@ -10,7 +10,7 @@ const PriceAlertComponent = ({ coins, user }) => {
             <title>Price Alert | CryptoWatch</title>
          </Head>
 
-         <PriceAlert user={user} />
+         <PriceAlert />
       </>
    );
 };

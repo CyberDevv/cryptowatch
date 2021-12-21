@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import tw from 'twin.macro';
-import Image from 'next/image';
 import { styled } from '@mui/system';
 import { Avatar, IconButton } from '@mui/material';
 import { useSwitch } from '@mui/base/SwitchUnstyled';
@@ -82,10 +81,6 @@ function BasicSwitch(props) {
       </BasicSwitchRoot>
    );
 }
-
-// const handleChecked = () => {
-
-// }
 
 const PriceAlert = () => {
    const [checkedNotification, setCheckedNotification] = useState(true);

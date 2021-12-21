@@ -59,7 +59,7 @@ const CoinTable = ({ coins }) => {
                            <TableBodyText>{index + 1}</TableBodyText>
 
                            {/* Currency */}
-                           <Link href={`coins/${id}`}>
+                           <Link href={`/coins/${id}`}>
                               <a>
                                  <div css={[tw`flex items-center space-x-4`]}>
                                     <Avatar

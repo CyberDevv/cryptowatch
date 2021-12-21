@@ -1,9 +1,13 @@
 import tw from 'twin.macro';
+import { useSelector } from 'react-redux';
 
 import ActiveLink from '../ActiveClass';
 import { SVGIcons } from '../SVG-Icons';
 
-const SideBar = ({ user }) => {
+const SideBar = () => {
+   // Gets the user from the store
+   const user = useSelector((state) => state.user.value);
+
    const handleLogout = (e) => {
       e.preventDefault();
    };
@@ -13,14 +17,14 @@ const SideBar = ({ user }) => {
          {/* NavMenu */}
          <NavMenu>
             <NavItemComponent link='/' svg={<SVGIcons home />} label='Home' />
-            {user && (
+            {user.name && (
                <NavItemComponent
                   link='/watchList'
                   svg={<SVGIcons watchlist />}
                   label='Watchlist'
                />
             )}
-            {user && (
+            {user.name && (
                <NavItemComponent
                   link='/priceAlerts'
                   svg={<SVGIcons priceAlerts />}
@@ -32,7 +36,7 @@ const SideBar = ({ user }) => {
                svg={<SVGIcons settings />}
                label='Settings'
             />
-            {user && (
+            {user.name && (
                <button onClick={handleLogout}>
                   <NavItemComponent
                      link=''

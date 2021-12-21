@@ -6,14 +6,19 @@ import Layout from '../Layout';
 import { StarSVG } from '../SVG-Icons';
 import CoinTable from '../CoinTable.jsx';
 import Watchlist from '../Watchlist.jsx';
-import CurrentcyFormatter from '../../utils/CurrencyFormatter';
+import { useSelector } from 'react-redux';
 import { coinsFromWachlist } from '../../data/fromWatchList';
+import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 
-const Home = ({ coins, user, page }) => {
+
+const Home = ({ coins, page }) => {
+   // Gets the user from the store
+   const user = useSelector((state) => state.user.value);
+
    return (
       <Layout>
          {/* Watchlist */}
-         {user && coins.length !== 0 && (
+         {user.name && coins.length !== 0 && (
             <WishlistWrapper>
                {/* Section title */}
                <div css={[tw`flex items-center justify-between`]}>
@@ -24,7 +29,7 @@ const Home = ({ coins, user, page }) => {
                      <span>Watchlist</span> <StarSVG />
                   </p>
 
-                  <Link href='watchList'>
+                  <Link href='/watchList'>
                      <a>
                         <Button
                            className='smallBold'
@@ -44,7 +49,7 @@ const Home = ({ coins, user, page }) => {
                            const FormattedPrice =
                               CurrentcyFormatter(current_price);
                            return (
-                              <CoinWrapper>
+                              <CoinWrapper key= {id}>
                                  <Watchlist
                                     name={name}
                                     symbol={symbol}

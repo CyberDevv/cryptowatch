@@ -6,7 +6,7 @@ import Watchlist from '../Watchlist.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 import { coinsFromWachlist } from '../../data/fromWatchList';
 
-const WatchList = ({ coins, user }) => {
+const WatchList = ({ coins }) => {
    return (
       <Layout>
          {/* Watchlist */}

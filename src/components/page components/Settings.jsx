@@ -1,5 +1,6 @@
 import tw from 'twin.macro';
 import Image from 'next/image';
+import { useState } from 'react';
 import {
    Button,
    Checkbox,
@@ -11,9 +12,8 @@ import {
 
 import Layout from '../Layout';
 import { SettingsComponentSVG } from '../SVG-Icons';
-import { useState } from 'react';
 
-const PriceAlert = () => {
+const SettingsComponent = () => {
    const [notificationToEmail, setNotificationToEmail] = useState(true);
    const [notificationForNewListing, setNotificationForNewListing] =
       useState(true);
@@ -172,7 +172,7 @@ const PriceAlert = () => {
                      src='/images/download app.png'
                      width={504}
                      height={400}
-                     alt= "Download for other devices"
+                     alt='Download for other devices'
                   />
                </a>
             </DownnloadPannel>
@@ -187,4 +187,4 @@ const SettingsPannel = tw.div`space-y-14 w-1/2`;
 const DownnloadPannel = tw.div`w-1/2 flex justify-center`;
 const Form = tw.form`max-w-md`;
 
-export default PriceAlert;
+export default SettingsComponent;

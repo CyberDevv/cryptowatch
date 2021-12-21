@@ -4,16 +4,15 @@ import { useState } from 'react';
 
 import Home from '../components/page components/Home.jsx';
 
-export default function Index({ coins, user, page }) {
-   // console.log(page);
-   // const [page, setPage] = useState(1);
+export default function Index({ coins, page }) {
+
    return (
       <>
          <Head>
             <title>Home | CryptoWatch</title>
          </Head>
 
-         <Home user={user} coins={coins} page={page} />
+         <Home coins={coins} page={page} />
       </>
    );
 }
