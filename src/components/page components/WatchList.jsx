@@ -4,6 +4,7 @@ import Layout from '../Layout';
 import { StarSVG } from '../SVG-Icons';
 import Watchlist from '../Watchlist.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
+import { coinsFromWachlist } from '../../data/fromWatchList';
 
 const WatchList = ({ coins, user }) => {
    return (
@@ -43,14 +44,6 @@ const WatchList = ({ coins, user }) => {
       </Layout>
    );
 };
-
-const coinsFromWachlist = [
-   { coinId: 'bitcoin' },
-   { coinId: 'ethereum' },
-   { coinId: 'ripple' },
-   { coinId: 'usd-coin' },
-   { coinId: 'tether' },
-];
 
 // Tailwind Styles
 const WishlistWrapper = tw.div`space-y-8 lg:(mb-14)`;

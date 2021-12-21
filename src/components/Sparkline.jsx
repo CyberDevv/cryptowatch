@@ -26,18 +26,7 @@ const Sparkline = ({ price }) => {
             },
          },
          tooltip: {
-            fixed: {
-               enabled: false,
-            },
-            x: {
-               show: false,
-            },
-            y: {
-               show: false,
-            },
-            marker: {
-               show: false,
-            },
+            enabled: false,
          },
       },
    });

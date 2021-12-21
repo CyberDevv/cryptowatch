@@ -2,11 +2,13 @@ import tw from 'twin.macro';
 import Link from 'next/link';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { Button, Stack } from '@mui/material';
+import { Autocomplete, Button, Stack, TextField } from '@mui/material';
 
 import SigninModal from './SignInModal.jsx';
 import SignupModal from './SignupModal.jsx';
 import { Logo, SearchSVG } from '../SVG-Icons';
+
+const coins = [{ name: 'bitcoin' }, { name: 'solana' }, { name: 'ethereum' }];
 
 const NavBar = ({ user }) => {
    const [signUpOpened, setSignUpOpened] = useState(false);
@@ -15,6 +17,7 @@ const NavBar = ({ user }) => {
    const handleClickOpen = () => {
       setSignUpOpened(true);
    };
+
    return (
       <Nav>
          {/* Logo */}
@@ -28,7 +31,33 @@ const NavBar = ({ user }) => {
             {/* Search input */}
             <InputWrapper>
                <SearchSVG />
-               <Input type='text' placeholder='Search' />
+               {/* <Input type='text' placeholder='Search' /> */}
+               <Autocomplete
+                  fullWidth
+                  freeSolo
+                  disableClearable
+                  options={coins.map((option) => option.name)}
+                  renderInput={(params) => (
+                     <TextField
+                        // classes= "searchTextBox"
+                        variant='standard'
+                        {...params}
+                        InputProps={{
+                           ...params.InputProps,
+                           type: 'search',
+                        }}
+                        placeholder='Search'
+                        sx={{
+                           border: 'transparent',
+                           fontSize: '13px',
+                           outline: 'none',
+                           '&::before': {
+                              content: 'none'
+                           }
+                        }}
+                     />
+                  )}
+               />
             </InputWrapper>
 
             {/* Buttons */}

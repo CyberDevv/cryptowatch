@@ -7,6 +7,7 @@ import { StarSVG } from '../SVG-Icons';
 import CoinTable from '../CoinTable.jsx';
 import Watchlist from '../Watchlist.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
+import { coinsFromWachlist } from '../../data/fromWatchList';
 
 const Home = ({ coins, user, page }) => {
    return (
@@ -37,23 +38,25 @@ const Home = ({ coins, user, page }) => {
 
                {/* WatchList */}
                <Wishlist>
-                  {coins
-                     .slice(0, 5)
-                     .map(({ id, name, symbol, current_price, image }) => {
-                        const FormattedPrice =
-                           CurrentcyFormatter(current_price);
-                        return (
-                           <CoinWrapper key={id}>
-                              <Watchlist
-                                 name={name}
-                                 symbol={symbol}
-                                 formattedPrice={FormattedPrice}
-                                 image={image}
-                                 id={id}
-                              />
-                           </CoinWrapper>
-                        );
-                     })}
+                  {coins.map(({ id, name, symbol, current_price, image }) =>
+                     coinsFromWachlist.slice(0, 5).map(({ coinId }) => {
+                        if (coinId === id) {
+                           const FormattedPrice =
+                              CurrentcyFormatter(current_price);
+                           return (
+                              <CoinWrapper>
+                                 <Watchlist
+                                    name={name}
+                                    symbol={symbol}
+                                    formattedPrice={FormattedPrice}
+                                    image={image}
+                                    id={id}
+                                 />
+                              </CoinWrapper>
+                           );
+                        }
+                     })
+                  )}
                </Wishlist>
             </WishlistWrapper>
          )}
@@ -62,20 +65,9 @@ const Home = ({ coins, user, page }) => {
          <div>
             {/* Section title */}
 
-            <div css={[tw`flex items-center justify-between mb-10`]}>
-               <p className='bodyBold'>All Coins</p>
-
-               <Link href='/'>
-                  <a>
-                     <Button
-                        className='smallBold'
-                        sx={{ textTransform: 'none', color: '#3754DB' }}
-                     >
-                        View all
-                     </Button>
-                  </a>
-               </Link>
-            </div>
+            <p css={[tw`mb-10`]} className='bodyBold'>
+               All Coins
+            </p>
 
             {/* coin Table */}
             <CoinTable coins={coins} page={page} />

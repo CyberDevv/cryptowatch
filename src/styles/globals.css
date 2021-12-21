@@ -123,6 +123,10 @@ h6 {
    color: #3754db;
 }
 
+.css-ghsjzk-MuiInputBase-root-MuiInput-root:before {
+   content: none !important;
+}
+
 /* Fonts */
 @font-face {
    font-family: 'SF Pro Display Regular';

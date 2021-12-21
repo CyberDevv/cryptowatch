@@ -1,7 +1,7 @@
 import tw from 'twin.macro';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Avatar, IconButton } from '@mui/material';
+import { Avatar, Button, IconButton } from '@mui/material';
 
 import Sparkline from './Sparkline.jsx';
 import { StarOutlinedSVG, HamburgerSVG } from './SVG-Icons';
@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 const CoinTable = ({ coins }) => {
    const router = useRouter();
    const { page } = router.query;
-   // const page = parseInt(query.get('page') || '1', 10);
+
    return (
       <TableWrapper>
          <TableHeader>
@@ -31,7 +31,6 @@ const CoinTable = ({ coins }) => {
 
          <TableBodyWrapper>
             {coins
-               .slice(0, 8)
                .map(
                   (
                      {
@@ -143,9 +142,23 @@ const CoinTable = ({ coins }) => {
                )}
          </TableBodyWrapper>
 
-         <Link href={`?page=${parseInt(page) + 1}`}>
-            <a>Next</a>
-         </Link>
+         <ButtonWrapper>
+            <LinkButton disabled={parseInt(page) === 1 ? true : false}>
+               <Link href={`?page=${+page - 1}`}>
+                  <a>Previous</a>
+               </Link>
+            </LinkButton>
+
+            <LinkButton>
+               <Link
+                  href={`?${
+                     page === undefined ? 'page=2' : `page=${+page + 1}`
+                  }`}
+               >
+                  <a>Next</a>
+               </Link>
+            </LinkButton>
+         </ButtonWrapper>
       </TableWrapper>
    );
 };
@@ -158,5 +171,7 @@ const TableHeaderText = tw.p`text-[14px] text-dark-black leading-[17px]`;
 const TableBodyWrapper = tw.div`py-3.5 space-y-9`;
 const TableBody = tw(TableGrid)``;
 const TableBodyText = tw.p`text-[14px] text-black leading-[17px]`;
+const ButtonWrapper = tw.div`flex items-center justify-center space-x-10 text-gray-500 py-10 `;
+const LinkButton = tw(Button)`text-dark-black text-transform[none]`;
 
 export default CoinTable;
