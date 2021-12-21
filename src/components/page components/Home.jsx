@@ -1,24 +1,27 @@
 import tw from 'twin.macro';
 import Link from 'next/link';
 import { Button } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 import Layout from '../Layout';
 import { StarSVG } from '../SVG-Icons';
 import CoinTable from '../CoinTable.jsx';
 import Watchlist from '../Watchlist.jsx';
-import { useSelector } from 'react-redux';
-import { coinsFromWachlist } from '../../data/fromWatchList';
+
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 
 
 const Home = ({ coins, page }) => {
    // Gets the user from the store
    const user = useSelector((state) => state.user.value);
+   const watchListS = useSelector((state) => state.watchList);
+
+   console.log(watchListS)
 
    return (
       <Layout>
          {/* Watchlist */}
-         {user.name && coins.length !== 0 && (
+         {user.name && watchListS.length !== 0 && (
             <WishlistWrapper>
                {/* Section title */}
                <div css={[tw`flex items-center justify-between`]}>
@@ -44,12 +47,12 @@ const Home = ({ coins, page }) => {
                {/* WatchList */}
                <Wishlist>
                   {coins.map(({ id, name, symbol, current_price, image }) =>
-                     coinsFromWachlist.slice(0, 5).map(({ coinId }) => {
+                     watchListS.slice(0, 5).map(({ coinId }) => {
                         if (coinId === id) {
                            const FormattedPrice =
                               CurrentcyFormatter(current_price);
                            return (
-                              <CoinWrapper key= {id}>
+                              <CoinWrapper key={id}>
                                  <Watchlist
                                     name={name}
                                     symbol={symbol}
