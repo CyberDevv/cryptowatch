@@ -20,6 +20,7 @@ export const watchListSlice = createSlice({
    },
 });
 
+
 export const { load } = watchListSlice.actions;
 
 export default watchListSlice.reducer;

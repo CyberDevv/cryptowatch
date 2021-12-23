@@ -1,16 +1,23 @@
 import tw from 'twin.macro';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Avatar, Button, IconButton } from '@mui/material';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import { Avatar, Button, Checkbox, IconButton } from '@mui/material';
 
 import Sparkline from './Sparkline.jsx';
-import { StarOutlinedSVG, HamburgerSVG } from './SVG-Icons';
 import CurrencyFormatter from '../utils/CurrencyFormatter.js';
-import { useRouter } from 'next/router';
+import { StarOutlinedSVG, HamburgerSVG, StarSVG } from './SVG-Icons';
+
+const handleAddToWatchList = (id) => {
+   console.log(`Add to watchlist ${id}`);
+};
 
 const CoinTable = ({ coins }) => {
    const router = useRouter();
    const { page } = router.query;
+
+   const watchListS = useSelector((state) => state.watchList);
 
    return (
       <TableWrapper>
@@ -30,120 +37,123 @@ const CoinTable = ({ coins }) => {
          </TableHeader>
 
          <TableBodyWrapper>
-            {coins
-               .map(
-                  (
-                     {
-                        id,
-                        name,
-                        current_price,
-                        price_change_percentage_24h,
-                        price_change_percentage_1h_in_currency,
-                        price_change_percentage_7d_in_currency,
-                        symbol,
-                        image,
-                        sparkline_in_7d: { price },
-                     },
-                     index
-                  ) => {
-                     const FormattedCurrentPrice =
-                        CurrencyFormatter(current_price);
-                     return (
-                        <TableBody key={id}>
-                           {/* add to watchlist button */}
-                           <IconButton>
-                              <StarOutlinedSVG />
-                           </IconButton>
+            {coins.map(
+               (
+                  {
+                     id,
+                     name,
+                     current_price,
+                     price_change_percentage_24h,
+                     price_change_percentage_1h_in_currency,
+                     price_change_percentage_7d_in_currency,
+                     symbol,
+                     image,
+                     sparkline_in_7d: { price },
+                  },
+                  index
+               ) => {
+                  const FormattedCurrentPrice =
+                     CurrencyFormatter(current_price);
+                  return (
+                     <TableBody key={id}>
+                        {/* add to watchlist button */}
+                        <Checkbox
+                           checked={watchListS.some(
+                              (coin) => coin.coinId === id
+                           )}
+                           onClick={() => handleAddToWatchList(id)}
+                           icon={<StarOutlinedSVG />}
+                           checkedIcon={<StarSVG />}
+                        />
 
-                           {/* S/N */}
-                           <TableBodyText>{index + 1}</TableBodyText>
+                        {/* S/N */}
+                        <TableBodyText>{index + 1}</TableBodyText>
 
-                           {/* Currency */}
-                           <Link href={`/coins/${id}`}>
-                              <a>
-                                 <div css={[tw`flex items-center space-x-4`]}>
-                                    <Avatar
-                                       sx={{
-                                          width: '32px',
-                                          height: '32px',
-                                          bgcolor: 'transparent',
-                                       }}
-                                    >
-                                       <Image
-                                          src={image}
-                                          alt={name}
-                                          layout='fill'
-                                       />
-                                    </Avatar>
-                                    <TableBodyText>
-                                       {`${name} ${symbol.toUpperCase()}`}
-                                    </TableBodyText>
-                                 </div>
-                              </a>
-                           </Link>
+                        {/* Currency */}
+                        <Link href={`/coins/${id}`}>
+                           <a>
+                              <div css={[tw`flex items-center space-x-4`]}>
+                                 <Avatar
+                                    sx={{
+                                       width: '32px',
+                                       height: '32px',
+                                       bgcolor: 'transparent',
+                                    }}
+                                 >
+                                    <Image
+                                       src={image}
+                                       alt={name}
+                                       layout='fill'
+                                    />
+                                 </Avatar>
+                                 <TableBodyText>
+                                    {`${name} ${symbol.toUpperCase()}`}
+                                 </TableBodyText>
+                              </div>
+                           </a>
+                        </Link>
 
-                           {/* price*/}
-                           <TableBodyText>
-                              {FormattedCurrentPrice}
-                           </TableBodyText>
+                        {/* price*/}
+                        <TableBodyText>{FormattedCurrentPrice}</TableBodyText>
 
-                           {/* last 1h */}
-                           <TableBodyText
-                              css={[
-                                 price_change_percentage_1h_in_currency < 0
-                                    ? tw`text-[#E52F15]`
-                                    : tw`text-[#66CB9F]`,
-                              ]}
-                           >
-                              {parseFloat(
-                                 price_change_percentage_1h_in_currency
-                              ).toFixed(1)}
-                              %
-                           </TableBodyText>
+                        {/* last 1h */}
+                        <TableBodyText
+                           css={[
+                              price_change_percentage_1h_in_currency < 0
+                                 ? tw`text-[#E52F15]`
+                                 : tw`text-[#66CB9F]`,
+                           ]}
+                        >
+                           {parseFloat(
+                              price_change_percentage_1h_in_currency
+                           ).toFixed(1)}
+                           %
+                        </TableBodyText>
 
-                           {/* last 24hr */}
-                           <TableBodyText
-                              css={[
-                                 price_change_percentage_24h < 0
-                                    ? tw`text-[#E52F15]`
-                                    : tw`text-[#66CB9F]`,
-                              ]}
-                           >
-                              {parseFloat(price_change_percentage_24h).toFixed(
-                                 1
-                              )}
-                              %
-                           </TableBodyText>
+                        {/* last 24hr */}
+                        <TableBodyText
+                           css={[
+                              price_change_percentage_24h < 0
+                                 ? tw`text-[#E52F15]`
+                                 : tw`text-[#66CB9F]`,
+                           ]}
+                        >
+                           {parseFloat(price_change_percentage_24h).toFixed(1)}%
+                        </TableBodyText>
 
-                           {/* last 7d */}
-                           <TableBodyText
-                              css={[
-                                 price_change_percentage_7d_in_currency < 0
-                                    ? tw`text-[#E52F15]`
-                                    : tw`text-[#66CB9F]`,
-                              ]}
-                           >
-                              {parseFloat(
-                                 price_change_percentage_7d_in_currency
-                              ).toFixed(1)}
-                              %
-                           </TableBodyText>
+                        {/* last 7d */}
+                        <TableBodyText
+                           css={[
+                              price_change_percentage_7d_in_currency < 0
+                                 ? tw`text-[#E52F15]`
+                                 : tw`text-[#66CB9F]`,
+                           ]}
+                        >
+                           {parseFloat(
+                              price_change_percentage_7d_in_currency
+                           ).toFixed(1)}
+                           %
+                        </TableBodyText>
 
-                           {/* graph for last 7 days */}
-                           <Sparkline price={price} />
+                        {/* graph for last 7 days */}
+                        <Sparkline price={price} />
 
-                           {/* Hamburger */}
-                           <IconButton>
-                              <HamburgerSVG />
-                           </IconButton>
-                        </TableBody>
-                     );
-                  }
-               )}
+                        {/* Hamburger */}
+                        <IconButton>
+                           <HamburgerSVG />
+                        </IconButton>
+                     </TableBody>
+                  );
+               }
+            )}
          </TableBodyWrapper>
 
          <ButtonWrapper>
-            <LinkButton disabled={parseInt(page) === 1 ? true : false}>
+            <LinkButton
+               disabled={
+                  parseInt(page) === 1 || page === undefined ? true : false
+               }
+            >
                <Link href={`?page=${+page - 1}`}>
                   <a>Previous</a>
                </Link>

@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
 
    useEffect(() => {
       dispatch(fetchCoins());
-   }, []);
+   }, [fetchCoins]);
    
    return (
       <MainWrapper>
