@@ -7,6 +7,7 @@ const initialStateValue = [
    { coinId: 'usd-coin' },
    { coinId: 'tether' },
    { coinId: 'duo-2' },
+   { coinId: 'nem' },
 ];
 
 export const watchListSlice = createSlice({

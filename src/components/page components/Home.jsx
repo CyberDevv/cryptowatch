@@ -10,13 +10,11 @@ import Watchlist from '../Watchlist.jsx';
 
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 
-
 const Home = ({ coins, page }) => {
    // Gets the user from the store
    const user = useSelector((state) => state.user.value);
    const watchListS = useSelector((state) => state.watchList);
-
-   console.log(watchListS)
+   const coinss = useSelector((state) => state.coins);
 
    return (
       <Layout>
@@ -46,7 +44,7 @@ const Home = ({ coins, page }) => {
 
                {/* WatchList */}
                <Wishlist>
-                  {coins.map(({ id, name, symbol, current_price, image }) =>
+                  {coinss.map(({ id, name, symbol, current_price, image }) =>
                      watchListS.slice(0, 5).map(({ coinId }) => {
                         if (coinId === id) {
                            const FormattedPrice =

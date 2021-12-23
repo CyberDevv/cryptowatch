@@ -7,7 +7,6 @@ import store from '../store/index.store';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
-   const user = 'null';
    return (
       <>
          <Provider store={store}>

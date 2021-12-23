@@ -1,6 +1,7 @@
 import tw from 'twin.macro';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';
@@ -9,15 +10,27 @@ import SigninModal from './SignInModal.jsx';
 import SignupModal from './SignupModal.jsx';
 import { Logo, SearchSVG } from '../SVG-Icons';
 
-const coins = [{ name: 'bitcoin' }, { name: 'solana' }, { name: 'ethereum' }];
-
 const NavBar = () => {
    const [signUpOpened, setSignUpOpened] = useState(false);
    const [signInOpened, setSignInOpened] = useState(false);
 
    // Gets the user from the store
    const user = useSelector((state) => state.user.value);
-   
+   const coins = useSelector((state) => state.coins);
+
+   const router = useRouter();
+
+   // function for pressing enter to search
+   const handleSearchKeyDown = (e) => {
+      if (e.key === 'Enter') {
+         coins.map((coin) => {
+            if (coin.name === e.target.value) {
+               router.push(`/coins/${coin.id}`);
+            }
+         });
+      }
+   };
+
    return (
       <Nav>
          {/* Logo */}
@@ -37,6 +50,7 @@ const NavBar = () => {
                   freeSolo
                   disableClearable
                   options={coins.map((option) => option.name)}
+                  onKeyDown={handleSearchKeyDown}
                   renderInput={(params) => (
                      <TextField
                         // classes= "searchTextBox"

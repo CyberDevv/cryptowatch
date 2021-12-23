@@ -1,9 +1,18 @@
 import tw from 'twin.macro';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import NavBar from './NavBar.jsx';
 import SideBar from './SideBar.jsx';
+import { fetchCoins } from '../../store/coins.store';
 
 const Layout = ({ children }) => {
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+      dispatch(fetchCoins());
+   }, []);
+   
    return (
       <MainWrapper>
          <NavBar />

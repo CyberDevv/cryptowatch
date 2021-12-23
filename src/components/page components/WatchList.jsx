@@ -6,8 +6,9 @@ import { StarSVG } from '../SVG-Icons';
 import Watchlist from '../Watchlist.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 
-const WatchList = ({ coins }) => {
+const WatchList = () => {
    const watchListS = useSelector((state) => state.watchList);
+   const coins = useSelector((state) => state.coins);
 
    return (
       <Layout>
