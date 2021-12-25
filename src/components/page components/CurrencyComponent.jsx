@@ -18,7 +18,7 @@ import {
    Select,
    TextField,
    InputAdornment,
-   FormHelperText,
+   Chip,
 } from '@mui/material';
 
 import Layout from '../Layout';
@@ -26,10 +26,14 @@ import { CloseSVG, WhiteStarSVG } from '../SVG-Icons';
 import CoinGraph from '../CoinGraph.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 import { styled } from '@mui/system';
+import {useRouter} from 'next/router';
 
-const CurrencyComponent = ({ coin, sevenDres }) => {
+const CurrencyComponent = ({ res, sevenDres }) => {
+   const {isFallback} = useRouter();
+   
    const [priceAlertModalOpened, setPriceAlertModalOpened] = useState(false);
    const [AmountAlertk, setAmountAlert] = useState('');
+
    const handleSetAlert = (e) => {
       e.preventDefault();
 
@@ -41,29 +45,49 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
    const handleAddToWatchlist = (e) => {
       e.preventDefault();
 
-      setPriceAlertModalOpened; // Your code should be in here
+      setPriceAlertModalOpened;
+
+      // Your code should be in here
    };
 
    const handlePricePercentSetters = (percent) => {
-      let currentPrice = coin.market_data.current_price.usd;
+      let currentPrice = res.market_data.current_price.usd;
 
       if (percent < 0) {
          let percentage = percent / 100;
          let amount = currentPrice * percentage;
          setAmountAlert(parseFloat(Math.abs(amount)).toFixed(2));
-      }
-      else {
-         let percentage = (percent / 100) + 1;
+      } else {
+         let percentage = percent / 100 + 1;
          let amount = currentPrice * percentage;
          setAmountAlert(parseFloat(Math.abs(amount)).toFixed(2));
       }
    };
 
+   if (isFallback) {
+      return (
+         <Layout>
+            <div tw="text-center">
+               <div tw="text-5xl font-bold">Loading...</div>
+            </div>
+         </Layout>
+      );
+   }
+
    const {
       name,
       image,
-      market_data: { current_price, high_24h, low_24h },
-   } = coin;
+      market_data: {
+         current_price,
+         high_24h,
+         low_24h,
+         price_change_percentage_24h,
+      },
+   } = res;
+
+   const HighLowPercent =
+      ((current_price.usd - low_24h.usd) / (high_24h.usd - low_24h.usd)) * 100;
+
    return (
       <Layout>
          <Breadcrumbs separator='>>' aria-label='breadcrumb'>
@@ -89,6 +113,7 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
                         <>
                            <CoinPrice>
                               {CurrentcyFormatter(current_price.usd)}
+                              <Chip sx= {{marginLeft: '16px', borderRadius: '10px'}} label={`${price_change_percentage_24h.toFixed(1)}%`} />
                            </CoinPrice>
                         </>
                      }
@@ -127,10 +152,11 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
                </ButtonWrapper>
             </div>
 
+            {/* 24 hours volume */}
             <div css={[tw`space-y-8 `]}>
                <VolumeTitle className='body'>24H Volume</VolumeTitle>
 
-               <div css={[tw`flex space-x-[100px]`]}>
+               <div css={[tw`flex space-x-20`]}>
                   {/* High */}
                   <div css={[tw`space-y-8`]}>
                      <VolumeText className='small'>High</VolumeText>
@@ -150,7 +176,44 @@ const CurrencyComponent = ({ coin, sevenDres }) => {
                      <CoinPrice>{CurrentcyFormatter(low_24h.usd)}</CoinPrice>
                   </div>
                </div>
+
+               <div
+                  css={[
+                     tw`w-full h-2 relative bg-gradient-to-r from-green-400 to-red-400 rounded-full`,
+                  ]}
+               >
+                  <div
+                     css={[tw`h-4 bg-blue-500 w-2 absolute top-0`]}
+                     style={{ left: `${HighLowPercent}%` }}
+                  ></div>
+               </div>
             </div>
+
+            {/* 7 days volume */}
+            {/* <div css={[tw`space-y-8 `]}>
+               <VolumeTitle className='body'>24H Volume</VolumeTitle>
+
+               <div css={[tw`flex space-x-20`]}> */}
+            {/* High */}
+            {/* <div css={[tw`space-y-8`]}>
+                     <VolumeText className='small'>High</VolumeText>
+                     <div>
+                        <CoinPrice>
+                           {CurrentcyFormatter(high_24h.usd)}
+                        </CoinPrice>
+                        <p>
+                           <span>{}</span>
+                        </p>
+                     </div>
+                  </div> */}
+
+            {/* Low */}
+            {/* <div css={[tw`space-y-8`]}>
+                     <VolumeText className='small'>Low</VolumeText>
+                     <CoinPrice>{CurrentcyFormatter(low_24h.usd)}</CoinPrice>
+                  </div>
+               </div>
+            </div> */}
          </CoinDashboard>
 
          <CoinGraph sevenDres={sevenDres} />

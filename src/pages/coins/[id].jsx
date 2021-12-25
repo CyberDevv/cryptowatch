@@ -7,16 +7,16 @@ const CurrencyPage = ({ res, sevenDres }) => {
    return (
       <>
          <Head>
-            <title>{res.name} | CryptoWatch</title>
+            <title>| CryptoWatch</title>
          </Head>
 
-         <CurrencyComponent coin={res} sevenDres={sevenDres} />
+         <CurrencyComponent res={res} sevenDres={sevenDres} />
       </>
    );
 };
 
 export async function getStaticPaths() {
-   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=500&page=1`;
+   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=250&page=1`;
 
    const res = await (await axios(url)).data;
 

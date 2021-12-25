@@ -1,13 +1,12 @@
 import clsx from 'clsx';
 import tw from 'twin.macro';
 import { styled } from '@mui/system';
-import { Avatar, IconButton } from '@mui/material';
+import { Avatar, IconButton, Switch } from '@mui/material';
 import { useSwitch } from '@mui/base/SwitchUnstyled';
 
 import Layout from '../Layout';
 import { StarOutlinedSVG, HamburgerSVG } from '../SVG-Icons';
 import CurrencyFormatter from '../../utils/CurrencyFormatter.js';
-import { useState } from 'react';
 
 const BasicSwitchRoot = styled('span')`
    font-size: 0;
@@ -83,7 +82,6 @@ function BasicSwitch(props) {
 }
 
 const PriceAlert = () => {
-   const [checkedNotification, setCheckedNotification] = useState(true);
    return (
       <Layout>
          {/* Section title */}
@@ -105,7 +103,16 @@ const PriceAlert = () => {
             <TableBodyWrapper>
                {coinsDetails.map(
                   (
-                     { id, name, current_price, high, low, symbol, image },
+                     {
+                        id,
+                        name,
+                        current_price,
+                        high,
+                        low,
+                        symbol,
+                        image,
+                        receiveNotification,
+                     },
                      index
                   ) => {
                      const Formattedcurrent_price =
@@ -153,8 +160,8 @@ const PriceAlert = () => {
 
                            {/* Enable notification */}
                            <BasicSwitch
-                              checked={checkedNotification}
-                              // onChange={handleChecked}
+                              checked={receiveNotification}
+                              // onChange={ }
                               defaultChecked
                            />
 
@@ -180,6 +187,7 @@ const coinsDetails = [
       current_price: 56000,
       low: 10000,
       high: 60000,
+      receiveNotification: true,
    },
    {
       id: 2,
@@ -187,6 +195,7 @@ const coinsDetails = [
       symbol: 'Eth',
       current_price: 6000,
       low: 10000,
+      receiveNotification: true,
    },
    {
       id: 3,
@@ -194,6 +203,7 @@ const coinsDetails = [
       symbol: 'NEO',
       current_price: 0.8,
       low: 10000,
+      receiveNotification: false,
    },
    {
       id: 4,
@@ -201,6 +211,7 @@ const coinsDetails = [
       symbol: 'bsc',
       current_price: 56000,
       low: 10000,
+      receiveNotification: true,
    },
 ];
 

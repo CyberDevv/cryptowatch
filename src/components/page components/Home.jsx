@@ -44,6 +44,19 @@ const Home = ({ coins, page }) => {
 
                {/* WatchList */}
                <Wishlist>
+                  {coinss.map(({ id }) => {
+                     watchListS.slice(0, 5).map((coin) => {
+                        // console.log(coin.id === id)
+                        // if (coin.id === id) {
+                           // coins.map(() => {
+
+                           // })
+                        // }
+                     });
+                  })}
+               </Wishlist>
+
+               {/* <Wishlist>
                   {coinss.map(({ id, name, symbol, current_price, image }) =>
                      watchListS.slice(0, 5).map(({ coinId }) => {
                         if (coinId === id) {
@@ -63,7 +76,7 @@ const Home = ({ coins, page }) => {
                         }
                      })
                   )}
-               </Wishlist>
+               </Wishlist> */}
             </WishlistWrapper>
          )}
 

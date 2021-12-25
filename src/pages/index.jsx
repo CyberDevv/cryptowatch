@@ -1,7 +1,5 @@
 import axios from 'axios';
 import Head from 'next/head';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 
 import Home from '../components/page components/Home.jsx';
 // import { load } from '../store/coins.store';

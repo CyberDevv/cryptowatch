@@ -23,6 +23,7 @@
       "apexcharts": "^3.32.0",
       "axios": "^0.24.0",
       "clsx": "^1.1.1",
+      "global": "^4.4.0",
       "next": "12.0.5",
       "nextjs-progressbar": "^0.0.13",
       "react": "17.0.2",
@@ -34,7 +35,7 @@
       "@emotion/babel-plugin": "^11.3.0",
       "babel-plugin-inline-react-svg": "^2.0.1",
       "babel-plugin-macros": "^3.1.0",
-      "eslint": "8.4.0",
+      "eslint": "^8.5.0",
       "eslint-config-next": "12.0.5",
       "tailwindcss": "^2.2.19",
       "twin.macro": "^2.8.1"
