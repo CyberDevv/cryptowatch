@@ -7,7 +7,7 @@ import { Avatar, Button, Checkbox, IconButton } from '@mui/material';
 
 import Sparkline from './Sparkline.jsx';
 import CurrencyFormatter from '../utils/CurrencyFormatter.js';
-import { StarOutlinedSVG, HamburgerSVG, StarSVG } from './SVG-Icons';
+import { StarOutlinedSVG, StarSVG } from './SVG-Icons';
 
 const handleAddToWatchList = (id) => {
    console.log(`Add to watchlist ${id}`);
@@ -33,7 +33,6 @@ const CoinTable = ({ coins }) => {
             <TableHeaderText>24hr</TableHeaderText>
             <TableHeaderText>7d</TableHeaderText>
             <TableHeaderText>Last 7 days</TableHeaderText>
-            <TableHeaderText></TableHeaderText>
          </TableHeader>
 
          <TableBodyWrapper>
@@ -48,7 +47,7 @@ const CoinTable = ({ coins }) => {
                      price_change_percentage_7d_in_currency,
                      symbol,
                      image,
-                     sparkline_in_7d: { price },
+                     spackline_7d,
                   },
                   index
                ) => {
@@ -136,12 +135,7 @@ const CoinTable = ({ coins }) => {
                         </TableBodyText>
 
                         {/* graph for last 7 days */}
-                        <Sparkline price={price} />
-
-                        {/* Hamburger */}
-                        <IconButton>
-                           <HamburgerSVG />
-                        </IconButton>
+                        <Sparkline price={spackline_7d} />
                      </TableBody>
                   );
                }
@@ -175,7 +169,7 @@ const CoinTable = ({ coins }) => {
 
 // tailwind styles
 const TableWrapper = tw.div`divide-y-2 space-y-2`;
-const TableGrid = tw.ul`grid justify-items-start divide-dark-gray items-center grid-template-columns[40px 0.3fr 2fr 1fr 0.7fr 0.7fr 0.7fr 1fr 0.2fr ]`;
+const TableGrid = tw.ul`grid justify-items-start divide-dark-gray items-center grid-template-columns[40px 0.3fr 2fr 1fr 0.7fr 0.7fr 0.7fr 1fr ]`;
 const TableHeader = tw(TableGrid)``;
 const TableHeaderText = tw.p`text-[14px] text-dark-black leading-[17px]`;
 const TableBodyWrapper = tw.div`py-3.5 space-y-9`;

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const Sparkline = ({ price }) => {
@@ -30,10 +30,7 @@ const Sparkline = ({ price }) => {
          },
       },
    });
-   useEffect(() => {
-      // setIsPrice(price);
-   }, [price]);
-
+   
    return (
       <div className='app'>
          <div className='row'>
@@ -42,7 +39,6 @@ const Sparkline = ({ price }) => {
                   options={isPrice.options}
                   series={isPrice.options.series}
                   height={50}
-                  // width= {300}
                />
             </div>
          </div>

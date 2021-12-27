@@ -19,6 +19,7 @@ import {
    TextField,
    InputAdornment,
    Chip,
+   Divider
 } from '@mui/material';
 
 import Layout from '../Layout';
@@ -26,11 +27,11 @@ import { CloseSVG, WhiteStarSVG } from '../SVG-Icons';
 import CoinGraph from '../CoinGraph.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 import { styled } from '@mui/system';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 
 const CurrencyComponent = ({ res, sevenDres }) => {
-   const {isFallback} = useRouter();
-   
+   const { isFallback } = useRouter();
+
    const [priceAlertModalOpened, setPriceAlertModalOpened] = useState(false);
    const [AmountAlertk, setAmountAlert] = useState('');
 
@@ -64,11 +65,11 @@ const CurrencyComponent = ({ res, sevenDres }) => {
       }
    };
 
-   if (isFallback) {
+   if (isFallback) {k
       return (
          <Layout>
-            <div tw="text-center">
-               <div tw="text-5xl font-bold">Loading...</div>
+            <div tw='text-center'>
+               <div tw='text-5xl font-bold'>Loading...</div>
             </div>
          </Layout>
       );
@@ -77,12 +78,10 @@ const CurrencyComponent = ({ res, sevenDres }) => {
    const {
       name,
       image,
-      market_data: {
-         current_price,
-         high_24h,
-         low_24h,
-         price_change_percentage_24h,
-      },
+      current_price,
+      high_24h,
+      low_24h,
+      price_change_percentage_24h,
    } = res;
 
    const HighLowPercent =
@@ -91,8 +90,8 @@ const CurrencyComponent = ({ res, sevenDres }) => {
    return (
       <Layout>
          <Breadcrumbs separator='>>' aria-label='breadcrumb'>
-            <Link href='/watchList'>
-               <a>Watchlist</a>
+            <Link href='/'>
+               <a>Coins</a>
             </Link>
             <Typography color='text.primary'>{name}</Typography>
          </Breadcrumbs>
@@ -105,7 +104,7 @@ const CurrencyComponent = ({ res, sevenDres }) => {
                <ListItem sx={{ padding: 0, marginTop: '24px' }}>
                   <ListItemAvatar>
                      <Avatar sx={{ bgcolor: 'transparent' }}>
-                        <Image src={image.small} layout='fill' alt={name} />
+                        <Image src={image} layout='fill' alt={name} />
                      </Avatar>
                   </ListItemAvatar>
                   <ListItemText
@@ -113,7 +112,15 @@ const CurrencyComponent = ({ res, sevenDres }) => {
                         <>
                            <CoinPrice>
                               {CurrentcyFormatter(current_price.usd)}
-                              <Chip sx= {{marginLeft: '16px', borderRadius: '10px'}} label={`${price_change_percentage_24h.toFixed(1)}%`} />
+                              <Chip
+                                 sx={{
+                                    marginLeft: '16px',
+                                    borderRadius: '10px',
+                                 }}
+                                 label={`${price_change_percentage_24h.toFixed(
+                                    1
+                                 )}%`}
+                              />
                            </CoinPrice>
                         </>
                      }
@@ -157,6 +164,12 @@ const CurrencyComponent = ({ res, sevenDres }) => {
                <VolumeTitle className='body'>24H Volume</VolumeTitle>
 
                <div css={[tw`flex space-x-20`]}>
+                  {/* Low */}
+                  <div css={[tw`space-y-8`]}>
+                     <VolumeText className='small'>Low</VolumeText>
+                     <CoinPrice>{CurrentcyFormatter(low_24h.usd)}</CoinPrice>
+                  </div>
+
                   {/* High */}
                   <div css={[tw`space-y-8`]}>
                      <VolumeText className='small'>High</VolumeText>
@@ -164,56 +177,71 @@ const CurrencyComponent = ({ res, sevenDres }) => {
                         <CoinPrice>
                            {CurrentcyFormatter(high_24h.usd)}
                         </CoinPrice>
-                        <p>
-                           <span>{}</span>
-                        </p>
                      </div>
-                  </div>
-
-                  {/* Low */}
-                  <div css={[tw`space-y-8`]}>
-                     <VolumeText className='small'>Low</VolumeText>
-                     <CoinPrice>{CurrentcyFormatter(low_24h.usd)}</CoinPrice>
                   </div>
                </div>
 
+               {/* Range */}
                <div
                   css={[
-                     tw`w-full h-2 relative bg-gradient-to-r from-green-400 to-red-400 rounded-full`,
+                     tw`w-full h-2 relative bg-gray-300 rounded-full overflow-hidden`,
                   ]}
                >
                   <div
-                     css={[tw`h-4 bg-blue-500 w-2 absolute top-0`]}
-                     style={{ left: `${HighLowPercent}%` }}
+                     css={[
+                        tw`h-full bg-blue-500 absolute top-0 bg-gray-600 rounded-full`,
+                     ]}
+                     style={{ width: `${HighLowPercent}%` }}
                   ></div>
                </div>
             </div>
 
-            {/* 7 days volume */}
-            {/* <div css={[tw`space-y-8 `]}>
-               <VolumeTitle className='body'>24H Volume</VolumeTitle>
+            {/* coins stats */}
+            <StatsWrapper>
+               <StatStack direction='row'>
+                  <EachStatL>
+                     <StatHeaderText className='bodyBold'>
+                        Market Cap
+                     </StatHeaderText>
+                     <StatText>$19021093894</StatText>
+                  </EachStatL>
 
-               <div css={[tw`flex space-x-20`]}> */}
-            {/* High */}
-            {/* <div css={[tw`space-y-8`]}>
-                     <VolumeText className='small'>High</VolumeText>
-                     <div>
-                        <CoinPrice>
-                           {CurrentcyFormatter(high_24h.usd)}
-                        </CoinPrice>
-                        <p>
-                           <span>{}</span>
-                        </p>
-                     </div>
-                  </div> */}
+                  <Divider orientation='vertical' flexItem />
 
-            {/* Low */}
-            {/* <div css={[tw`space-y-8`]}>
-                     <VolumeText className='small'>Low</VolumeText>
-                     <CoinPrice>{CurrentcyFormatter(low_24h.usd)}</CoinPrice>
-                  </div>
-               </div>
-            </div> */}
+                  <EachStatR>
+                     <StatHeaderText className='bodyBold'>
+                        Trading Volume
+                     </StatHeaderText>
+                     <StatText>$19021093894</StatText>
+                  </EachStatR>
+               </StatStack>
+
+               <Divider direction='horizontal' flexItem />
+
+               <StatStack direction='row'>
+                  <EachStatL>
+                     <StatHeaderText className='bodyBold'>
+                        All-Time High
+                     </StatHeaderText>
+                     <StatText>$19021093894</StatText>
+                     <SecondaryText className='small'>
+                        Nov 10, 2021
+                     </SecondaryText>
+                  </EachStatL>
+
+                  <Divider orientation='vertical' flexItem />
+
+                  <EachStatR>
+                     <StatHeaderText className='bodyBold'>
+                        All-Time Low
+                     </StatHeaderText>
+                     <StatText>$19021093894</StatText>
+                     <SecondaryText className='small'>
+                        Oct 20, 2015
+                     </SecondaryText>
+                  </EachStatR>
+               </StatStack>
+            </StatsWrapper>
          </CoinDashboard>
 
          <CoinGraph sevenDres={sevenDres} />
@@ -421,4 +449,12 @@ const ButtonWrapper = tw.div`space-x-5 mt-7`;
 const VolumeTitle = tw.p`text-dark-gray`;
 const VolumeText = tw.p`text-dark-black`;
 const Description = tw.p`text-dark-gray mt-3 mb-8`;
+const StatsWrapper = tw.div`flex flex-col items-center`;
+const StatStack = tw(Stack)``
+const EachStatL = tw.div`pr-10 py-5`;
+const EachStatR = tw.div`pl-10 py-5`;
+const StatHeaderText = tw.p`text-dark-black`;
+const StatText = tw.p`text-dark-gray mt-2`;
+const SecondaryText = tw.p`text-dark-gray`
+
 export default CurrencyComponent;
