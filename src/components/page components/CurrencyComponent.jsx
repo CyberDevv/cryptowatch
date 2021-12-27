@@ -1,7 +1,10 @@
+import moment from 'moment';
 import tw from 'twin.macro';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { styled } from '@mui/system';
+import { useRouter } from 'next/router';
 import {
    Avatar,
    Breadcrumbs,
@@ -19,15 +22,13 @@ import {
    TextField,
    InputAdornment,
    Chip,
-   Divider
+   Divider,
 } from '@mui/material';
 
 import Layout from '../Layout';
-import { CloseSVG, WhiteStarSVG } from '../SVG-Icons';
 import CoinGraph from '../CoinGraph.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
-import { styled } from '@mui/system';
-import { useRouter } from 'next/router';
+import { CloseSVG, WhiteStarSVG, ArrowDownSVG, ArrowUpSVG } from '../SVG-Icons';
 
 const CurrencyComponent = ({ res, sevenDres }) => {
    const { isFallback } = useRouter();
@@ -65,7 +66,8 @@ const CurrencyComponent = ({ res, sevenDres }) => {
       }
    };
 
-   if (isFallback) {k
+   if (isFallback) {
+      k;
       return (
          <Layout>
             <div tw='text-center'>
@@ -82,10 +84,25 @@ const CurrencyComponent = ({ res, sevenDres }) => {
       high_24h,
       low_24h,
       price_change_percentage_24h,
+      market_cap,
+      total_volume,
+      atl,
+      ath,
+      ath_date,
+      atl_date,
+      description,
    } = res;
 
    const HighLowPercent =
       ((current_price.usd - low_24h.usd) / (high_24h.usd - low_24h.usd)) * 100;
+
+   const chipStyles = {
+      marginLeft: '16px',
+      borderRadius: '5px',
+      padding: '4px',
+      bgcolor: `${price_change_percentage_24h > 0 ? '#EBFBED' : '#FBEEEB'}`,
+      color: `${price_change_percentage_24h > 0 ? '#00D578' : '#F55858'}`,
+   };
 
    return (
       <Layout>
@@ -98,149 +115,158 @@ const CurrencyComponent = ({ res, sevenDres }) => {
 
          {/* Coin dashboard */}
          <CoinDashboard>
-            <div>
-               <CoinName className='body'>{name}</CoinName>
+            <div css={[tw`flex justify-between items-center`]}>
+               <div>
+                  <CoinName className='body'>{name}</CoinName>
 
-               <ListItem sx={{ padding: 0, marginTop: '24px' }}>
-                  <ListItemAvatar>
-                     <Avatar sx={{ bgcolor: 'transparent' }}>
-                        <Image src={image} layout='fill' alt={name} />
-                     </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                     primary={
-                        <>
+                  <ListItem sx={{ padding: 0, marginTop: '24px' }}>
+                     <ListItemAvatar>
+                        <Avatar sx={{ bgcolor: 'transparent' }}>
+                           <Image src={image} layout='fill' alt={name} />
+                        </Avatar>
+                     </ListItemAvatar>
+                     <ListItemText
+                        primary={
+                           <>
+                              <CoinPrice>
+                                 {CurrentcyFormatter(current_price.usd)}
+                                 <Chip
+                                    icon={
+                                       price_change_percentage_24h > 0 ? (
+                                          <ArrowUpSVG />
+                                       ) : (
+                                          <ArrowDownSVG />
+                                       )
+                                    }
+                                    sx={chipStyles}
+                                    size='small'
+                                    label={`${price_change_percentage_24h.toFixed(
+                                       1
+                                    )}%`}
+                                 />
+                              </CoinPrice>
+                           </>
+                        }
+                        secondary='Current Price'
+                     />
+                  </ListItem>
+
+                  <ButtonWrapper>
+                     <Button
+                        variant='contained'
+                        sx={{
+                           bgcolor: '#4C6FFF',
+                           textTransform: 'capitalize',
+                           boxShadow: 'none',
+                        }}
+                        onClick={handleSetAlert}
+                     >
+                        Set Price Alert
+                     </Button>
+
+                     <Button
+                        variant='contained'
+                        sx={{
+                           bgcolor: '#F6ACA2',
+                           textTransform: 'none',
+                           boxShadow: 'none',
+                           '&:hover': {
+                              bgcolor: '#f59285',
+                           },
+                        }}
+                        endIcon={<WhiteStarSVG />}
+                        onClick={handleAddToWatchlist}
+                     >
+                        Add to Watchlist
+                     </Button>
+                  </ButtonWrapper>
+               </div>
+
+               {/* 24 hours volume */}
+               <div css={[tw`space-y-8 `]}>
+                  <div css={[tw`space-y-8 `]}>
+                     <VolumeTitle className='body'>24H Volume</VolumeTitle>
+
+                     <div css={[tw`flex space-x-40`]}>
+                        {/* Low */}
+                        <div css={[tw`space-y-4`]}>
+                           <VolumeText className='small'>Low</VolumeText>
                            <CoinPrice>
-                              {CurrentcyFormatter(current_price.usd)}
-                              <Chip
-                                 sx={{
-                                    marginLeft: '16px',
-                                    borderRadius: '10px',
-                                 }}
-                                 label={`${price_change_percentage_24h.toFixed(
-                                    1
-                                 )}%`}
-                              />
+                              {CurrentcyFormatter(low_24h.usd)}
                            </CoinPrice>
-                        </>
-                     }
-                     secondary='Current Price'
-                  />
-               </ListItem>
+                        </div>
 
-               <ButtonWrapper>
-                  <Button
-                     variant='contained'
-                     sx={{
-                        bgcolor: '#4C6FFF',
-                        textTransform: 'capitalize',
-                        boxShadow: 'none',
-                     }}
-                     onClick={handleSetAlert}
-                  >
-                     Set Price Alert
-                  </Button>
-
-                  <Button
-                     variant='contained'
-                     sx={{
-                        bgcolor: '#F6ACA2',
-                        textTransform: 'none',
-                        boxShadow: 'none',
-                        '&:hover': {
-                           bgcolor: '#f59285',
-                        },
-                     }}
-                     endIcon={<WhiteStarSVG />}
-                     onClick={handleAddToWatchlist}
-                  >
-                     Add to Watchlist
-                  </Button>
-               </ButtonWrapper>
-            </div>
-
-            {/* 24 hours volume */}
-            <div css={[tw`space-y-8 `]}>
-               <VolumeTitle className='body'>24H Volume</VolumeTitle>
-
-               <div css={[tw`flex space-x-20`]}>
-                  {/* Low */}
-                  <div css={[tw`space-y-8`]}>
-                     <VolumeText className='small'>Low</VolumeText>
-                     <CoinPrice>{CurrentcyFormatter(low_24h.usd)}</CoinPrice>
-                  </div>
-
-                  {/* High */}
-                  <div css={[tw`space-y-8`]}>
-                     <VolumeText className='small'>High</VolumeText>
-                     <div>
-                        <CoinPrice>
-                           {CurrentcyFormatter(high_24h.usd)}
-                        </CoinPrice>
+                        {/* High */}
+                        <div css={[tw`space-y-4`]}>
+                           <VolumeText className='small'>High</VolumeText>
+                           <div>
+                              <CoinPrice>
+                                 {CurrentcyFormatter(high_24h.usd)}
+                              </CoinPrice>
+                           </div>
+                        </div>
                      </div>
                   </div>
-               </div>
 
-               {/* Range */}
-               <div
-                  css={[
-                     tw`w-full h-2 relative bg-gray-300 rounded-full overflow-hidden`,
-                  ]}
-               >
+                  {/* Range */}
                   <div
                      css={[
-                        tw`h-full bg-blue-500 absolute top-0 bg-gray-600 rounded-full`,
+                        tw`w-full h-2 relative bg-gray-300 rounded-full overflow-hidden`,
                      ]}
-                     style={{ width: `${HighLowPercent}%` }}
-                  ></div>
+                  >
+                     <div
+                        css={[
+                           tw`h-full absolute top-0 bg-gray-600 rounded-full`,
+                        ]}
+                        style={{ width: `${HighLowPercent}%` }}
+                     ></div>
+                  </div>
                </div>
+
+               {/* <p className= "tiny">{description.en}</p> */}
             </div>
 
             {/* coins stats */}
             <StatsWrapper>
-               <StatStack direction='row'>
-                  <EachStatL>
-                     <StatHeaderText className='bodyBold'>
-                        Market Cap
-                     </StatHeaderText>
-                     <StatText>$19021093894</StatText>
-                  </EachStatL>
+               <EachStat>
+                  <StatHeaderText className='bodyBold'>
+                     Market Cap
+                  </StatHeaderText>
+                  <StatText>{CurrentcyFormatter(market_cap.usd)}</StatText>
+               </EachStat>
 
-                  <Divider orientation='vertical' flexItem />
+               <Divider orientation='vertical' flexItem />
 
-                  <EachStatR>
-                     <StatHeaderText className='bodyBold'>
-                        Trading Volume
-                     </StatHeaderText>
-                     <StatText>$19021093894</StatText>
-                  </EachStatR>
-               </StatStack>
+               <EachStat>
+                  <StatHeaderText className='bodyBold'>
+                     Trading Volume
+                  </StatHeaderText>
+                  <StatText>{CurrentcyFormatter(total_volume.usd)}</StatText>
+               </EachStat>
 
-               <Divider direction='horizontal' flexItem />
+               <Divider orientation='vertical' flexItem />
 
-               <StatStack direction='row'>
-                  <EachStatL>
-                     <StatHeaderText className='bodyBold'>
-                        All-Time High
-                     </StatHeaderText>
-                     <StatText>$19021093894</StatText>
-                     <SecondaryText className='small'>
-                        Nov 10, 2021
-                     </SecondaryText>
-                  </EachStatL>
+               <EachStat>
+                  <StatHeaderText className='bodyBold'>
+                     All-Time High
+                  </StatHeaderText>
+                  <StatText>{CurrentcyFormatter(ath.usd)}</StatText>
+                  <SecondaryText className='small'>
+                     {DateFormatter(ath_date.usd)}
+                  </SecondaryText>
+               </EachStat>
 
-                  <Divider orientation='vertical' flexItem />
+               <Divider orientation='vertical' flexItem />
 
-                  <EachStatR>
-                     <StatHeaderText className='bodyBold'>
-                        All-Time Low
-                     </StatHeaderText>
-                     <StatText>$19021093894</StatText>
-                     <SecondaryText className='small'>
-                        Oct 20, 2015
-                     </SecondaryText>
-                  </EachStatR>
-               </StatStack>
+               <EachStat>
+                  <StatHeaderText className='bodyBold'>
+                     All-Time Low
+                  </StatHeaderText>
+                  <StatText>{CurrentcyFormatter(atl.usd)}</StatText>
+                  <SecondaryText className='small'>
+                     {DateFormatter(atl_date.usd)}
+                  </SecondaryText>
+               </EachStat>
             </StatsWrapper>
          </CoinDashboard>
 
@@ -441,20 +467,30 @@ const ButtonGreen = styled(PreDefinedPriceButton)({
    },
 });
 
+const DateFormatter = (date) => {
+   return (
+      <>
+         <span>
+            {`${moment(date).utc().format('MMM DD, YYYY')} ( ${moment(
+               date
+            ).fromNow()} )`}
+         </span>
+      </>
+   );
+};
+
 // Tailwind Styles
-const CoinDashboard = tw.div`bg-white px-8 py-9 mt-8 flex justify-between`;
+const CoinDashboard = tw.div`bg-white px-8 py-9 mt-8 flex justify-between flex-col space-y-10`;
 const CoinName = tw.p`uppercase text-dark-gray`;
 const CoinPrice = tw.p`text-[24px] text-dark-darker`;
 const ButtonWrapper = tw.div`space-x-5 mt-7`;
 const VolumeTitle = tw.p`text-dark-gray`;
 const VolumeText = tw.p`text-dark-black`;
 const Description = tw.p`text-dark-gray mt-3 mb-8`;
-const StatsWrapper = tw.div`flex flex-col items-center`;
-const StatStack = tw(Stack)``
-const EachStatL = tw.div`pr-10 py-5`;
-const EachStatR = tw.div`pl-10 py-5`;
-const StatHeaderText = tw.p`text-dark-black`;
+const StatsWrapper = tw.div`flex justify-between items-center`;
+const EachStat = tw.div`py-8`;
+const StatHeaderText = tw.p`text-dark-black tracking-wider`;
 const StatText = tw.p`text-dark-gray mt-2`;
-const SecondaryText = tw.p`text-dark-gray`
+const SecondaryText = tw.p`text-gray-300`;
 
 export default CurrencyComponent;

@@ -7,7 +7,7 @@ const CurrencyPage = ({ res, sevenDres }) => {
    return (
       <>
          <Head>
-            <title>{ res.name }| CryptoWatch</title>
+            <title>{ res.name || 'Coin' }| CryptoWatch</title>
          </Head>
 
          <CurrencyComponent res={res} sevenDres={sevenDres} />
@@ -54,6 +54,13 @@ function srtipData(coin) {
       price_change_percentage_24h: coin.market_data.price_change_percentage_24h,
       high_24h: coin.market_data.high_24h,
       low_24h: coin.market_data.low_24h,
+      market_cap: coin.market_data.market_cap,
+      total_volume: coin.market_data.total_volume,
+      atl: coin.market_data.atl,
+      ath: coin.market_data.ath,
+      ath_date: coin.market_data.ath_date,
+      atl_date: coin.market_data.atl_date,
+      description: coin.description,
    };
 }
 
