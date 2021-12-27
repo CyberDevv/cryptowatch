@@ -22,6 +22,7 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 
    const coin = await (await axios(url)).data;
    const res = coin.map(srtipData);
+   console.log(res);
 
    return {
       props: {
