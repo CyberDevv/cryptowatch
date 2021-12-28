@@ -127,6 +127,20 @@ h6 {
    content: none !important;
 }
 
+.chartWrapper {
+   /* padding: 1rem 2rem; */
+   display: flex;
+}
+
+.chartWrapper span:first-child {
+   margin-right: 3.5rem;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+    background: transparent !important;
+    border-bottom: 0 !important;
+}
+
 /* Fonts */
 @font-face {
    font-family: 'SF Pro Display Regular';

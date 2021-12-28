@@ -1,22 +1,24 @@
+import moment from 'moment';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 import tw from 'twin.macro';
+import CurrencyFormatter from '../utils/CurrencyFormatter';
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const Sparkline = ({ sevenDres: { prices } }) => {
    const [isPrice] = useState({
       options: {
          xaxis: {
-            categories: ['Sun', 'Sat', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+            type: 'datetime',
+            tooltip: {
+               enabled: false,
+            },
          },
          yaxis: [
             {
-               categories: ['Sun', 'Sat', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
                tickAmount: 5,
-               //  min: '10k',
-               //  max: '100m',
                axisTicks: {
-                  show: true,
+                  show: false,
                },
                labels: {
                   style: {
@@ -28,7 +30,10 @@ const Sparkline = ({ sevenDres: { prices } }) => {
          series: [
             {
                name: 'Price',
-               data: prices,
+               data: prices.map((pri) => [
+                  pri[0],
+                  parseFloat(pri[1]).toFixed(2),
+               ]),
             },
          ],
          stroke: {
@@ -39,17 +44,50 @@ const Sparkline = ({ sevenDres: { prices } }) => {
             dashArray: 0,
          },
          chart: {
-            type: 'line',
+            toolbar: {
+               show: true,
+               offsetX: 0,
+               offsetY: 0,
+               tools: {
+                  download: '<img src= "/Camera.png" width= "20">',
+                  selection: false,
+                  zoom: false,
+                  zoomin: false,
+                  zoomout: false,
+                  pan: false,
+                  reset: false,
+               },
+            },
          },
          tooltip: {
             fixed: {
                enabled: false,
             },
             x: {
-               show: false,
+               show: true,
+               formatter: function (x) {
+                  if (typeof x !== 'undefined') {
+                     return (
+                        '<p class="chartWrapper">' +
+                        '<span class="">' +
+                        moment(x).format('L') +
+                        '</span>' +
+                        '<span>' +
+                        moment(x).format('LTS') +
+                        '</span>' +
+                        '</p>'
+                     );
+                  }
+                  return x;
+               },
             },
             y: {
-               show: false,
+               formatter: function (y) {
+                  if (typeof y !== 'undefined') {
+                     return `${CurrencyFormatter(y)}`;
+                  }
+                  return y;
+               },
             },
             marker: {
                show: false,
@@ -63,12 +101,12 @@ const Sparkline = ({ sevenDres: { prices } }) => {
          <Chart
             options={isPrice.options}
             series={isPrice.options.series}
-            height={430}
+            height={500}
+            // children={<p>What the </p>}
             // width= {300}
          />
       </div>
    );
 };
-
 
 export default Sparkline;
