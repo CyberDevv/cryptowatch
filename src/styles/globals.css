@@ -123,10 +123,6 @@ h6 {
    color: #3754db;
 }
 
-.css-ghsjzk-MuiInputBase-root-MuiInput-root:before {
-   content: none !important;
-}
-
 .chartWrapper {
    /* padding: 1rem 2rem; */
    display: flex;

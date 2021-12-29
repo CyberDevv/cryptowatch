@@ -3,14 +3,19 @@ import Head from 'next/head';
 
 import CurrencyComponent from '../../components/page components/CurrencyComponent.jsx';
 
-const CurrencyPage = ({ res, sevenDres }) => {
+const CurrencyPage = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
    return (
       <>
          <Head>
-            <title>{ res.name || 'Coin' }| CryptoWatch</title>
+            <title>{res.name || 'Coin'}| CryptoWatch</title>
          </Head>
 
-         <CurrencyComponent res={res} sevenDres={sevenDres} />
+         <CurrencyComponent
+            res={res}
+            sevenDres={sevenDres}
+            oneMonthRes={oneMonthRes}
+            oneDayRes={oneDayRes}
+         />
       </>
    );
 };
@@ -30,18 +35,21 @@ export async function getStaticPaths() {
    };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params}) {
    // const url = `https://api.coingecko.com/api/v3/coins/${params.id}`;
-
    const url = `https://api.coingecko.com/api/v3/coins/${params.id}?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`;
    const sevenDUrl = `https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=7`;
+   const oneMonthDUrl = `https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=30`;
+   const oneDayUrl = `https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=1`;
 
    const coin = await (await axios(url)).data;
-   
+
    const res = srtipData(coin);
    const sevenDres = await (await axios(sevenDUrl)).data;
+   const oneMonthRes = await (await axios(oneMonthDUrl)).data
+   const oneDayRes = await (await axios(oneDayUrl)).data;
 
-   return { props: { res, sevenDres } };
+   return { props: { res, sevenDres, oneMonthRes, oneDayRes } };
 }
 
 function srtipData(coin) {

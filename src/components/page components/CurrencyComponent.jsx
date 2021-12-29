@@ -30,7 +30,7 @@ import CoinGraph from '../CoinGraph.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 import { CloseSVG, WhiteStarSVG, ArrowDownSVG, ArrowUpSVG } from '../SVG-Icons';
 
-const CurrencyComponent = ({ res, sevenDres }) => {
+const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
    const { isFallback } = useRouter();
 
    const [priceAlertModalOpened, setPriceAlertModalOpened] = useState(false);
@@ -270,7 +270,11 @@ const CurrencyComponent = ({ res, sevenDres }) => {
             </StatsWrapper>
          </CoinDashboard>
 
-         <CoinGraph sevenDres={sevenDres} />
+         <CoinGraph
+            sevenDres={sevenDres}
+            oneMonthRes={oneMonthRes}
+            oneDayRes={oneDayRes}
+         />
 
          {/* price alert modal */}
          <Dialog

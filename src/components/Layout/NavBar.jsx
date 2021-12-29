@@ -54,7 +54,6 @@ const NavBar = () => {
                      onChange={(e) => setCoins(e.target.value)}
                      onFocus={() => setSearchOpeend(true)}
                      onBlur={() => setSearchOpeend(false)}
-                     on
                   />
                </InputWrapper>
 
