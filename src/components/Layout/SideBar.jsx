@@ -1,10 +1,12 @@
 import tw from 'twin.macro';
 import { useSelector } from 'react-redux';
 
-import ActiveLink from '../ActiveClass';
 import { SVGIcons } from '../SVG-Icons';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const SideBar = () => {
+   const { asPath } = useRouter();
    // Gets the user from the store
    const user = useSelector((state) => state.user.value);
 
@@ -12,16 +14,40 @@ const SideBar = () => {
       e.preventDefault();
    };
 
+   const NavItemComponent = ({ label, svg, link, className }) => {
+      return (
+         <NavItem>
+            <Link href={link}>
+               <a
+                  className={className}
+                  css={[
+                     tw`text-dark-gray hover:(text-dark-black transition-colors duration-300) cursor-pointer flex items-center lg:(space-x-4) letter-spacing[-0.025em]`,
+                  ]}
+               >
+                  {svg}
+                  <p className='small'>{label}</p>
+               </a>
+            </Link>
+         </NavItem>
+      );
+   };
+
    return (
       <Nav>
          {/* NavMenu */}
          <NavMenu>
-            <NavItemComponent link='/' svg={<SVGIcons home />} label='Home' />
+            <NavItemComponent
+               link='/'
+               svg={<SVGIcons home />}
+               label='Home'
+               className={asPath === '/' ? 'active' : ''}
+            />
             {user.name && (
                <NavItemComponent
                   link='/watchList'
                   svg={<SVGIcons watchlist />}
                   label='Watchlist'
+                  className={asPath === '/watchList' ? 'active' : ''}
                />
             )}
             {user.name && (
@@ -29,12 +55,14 @@ const SideBar = () => {
                   link='/priceAlerts'
                   svg={<SVGIcons priceAlerts />}
                   label='Price Alerts'
+                  className={asPath === '/priceAlerts' ? 'active' : ''}
                />
             )}
             <NavItemComponent
                link='/settings'
                svg={<SVGIcons settings />}
                label='Settings'
+               className={asPath === '/settings' ? 'active' : ''}
             />
             {user.name && (
                <button onClick={handleLogout}>
@@ -50,23 +78,10 @@ const SideBar = () => {
    );
 };
 
-const NavItemComponent = ({ label, svg, link }) => {
-   return (
-      <NavItem>
-         <ActiveLink activeClassName='active' href={link}>
-            <Anchor css={[tw`text-dark-gray`]}>
-               {svg}
-               <p className='small'>{label}</p>
-            </Anchor>
-         </ActiveLink>
-      </NavItem>
-   );
-};
-
 // tailwind Styles
 const Nav = tw.nav`lg:(w-[180px] min-w-[180px] ml-6) xl:(w-[211px] min-w-[211px])`;
 const NavMenu = tw.ul`lg:(space-y-10)`;
 const NavItem = tw.li``;
-const Anchor = tw.a` hover:(text-dark-black transition-colors duration-300) cursor-pointer flex items-center lg:(space-x-4) letter-spacing[-0.025em]`;
+// const Anchor = tw.a``;
 
 export default SideBar;

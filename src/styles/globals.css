@@ -112,15 +112,15 @@ h6 {
 }
 
 .active {
-   color: #3754db;
+   color: #3754db !important;
 }
 
 .active a {
-   fill: #3754db;
+   fill: #3754db !important;
 }
 
 .active:hover {
-   color: #3754db;
+   color: #3754db !important;
 }
 
 .chartWrapper {
