@@ -11,6 +11,13 @@ import Watchlist from '../Watchlist.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
 
 const Home = ({ coins, page }) => {
+
+
+
+   
+   
+   
+   
    // Gets the user from the store
    const user = useSelector((state) => state.user.value);
    const watchListS = useSelector((state) => state.watchList);

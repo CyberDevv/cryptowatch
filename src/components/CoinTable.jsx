@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import tw from 'twin.macro';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -51,6 +52,8 @@ const CoinTable = ({ coins }) => {
                   },
                   index
                ) => {
+                  const forImageUrlToSparkline = image.split('/')[5];
+
                   const FormattedCurrentPrice =
                      CurrencyFormatter(current_price);
                   return (
@@ -135,7 +138,17 @@ const CoinTable = ({ coins }) => {
                         </TableBodyText>
 
                         {/* graph for last 7 days */}
-                        <Sparkline price={spackline_7d} />
+                        {/* <Sparkline price={spackline_7d} /> */}
+                        <img
+                           className=''
+                           width='70%'
+                           height='50'
+                           alt={name}
+                           data-src={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline`}
+                           data-srcSet={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline 1x`}
+                           src={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline`}
+                           srcSet={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline 1x`}
+                        ></img>
                      </TableBody>
                   );
                }
