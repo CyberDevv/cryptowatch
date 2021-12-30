@@ -7,7 +7,8 @@ const CurrencyPage = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
    return (
       <>
          <Head>
-            <title>{res.name || 'Coin'}| CryptoWatch</title>
+            {/* TODO: fix the issue of not building when using res.name */}
+            <title>Coin | CryptoWatch</title>
          </Head>
 
          <CurrencyComponent

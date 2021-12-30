@@ -67,7 +67,6 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
    };
 
    if (isFallback) {
-      k;
       return (
          <Layout>
             <div tw='text-center'>
