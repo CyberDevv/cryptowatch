@@ -22,7 +22,7 @@ const CurrencyPage = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
 };
 
 export async function getStaticPaths() {
-   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=25&page=1`;
+   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=15&page=1`;
 
    const res = await (await axios(url)).data;
 
