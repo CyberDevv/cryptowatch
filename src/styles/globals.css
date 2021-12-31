@@ -132,6 +132,10 @@ h6 {
    margin-right: 3.5rem;
 }
 
+.wow svg {
+   width: 50vw !important;
+}
+
 .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
     background: transparent !important;
     border-bottom: 0 !important;
