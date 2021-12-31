@@ -140,12 +140,11 @@ const CoinTable = ({ coins }) => {
                         {/* graph for last 7 days */}
                         {/* <Sparkline price={spackline_7d} /> */}
                         <img
-                           className=''
                            width='70%'
                            height='50'
                            alt={name}
                            data-src={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline`}
-                           data-srcSet={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline 1x`}
+                           data-srcset={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline 1x`}
                            src={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline`}
                            srcSet={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline 1x`}
                         ></img>
