@@ -32,7 +32,7 @@ const WatchList = () => {
                            const FormattedPrice =
                               CurrentcyFormatter(current_price);
                            return (
-                              <CoinWrapper>
+                              <CoinWrapper key={id}>
                                  <Watchlist
                                     name={name}
                                     symbol={symbol}

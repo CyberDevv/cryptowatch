@@ -1,22 +1,32 @@
 import axios from 'axios';
 import Head from 'next/head';
+import Error from 'next/error';
 
 import CurrencyComponent from '../../components/page components/CurrencyComponent.jsx';
 
 const CurrencyPage = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
    return (
       <>
-         <Head>
-            {/* TODO: fix the issue of not building when using res.name */}
-            <title>Coin | CryptoWatch</title>
-         </Head>
+         {(res === 0 ||
+            sevenDres === 0 ||
+            oneMonthRes === 0 ||
+            oneDayRes === 0) && <Error statusCode={503} />}
 
-         <CurrencyComponent
-            res={res}
-            sevenDres={sevenDres}
-            oneMonthRes={oneMonthRes}
-            oneDayRes={oneDayRes}
-         />
+         {res !== 0 && sevenDres !== 0 && oneMonthRes !== 0 && oneDayRes !== 0 && (
+            <>
+               <Head>
+                  {/* TODO: fix the issue of not building when using res.name */}
+                  <title>Coin | CryptoWatch</title>
+               </Head>
+
+               <CurrencyComponent
+                  res={res}
+                  sevenDres={sevenDres}
+                  oneMonthRes={oneMonthRes}
+                  oneDayRes={oneDayRes}
+               />
+            </>
+         )}
       </>
    );
 };
@@ -36,21 +46,27 @@ export async function getStaticPaths() {
    };
 }
 
-export async function getStaticProps({ params}) {
-   // const url = `https://api.coingecko.com/api/v3/coins/${params.id}`;
-   const url = `https://api.coingecko.com/api/v3/coins/${params.id}?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`;
-   const sevenDUrl = `https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=7`;
-   const oneMonthDUrl = `https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=30`;
-   const oneDayUrl = `https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=1`;
+export async function getStaticProps({ params }) {
+   try {
+      const url = `https://api.coingecko.com/api/v3/coins/${params.id}?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`;
+      const sevenDUrl = `https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=7`;
+      const oneMonthDUrl = `https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=30`;
+      const oneDayUrl = `https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=1`;
 
-   const coin = await (await axios(url)).data;
+      const coin = await (await axios(url)).data;
 
-   const res = srtipData(coin);
-   const sevenDres = await (await axios(sevenDUrl)).data;
-   const oneMonthRes = await (await axios(oneMonthDUrl)).data
-   const oneDayRes = await (await axios(oneDayUrl)).data;
+      const res = srtipData(coin);
+      const sevenDres = await (await axios(sevenDUrl)).data;
+      const oneMonthRes = await (await axios(oneMonthDUrl)).data;
+      const oneDayRes = await (await axios(oneDayUrl)).data;
 
-   return { props: { res, sevenDres, oneMonthRes, oneDayRes } };
+      return { props: { res, sevenDres, oneMonthRes, oneDayRes } };
+   } catch (error) {
+      console.log(error);
+      return {
+         props: { res: [], sevenDres: [], oneMonthRes: [], oneDayRes: [] },
+      };
+   }
 }
 
 function srtipData(coin) {
