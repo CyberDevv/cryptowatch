@@ -22,7 +22,10 @@ const SignUpModal = ({ setSignUpOpened, signUpOpened }) => {
 
             {/* Email Signup */}
             {withEmailModal && (
-               <EmailSignupMethod setWithEmailModal={setWithEmailModal} />
+               <EmailSignupMethod
+                  setWithEmailModal={setWithEmailModal}
+                  setSignUpOpened={setSignUpOpened}
+               />
             )}
 
             {/* Close button */}

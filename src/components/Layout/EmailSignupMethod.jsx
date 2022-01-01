@@ -3,13 +3,15 @@ import { useState } from 'react';
 import tw from 'twin.macro';
 import FormField from '../FormField';
 
-const EmailSignupMethod = ({ setWithEmailModal }) => {
+const EmailSignupMethod = ({ setWithEmailModal, setSignUpOpened }) => {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
    const [confirmPassword, setConfirmPassword] = useState('');
 
    const handleCreateAccount = (e) => {
       e.preventDefault();
+
+      setSignUpOpened(false);
    };
 
    return (

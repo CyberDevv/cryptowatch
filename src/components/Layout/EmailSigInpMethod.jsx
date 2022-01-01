@@ -1,15 +1,10 @@
 import tw from 'twin.macro';
 import { useState } from 'react';
-import {
-   Button,
-   Checkbox,
-   FormControlLabel,
-   TextField,
-} from '@mui/material';
+import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
 
 import FormField from '../FormField.jsx';
 
-const EmailSignInMethod = ({ setWithEmailModal }) => {
+const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
    const [forgotPassModal, setForgotPassModal] = useState(false);
    const [forgotPinSent, setForgotPinSent] = useState(false);
    const [rememberMe, setRememberMe] = useState(false);
@@ -31,6 +26,8 @@ const EmailSignInMethod = ({ setWithEmailModal }) => {
       e.preventDefault();
 
       // Input your code in here
+
+      setSignInOpened(false);
    };
 
    const handleForgotPass = (e) => {
@@ -58,6 +55,7 @@ const EmailSignInMethod = ({ setWithEmailModal }) => {
    const handleResetPassword = (e) => {
       e.preventDefault();
 
+      setSignInOpened(false);
       // Input your code here
    };
 
@@ -200,11 +198,14 @@ const EmailSignInMethod = ({ setWithEmailModal }) => {
                </SignupDescription>
 
                <Form>
-                  {/* FIXME make a better OTP input */}
                   <Input
                      type='password'
                      value={otp}
                      onChange={handleOTPOnChange}
+                     maxLength={4}
+                     onInput={(e) =>
+                        (e.target.value = e.target.value.replace(/[^0-9]/g, ''))
+                     }
                   />
 
                   <div>

@@ -42,7 +42,7 @@ const SideBar = () => {
                label='Home'
                className={asPath === '/' ? 'active' : ''}
             />
-            {user.name && (
+            {user.email && (
                <NavItemComponent
                   link='/watchList'
                   svg={<SVGIcons watchlist />}
@@ -50,7 +50,7 @@ const SideBar = () => {
                   className={asPath === '/watchList' ? 'active' : ''}
                />
             )}
-            {user.name && (
+            {user.email && (
                <NavItemComponent
                   link='/priceAlerts'
                   svg={<SVGIcons priceAlerts />}
@@ -64,7 +64,7 @@ const SideBar = () => {
                label='Settings'
                className={asPath === '/settings' ? 'active' : ''}
             />
-            {user.name && (
+            {user.email && (
                <button onClick={handleLogout}>
                   <NavItemComponent
                      link=''

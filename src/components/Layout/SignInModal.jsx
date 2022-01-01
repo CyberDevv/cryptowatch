@@ -2,7 +2,7 @@ import tw from 'twin.macro';
 import { useState } from 'react';
 import { Button, Dialog, DialogActions } from '@mui/material';
 
-import { CloseSVG} from '../SVG-Icons';
+import { CloseSVG } from '../SVG-Icons';
 import SignInMethods from './SignInMethods.jsx';
 import EmailSigInpMethod from './EmailSigInpMethod.jsx';
 
@@ -21,7 +21,10 @@ const SignInModal = ({ setSignInOpened, signInOpened }) => {
 
             {/* Email Signup */}
             {withEmailModal && (
-               <EmailSigInpMethod setWithEmailModal={setWithEmailModal} />
+               <EmailSigInpMethod
+                  setWithEmailModal={setWithEmailModal}
+                  setSignInOpened={setSignInOpened}
+               />
             )}
 
             {/* Close button */}

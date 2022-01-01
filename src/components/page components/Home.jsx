@@ -19,7 +19,7 @@ const Home = ({ coins, page }) => {
    return (
       <Layout>
          {/* Watchlist */}
-         {user.name && watchListS.length !== 0 && (
+         {user.email && watchListS.length !== 0 && (
             <WishlistWrapper>
                {/* Section title */}
                <div css={[tw`flex items-center justify-between`]}>

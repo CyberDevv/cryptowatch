@@ -1,7 +1,6 @@
 import tw from 'twin.macro';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import { Avatar, Button, ListItemText, Stack } from '@mui/material';
@@ -19,19 +18,6 @@ const NavBar = () => {
    // Gets the user from the store
    const user = useSelector((state) => state.user.value);
    const coins = useSelector((state) => state.coins);
-
-   const router = useRouter();
-
-   // function for pressing enter to search
-   const handleSearchKeyDown = (e) => {
-      if (e.key === 'Enter') {
-         coins.map((coin) => {
-            if (coin.name === e.target.value) {
-               router.push(`/coins/${coin.id}`);
-            }
-         });
-      }
-   };
 
    return (
       <Nav>
@@ -109,7 +95,7 @@ const NavBar = () => {
 
             <Stack spacing={3} direction='row'>
                {/* sign in */}
-               {!user && (
+               {!user.email && (
                   <NavButton
                      onClick={() => setSignInOpened(true)}
                      sx={{
@@ -123,7 +109,7 @@ const NavBar = () => {
                )}
 
                {/* Sign up */}
-               {!user.name && (
+               {!user.email && (
                   <NavButton
                      onClick={() => setSignUpOpened(true)}
                      sx={{ bgcolor: '#EBF2FA', color: '#4C6FFF' }}
