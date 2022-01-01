@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
    // useEffect(() => {
    //    dispatch(fetchCoins());
    // }, [dispatch]);
-   
+
    return (
       <MainWrapper>
          <NavBar />
@@ -27,8 +27,8 @@ const Layout = ({ children }) => {
 };
 
 // Tailwind styles
-const MainWrapper = tw.div`py-5 overflow-x-hidden`;
+const MainWrapper = tw.div`pb-5 overflow-x-hidden`;
 const Div = tw.main`flex`;
-const Main = tw.main`w-full lg:(px-[40px]) xl:(px-[40px])`;
+const Main = tw.main`w-full lg:(px-[40px] ml-[180px]) xl:(px-[40px] ml-[240px])`;
 
 export default Layout;

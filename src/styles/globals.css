@@ -137,8 +137,26 @@ h6 {
 }
 
 .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
-    background: transparent !important;
-    border-bottom: 0 !important;
+   background: transparent !important;
+   border-bottom: 0 !important;
+}
+
+.navBar {
+   transition: all 0.5s ease-in-out;
+   -webkit-transition: all 0.5s ease-in-out;
+   -moz-transition: all 0.5s ease-in-out;
+   -ms-transition: all 0.5s ease-in-out;
+   -o-transition: all 0.5s ease-in-out;
+}
+
+.navScrolled {
+   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+   padding: 0.7rem 40px;
+   background-color: rgb(251, 251, 251);
+   top: 0;
+   position: fixed;
+   width: 100%;
+   z-index: 40;
 }
 
 /* Fonts */

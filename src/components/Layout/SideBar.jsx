@@ -22,6 +22,9 @@ const SideBar = () => {
                   className={className}
                   css={[
                      tw`text-dark-gray hover:(text-dark-black transition-colors duration-300) cursor-pointer flex items-center lg:(space-x-4) letter-spacing[-0.025em]`,
+                     !user.email &&
+                        label !== 'Home' &&
+                        tw`pointer-events-none opacity-70`,
                   ]}
                >
                   {svg}
@@ -42,22 +45,21 @@ const SideBar = () => {
                label='Home'
                className={asPath === '/' ? 'active' : ''}
             />
-            {user.email && (
-               <NavItemComponent
-                  link='/watchList'
-                  svg={<SVGIcons watchlist />}
-                  label='Watchlist'
-                  className={asPath === '/watchList' ? 'active' : ''}
-               />
-            )}
-            {user.email && (
-               <NavItemComponent
-                  link='/priceAlerts'
-                  svg={<SVGIcons priceAlerts />}
-                  label='Price Alerts'
-                  className={asPath === '/priceAlerts' ? 'active' : ''}
-               />
-            )}
+
+            <NavItemComponent
+               link='/watchList'
+               svg={<SVGIcons watchlist />}
+               label='Watchlist'
+               className={asPath === '/watchList' ? 'active' : ''}
+            />
+
+            <NavItemComponent
+               link='/priceAlerts'
+               svg={<SVGIcons priceAlerts />}
+               label='Price Alerts'
+               className={asPath === '/priceAlerts' ? 'active' : ''}
+            />
+
             <NavItemComponent
                link='/settings'
                svg={<SVGIcons settings />}
@@ -79,7 +81,7 @@ const SideBar = () => {
 };
 
 // tailwind Styles
-const Nav = tw.nav`lg:(w-[180px] min-w-[180px] ml-6) xl:(w-[211px] min-w-[211px])`;
+const Nav = tw.nav`lg:(w-[180px] min-w-[180px] ml-8) xl:(w-[211px] min-w-[211px]) fixed z-40`;
 const NavMenu = tw.ul`lg:(space-y-10)`;
 const NavItem = tw.li``;
 // const Anchor = tw.a``;
