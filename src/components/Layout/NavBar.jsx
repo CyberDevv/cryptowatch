@@ -9,9 +9,8 @@ import SigninModal from './SignInModal.jsx';
 import SignupModal from './SignupModal.jsx';
 import { Logo, SearchSVG } from '../SVG-Icons';
 
-const NavBar = () => {
+const NavBar = ({ signInOpened, setSignInOpened }) => {
    const [signUpOpened, setSignUpOpened] = useState(false);
-   const [signInOpened, setSignInOpened] = useState(false);
    const [coinss, setCoins] = useState('');
    const [searchOpened, setSearchOpeend] = useState(false);
 
@@ -37,7 +36,7 @@ const NavBar = () => {
                   <Logo />
                </LogoAnchor>
             </Link>
-         
+
             <div css={[tw`flex justify-between items-center w-full`]}>
                {/* Search input */}
                <div css={[tw`relative`]}>
@@ -52,7 +51,7 @@ const NavBar = () => {
                         onBlur={() => setSearchOpeend(false)}
                      />
                   </InputWrapper>
-         
+
                   {/* Search Pannel */}
                   {searchOpened && (
                      <SearchPanel>
@@ -88,7 +87,11 @@ const NavBar = () => {
                                              ></Avatar>
                                              <ListItemText primary={name} />
                                           </div>
-                                          <p css={[tw`uppercase text-dark-gray`]}>
+                                          <p
+                                             css={[
+                                                tw`uppercase text-dark-gray`,
+                                             ]}
+                                          >
                                              {symbol}
                                           </p>
                                        </CoinAnchor>
@@ -100,9 +103,9 @@ const NavBar = () => {
                      </SearchPanel>
                   )}
                </div>
-         
+
                {/* Buttons */}
-         
+
                <Stack spacing={3} direction='row'>
                   {/* sign in */}
                   {!user.email && (
@@ -117,7 +120,7 @@ const NavBar = () => {
                         Sign in
                      </NavButton>
                   )}
-         
+
                   {/* Sign up */}
                   {!user.email && (
                      <NavButton
@@ -129,13 +132,13 @@ const NavBar = () => {
                   )}
                </Stack>
             </div>
-         
+
             {/* Sign in modal */}
             <SigninModal
                setSignInOpened={setSignInOpened}
                signInOpened={signInOpened}
             />
-         
+
             {/* Sign in modal */}
             <SignupModal
                setSignUpOpened={setSignUpOpened}

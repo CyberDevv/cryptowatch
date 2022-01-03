@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import { SVGIcons } from '../SVG-Icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useState } from 'react';
 
-const SideBar = () => {
+const SideBar = ({ setSignInOpened }) => {
    const { asPath } = useRouter();
    // Gets the user from the store
    const user = useSelector((state) => state.user.value);
@@ -14,23 +15,26 @@ const SideBar = () => {
       e.preventDefault();
    };
 
+   const handleLinkClick = () => {
+      !user.email && setSignInOpened(true);
+   }
+
    const NavItemComponent = ({ label, svg, link, className }) => {
       return (
          <NavItem>
-            <Link href={link}>
-               <a
-                  className={className}
-                  css={[
-                     tw`text-dark-gray hover:(text-dark-black transition-colors duration-300) cursor-pointer flex items-center lg:(space-x-4) letter-spacing[-0.025em]`,
-                     !user.email &&
-                        label !== 'Home' &&
-                        tw`pointer-events-none opacity-70`,
-                  ]}
-               >
-                  {svg}
-                  <p className='small'>{label}</p>
-               </a>
-            </Link>
+            <button onClick={handleLinkClick}>
+               <Link href={user.email ? link : ''}>
+                  <a
+                     className={className}
+                     css={[
+                        tw`text-dark-gray hover:(text-dark-black transition-colors duration-300) cursor-pointer flex items-center lg:(space-x-4) letter-spacing[-0.025em]`,
+                     ]}
+                  >
+                     {svg}
+                     <p className='small'>{label}</p>
+                  </a>
+               </Link>
+            </button>
          </NavItem>
       );
    };

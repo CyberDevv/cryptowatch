@@ -1,5 +1,5 @@
 import tw from 'twin.macro';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import NavBar from './NavBar.jsx';
@@ -10,15 +10,20 @@ import SideBar from './SideBar.jsx';
 const Layout = ({ children }) => {
    const dispatch = useDispatch();
 
+   const [signInOpened, setSignInOpened] = useState(false);
+
    // useEffect(() => {
    //    dispatch(fetchCoins());
    // }, [dispatch]);
 
    return (
       <MainWrapper>
-         <NavBar />
+         <NavBar
+            signInOpened={signInOpened}
+            setSignInOpened={setSignInOpened}
+         />
          <Div>
-            <SideBar />
+            <SideBar setSignInOpened={setSignInOpened} />
 
             <Main>{children}</Main>
          </Div>
