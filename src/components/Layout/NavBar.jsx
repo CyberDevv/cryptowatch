@@ -14,18 +14,18 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
    const [coinss, setCoins] = useState('');
    const [searchOpened, setSearchOpeend] = useState(false);
 
-   const navBar = useRef(null);
+   const navBar = useRef();
 
    // Gets the user from the store
    const user = useSelector((state) => state.user.value);
    const coins = useSelector((state) => state.coins);
 
    useEffect(() => {
+      const navBarr = navBar.current;
       window.addEventListener('scroll', function () {
-         // let navBar = this.document.querySelector('.navBar');
-         navBar.current.classList.toggle('navScrolled', window.scrollY > 0);
+         navBarr.classList.toggle('navScrolled', window.scrollY > 0);
       });
-   }, []);
+   }, [navBar]);
 
    return (
       <div css={[tw`relative h-32`]}>

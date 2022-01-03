@@ -15,7 +15,7 @@ const CurrencyPage = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
          {res !== 0 && sevenDres !== 0 && oneMonthRes !== 0 && oneDayRes !== 0 && (
             <>
                <Head>
-                  {/* TODO: fix the issue of not building when using res.name */}
+                  {/* FIXME: fix the issue of not building when using res.name */}
                   <title>Coin | CryptoWatch</title>
                </Head>
 
