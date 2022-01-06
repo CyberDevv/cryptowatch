@@ -12,6 +12,9 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
 
    const [isSevenDays] = useState({
       options: {
+         noData: {
+            text: 'No data available for this period',
+         },
          xaxis: {
             type: 'datetime',
             tooltip: {
@@ -29,8 +32,8 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
                      colors: '#666666',
                      fontSize: '14px',
                   },
-                  formatter: function (val, index) {
-                     return `$${millify(val)}`;
+                  formatter: function (val) {
+                     return `$${millify(val, { precision: 6 })}`;
                   },
                },
             },
@@ -38,10 +41,7 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
          series: [
             {
                name: 'Price',
-               data: sevenDres.prices.map((pri) => [
-                  pri[0],
-                  parseFloat(pri[1]).toFixed(2),
-               ]),
+               data: sevenDres.prices.map((pri) => [pri[0], pri[1]]),
             },
          ],
          stroke: {
@@ -92,7 +92,7 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
             y: {
                formatter: function (y) {
                   if (typeof y !== 'undefined') {
-                     return `${CurrencyFormatter(y)}`;
+                     return `$${parseFloat(y).toFixed(6)}`;
                   }
                   return y;
                },
@@ -106,6 +106,9 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
 
    const [isOneDay] = useState({
       options: {
+         noData: {
+            text: 'No data available for this period',
+         },
          xaxis: {
             type: 'datetime',
             tooltip: {
@@ -123,8 +126,8 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
                      colors: '#666666',
                      fontSize: '14px',
                   },
-                  formatter: function (val, index) {
-                     return `$${millify(val)}`;
+                  formatter: function (val) {
+                     return `$${millify(val, { precision: 6 })}`;
                   },
                },
             },
@@ -132,10 +135,7 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
          series: [
             {
                name: 'Price',
-               data: oneDayRes.prices.map((pri) => [
-                  pri[0],
-                  parseFloat(pri[1]).toFixed(2),
-               ]),
+               data: oneDayRes.prices.map((pri) => [pri[0], pri[1]]),
             },
          ],
          stroke: {
@@ -186,7 +186,7 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
             y: {
                formatter: function (y) {
                   if (typeof y !== 'undefined') {
-                     return `${CurrencyFormatter(y)}`;
+                     return `$${parseFloat(y).toFixed(6)}`;
                   }
                   return y;
                },
@@ -200,6 +200,9 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
 
    const [isOneMonth] = useState({
       options: {
+         noData: {
+            text: 'No data available for this period',
+         },
          xaxis: {
             type: 'datetime',
             tooltip: {
@@ -217,8 +220,8 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
                      colors: '#666666',
                      fontSize: '14px',
                   },
-                  formatter: function (val, index) {
-                     return `$${millify(val)}`;
+                  formatter: function (val) {
+                     return `$${millify(val, { precision: 6 })}`;
                   },
                },
             },
@@ -226,10 +229,7 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
          series: [
             {
                name: 'Price',
-               data: oneMonthRes.prices.map((pri) => [
-                  pri[0],
-                  parseFloat(pri[1]).toFixed(2),
-               ]),
+               data: oneMonthRes.prices.map((pri) => [pri[0], pri[1]]),
             },
          ],
          stroke: {
@@ -280,7 +280,7 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
             y: {
                formatter: function (y) {
                   if (typeof y !== 'undefined') {
-                     return `${CurrencyFormatter(y)}`;
+                     return `$${parseFloat(y).toFixed(6)}`;
                   }
                   return y;
                },
