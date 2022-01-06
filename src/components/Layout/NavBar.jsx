@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
-import { Avatar, Button, ListItemText, Stack } from '@mui/material';
+import { Avatar, Button, ListItemText, Skeleton, Stack } from '@mui/material';
 
 import SigninModal from './SignInModal.jsx';
 import SignupModal from './SignupModal.jsx';
-import { Logo, SearchSVG } from '../SVG-Icons';
+import { Logo, SearchSVG, SpinnerSVG } from '../SVG-Icons';
 
 const NavBar = ({ signInOpened, setSignInOpened }) => {
    const [signUpOpened, setSignUpOpened] = useState(false);
@@ -15,10 +15,12 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
    const [searchOpened, setSearchOpeend] = useState(false);
 
    const navBar = useRef();
+   const searchPanel = useRef();
 
    // Gets the user from the store
    const user = useSelector((state) => state.user.value);
-   const coins = useSelector((state) => state.coins);
+   const coins = useSelector((state) => state.coins.coins);
+   const coinsLoading = useSelector((state) => state.coins.loading);
 
    useEffect(() => {
       const navBarr = navBar.current;
@@ -26,6 +28,23 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
          navBarr.classList.toggle('navScrolled', window.scrollY > 0);
       });
    }, [navBar]);
+
+   const handleOnBlur = (e) => {
+      const searchPanelRef = searchPanel.current;
+      if (!searchPanelRef.contains(e.target)) {
+         setSearchOpeend(false);
+      }
+   };
+
+   useEffect(() => {
+      if (setSearchOpeend) {
+         document.addEventListener('mousedown', handleOnBlur);
+      }
+
+      return () => {
+         document.removeEventListener('mousedown', handleOnBlur);
+      };
+   }, [setSearchOpeend]);
 
    return (
       <div css={[tw`relative h-32`]}>
@@ -39,7 +58,7 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
 
             <div css={[tw`flex justify-between items-center w-full`]}>
                {/* Search input */}
-               <div css={[tw`relative`]}>
+               <div css={[tw`relative`]} ref={searchPanel}>
                   <InputWrapper>
                      <SearchSVG />
                      <Input
@@ -48,12 +67,14 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
                         value={coinss}
                         onChange={(e) => setCoins(e.target.value)}
                         onFocus={() => setSearchOpeend(true)}
-                        onBlur={() => setSearchOpeend(false)}
                      />
+                     {coinsLoading && coins.length === 0 && (
+                        <SpinnerSVG />
+                     )}
                   </InputWrapper>
 
                   {/* Search Pannel */}
-                  {searchOpened && (
+                  {coinss.length !== 0 && searchOpened && (
                      <SearchPanel>
                         {coins
                            .filter((coinsss) => {
@@ -74,14 +95,22 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
                                     css={[tw`px-4 py-3  hover:bg-gray-100`]}
                                  >
                                     <Link href={`/coins/${id}`} passHref>
-                                       <CoinAnchor>
+                                       <CoinAnchor
+                                          onClick={() => {
+                                             setSearchOpeend(false);
+                                             setCoins('');
+                                          }}
+                                       >
                                           <div
                                              css={[
                                                 tw`flex items-center space-x-2`,
                                              ]}
                                           >
                                              <Avatar
-                                                sx={{ width: 24, height: 24 }}
+                                                sx={{
+                                                   width: 24,
+                                                   height: 24,
+                                                }}
                                                 src={image}
                                                 alt={name}
                                              ></Avatar>
@@ -96,7 +125,6 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
                                           </p>
                                        </CoinAnchor>
                                     </Link>
-                                    {/* <Divider /> */}
                                  </li>
                               );
                            })}
@@ -105,7 +133,6 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
                </div>
 
                {/* Buttons */}
-
                <Stack spacing={3} direction='row'>
                   {/* sign in */}
                   {!user.email && (

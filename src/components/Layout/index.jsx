@@ -4,17 +4,16 @@ import { useDispatch } from 'react-redux';
 
 import NavBar from './NavBar.jsx';
 import SideBar from './SideBar.jsx';
-// import { fetchCoins } from '../../store/coins.store';
-// import {load} from '../../store/coins.store'
+import { fetchCoins } from '../../store/coins.store';
 
 const Layout = ({ children }) => {
    const dispatch = useDispatch();
 
    const [signInOpened, setSignInOpened] = useState(false);
 
-   // useEffect(() => {
-   //    dispatch(fetchCoins());
-   // }, [dispatch]);
+   useEffect(() => {
+      dispatch(fetchCoins());
+   }, [dispatch]);
 
    return (
       <MainWrapper>
