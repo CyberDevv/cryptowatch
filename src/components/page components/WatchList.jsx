@@ -5,10 +5,12 @@ import Layout from '../Layout';
 import { StarSVG } from '../SVG-Icons';
 import Watchlist from '../Watchlist.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
+import { Skeleton, Stack } from '@mui/material';
 
 const WatchList = () => {
    const watchListS = useSelector((state) => state.watchList);
-   const coins = useSelector((state) => state.coins);
+   const coins = useSelector((state) => state.coins.coins);
+   const coinsLoading = useSelector((state) => state.coins.loading);
 
    return (
       <Layout>
@@ -24,6 +26,34 @@ const WatchList = () => {
             )}
 
             {/* WatchList */}
+
+            {/* skeleton */}
+            {coinsLoading && coins.length === 0 && (
+               <Stack direction='row' spacing={4}>
+                  <Skeleton
+                     animation='wave'
+                     variant='rectangular'
+                     width={210}
+                     height={164}
+                     sx={{ borderRadius: '20px' }}
+                  />
+                  <Skeleton
+                     animation='wave'
+                     variant='rectangular'
+                     width={210}
+                     height={164}
+                     sx={{ borderRadius: '20px' }}
+                  />
+                  <Skeleton
+                     animation='wave'
+                     variant='rectangular'
+                     width={210}
+                     height={164}
+                     sx={{ borderRadius: '20px' }}
+                  />
+               </Stack>
+            )}
+
             {watchListS.length !== 0 && (
                <Wishlist>
                   {coins.map(({ id, name, symbol, current_price, image }) =>

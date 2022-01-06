@@ -71,6 +71,7 @@ const Home = ({ coins, page }) => {
                      />
                   </Stack>
                )}
+               
                <Wishlist>
                   {coinss.map(({ id, name, symbol, current_price, image }) =>
                      watchListS.slice(0, 5).map(({ coinId }) => {
