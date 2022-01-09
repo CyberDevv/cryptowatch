@@ -3,8 +3,17 @@ import { Button, Divider } from '@mui/material';
 
 import { styled } from '@mui/system';
 import { GoogleSVG, FacebookSVG } from '../SVG-Icons';
+import { signInWthGoogle, signInWithFacebook } from '../../utils/auth';
 
 const SignInMethods = ({ setWithEmailModal }) => {
+   const handleGoogleSignIn = () => {
+      signInWthGoogle();
+   };
+
+   const handleFacebookSignIn = () => {
+      signInWithFacebook();
+   };
+
    return (
       <div css={[tw`text-center`]}>
          <h6 css={[tw`letter-spacing[0]`]}>Welcome back to Cryptowatch</h6>
@@ -20,7 +29,11 @@ const SignInMethods = ({ setWithEmailModal }) => {
                   <GoogleSVG />
                </div>
                <Divider orientation='vertical' flexItem />
-               <SignInButton fullWidth sx={{ color: '#000' }}>
+               <SignInButton
+                  onClick={handleGoogleSignIn}
+                  fullWidth
+                  sx={{ color: '#000' }}
+               >
                   Sign in with Google
                </SignInButton>
             </ButtonWrapper>
@@ -35,7 +48,11 @@ const SignInMethods = ({ setWithEmailModal }) => {
                   flexItem
                   sx={{ bgcolor: '#fff' }}
                />
-               <SignInButton fullWidth sx={{ color: '#fff' }}>
+               <SignInButton
+                  onClick={handleFacebookSignIn}
+                  fullWidth
+                  sx={{ color: '#fff' }}
+               >
                   Sign in with Facebook
                </SignInButton>
             </ButtonWrapper>

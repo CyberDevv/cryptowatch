@@ -12,6 +12,7 @@ const SignInModal = ({ setSignInOpened, signInOpened }) => {
    const handleClose = () => {
       setSignInOpened(false);
    };
+   
    return (
       <Dialog maxWidth='md' open={signInOpened} onClose={handleClose}>
          <ModalWrapper>
@@ -19,7 +20,7 @@ const SignInModal = ({ setSignInOpened, signInOpened }) => {
                <SignInMethods setWithEmailModal={setWithEmailModal} />
             )}
 
-            {/* Email Signup */}
+            {/* Email sign up */}
             {withEmailModal && (
                <EmailSigInpMethod
                   setWithEmailModal={setWithEmailModal}

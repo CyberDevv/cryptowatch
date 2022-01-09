@@ -3,8 +3,18 @@ import { Button, Divider } from '@mui/material';
 
 import { styled } from '@mui/system';
 import { GoogleSVG, FacebookSVG } from '../SVG-Icons';
+import { signInWithFacebook, signInWthGoogle } from '../../utils/auth';
 
 const SignupMethodsComponent = ({ setWithEmailModal }) => {
+
+   const handleGoogleSignIn = () => {
+      signInWthGoogle();
+   };
+
+   const handleFacebookSignIn = () => {
+      signInWithFacebook();
+   };
+   
    return (
       <div css={[tw`text-center`]}>
          <h6 css={[tw`letter-spacing[0]`]}>Welcome to Cryptowatch</h6>

@@ -3,6 +3,13 @@ import { useState } from 'react';
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
 
 import FormField from '../FormField.jsx';
+import {
+   signInWithEmail,
+   ForgotPassword,
+   VerifyOTP,
+   ResendOTP,
+   setNewPassword,
+} from '../../utils/auth.js';
 
 const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
    const [forgotPassModal, setForgotPassModal] = useState(false);
@@ -15,45 +22,46 @@ const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
    const [newPassword, setNewPassword] = useState('');
    const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
-   const handleOTPOnChange = (e) => {
-      setOTP(e.target.value);
-      // if (otp.length >= 6) {
-      //    alert('yo');
-      // }
-   };
-
-   const handleSignin = (e) => {
+   const handleSignIn = (e) => {
+      // TODO: make a better handle of this
       e.preventDefault();
 
-      // Input your code in here
-
-      setSignInOpened(false);
+      signInWithEmail(email, password, rememberMe).then((res) => {
+         console.log(res);
+         res && setSignInOpened(false);
+      });
    };
 
    const handleForgotPass = (e) => {
+      // TODO: make a better handle of this
       e.preventDefault();
 
-      // INput youir codes in here
-
-      setForgotPinSent(true);
+      ForgotPassword(email).then((res) => {
+         console.log(res);
+         res && setForgotPinSent(true);
+      });
    };
 
    const handleResendOTP = (e) => {
       e.preventDefault();
 
-      // INput youir codes in here
+      ResendOTP();
    };
 
    const handleSendOTP = (e) => {
       e.preventDefault();
       // INput youir codes in here
 
-      // this should only run when the OTP is sent successfully
-      setResetPIN(true);
+      VerifyOTP(otp).then((res) => {
+         console.log(res);
+         res && setResetPIN(true);
+      });
    };
 
    const handleResetPassword = (e) => {
       e.preventDefault();
+
+      setNewPassword(newPassword, confirmNewPassword);
 
       setSignInOpened(false);
       // Input your code here
@@ -129,7 +137,7 @@ const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
                               bgcolor: '#254792',
                            },
                         }}
-                        onClick={handleSignin}
+                        onClick={handleSignIn}
                      >
                         Sign in
                      </Button>
@@ -201,7 +209,7 @@ const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
                   <Input
                      type='password'
                      value={otp}
-                     onChange={handleOTPOnChange}
+                     onChange={(e) => setOTP(e.target.value)}
                      maxLength={4}
                      onInput={(e) =>
                         (e.target.value = e.target.value.replace(/[^0-9]/g, ''))
@@ -265,6 +273,7 @@ const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
                      variant='outlined'
                      fullWidth
                      value={newPassword}
+                     type='password'
                      onChange={(e) => setNewPassword(e.target.value)}
                   />
 
@@ -272,17 +281,10 @@ const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
                      label='Confirm Password'
                      variant='outlined'
                      fullWidth
+                     type='password'
                      value={confirmNewPassword}
                      onChange={(e) => setConfirmNewPassword(e.target.value)}
                   />
-
-                  {/* 
-                     💌This might be a lot of work, pain and brain storming
-                     but it's for the best
-
-                     sorry bro
-                     👍
-                   */}
 
                   {/* send otp Button */}
                   <Button

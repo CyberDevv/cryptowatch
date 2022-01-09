@@ -49,128 +49,128 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
    return (
       <div css={[tw`relative h-32`]}>
          <Nav className='navBar' ref={navBar}>
-            {/* Logo */}
-            <Link href='/' passHref>
-               <LogoAnchor>
-                  <Logo />
-               </LogoAnchor>
-            </Link>
+            <NavDiv>
+               {/* Logo */}
+               <Link href='/' passHref>
+                  <LogoAnchor>
+                     <Logo />
+                  </LogoAnchor>
+               </Link>
 
-            <div css={[tw`flex justify-between items-center w-full`]}>
-               {/* Search input */}
-               <div css={[tw`relative`]} ref={searchPanel}>
-                  <InputWrapper>
-                     <SearchSVG />
-                     <Input
-                        type='text'
-                        placeholder='Search'
-                        value={coinss}
-                        onChange={(e) => setCoins(e.target.value)}
-                        onFocus={() => setSearchOpeend(true)}
-                     />
-                     {coinsLoading && coins.length === 0 && (
-                        <SpinnerSVG />
+               <div css={[tw`flex justify-between items-center w-full`]}>
+                  {/* Search input */}
+                  <div css={[tw`relative`]} ref={searchPanel}>
+                     <InputWrapper>
+                        <SearchSVG />
+                        <Input
+                           type='text'
+                           placeholder='Search'
+                           value={coinss}
+                           onChange={(e) => setCoins(e.target.value)}
+                           onFocus={() => setSearchOpeend(true)}
+                        />
+                        {coinsLoading && coins.length === 0 && <SpinnerSVG />}
+                     </InputWrapper>
+
+                     {/* Search Pannel */}
+                     {coinss.length !== 0 && searchOpened && (
+                        <SearchPanel>
+                           {coins
+                              .filter((coinsss) => {
+                                 if (coinss === '') {
+                                    return coinsss;
+                                 } else if (
+                                    coinsss.name
+                                       .toLowerCase()
+                                       .includes(coinss.toLowerCase())
+                                 ) {
+                                    return coinsss;
+                                 }
+                              })
+                              .map(({ image, name, id, symbol }) => {
+                                 return (
+                                    <li
+                                       key={id}
+                                       css={[tw`px-4 py-3  hover:bg-gray-100`]}
+                                    >
+                                       <Link href={`/coins/${id}`} passHref>
+                                          <CoinAnchor
+                                             onClick={() => {
+                                                setSearchOpeend(false);
+                                                setCoins('');
+                                             }}
+                                          >
+                                             <div
+                                                css={[
+                                                   tw`flex items-center space-x-2`,
+                                                ]}
+                                             >
+                                                <Avatar
+                                                   sx={{
+                                                      width: 24,
+                                                      height: 24,
+                                                   }}
+                                                   src={image}
+                                                   alt={name}
+                                                ></Avatar>
+                                                <ListItemText primary={name} />
+                                             </div>
+                                             <p
+                                                css={[
+                                                   tw`uppercase text-dark-gray`,
+                                                ]}
+                                             >
+                                                {symbol}
+                                             </p>
+                                          </CoinAnchor>
+                                       </Link>
+                                    </li>
+                                 );
+                              })}
+                        </SearchPanel>
                      )}
-                  </InputWrapper>
+                  </div>
 
-                  {/* Search Pannel */}
-                  {coinss.length !== 0 && searchOpened && (
-                     <SearchPanel>
-                        {coins
-                           .filter((coinsss) => {
-                              if (coinss === '') {
-                                 return coinsss;
-                              } else if (
-                                 coinsss.name
-                                    .toLowerCase()
-                                    .includes(coinss.toLowerCase())
-                              ) {
-                                 return coinsss;
-                              }
-                           })
-                           .map(({ image, name, id, symbol }) => {
-                              return (
-                                 <li
-                                    key={id}
-                                    css={[tw`px-4 py-3  hover:bg-gray-100`]}
-                                 >
-                                    <Link href={`/coins/${id}`} passHref>
-                                       <CoinAnchor
-                                          onClick={() => {
-                                             setSearchOpeend(false);
-                                             setCoins('');
-                                          }}
-                                       >
-                                          <div
-                                             css={[
-                                                tw`flex items-center space-x-2`,
-                                             ]}
-                                          >
-                                             <Avatar
-                                                sx={{
-                                                   width: 24,
-                                                   height: 24,
-                                                }}
-                                                src={image}
-                                                alt={name}
-                                             ></Avatar>
-                                             <ListItemText primary={name} />
-                                          </div>
-                                          <p
-                                             css={[
-                                                tw`uppercase text-dark-gray`,
-                                             ]}
-                                          >
-                                             {symbol}
-                                          </p>
-                                       </CoinAnchor>
-                                    </Link>
-                                 </li>
-                              );
-                           })}
-                     </SearchPanel>
-                  )}
+                  {/* Buttons */}
+                  <Stack spacing={3} direction='row'>
+                     {/* sign in */}
+                     {!user.email && (
+                        <NavButton
+                           onClick={() => setSignInOpened(true)}
+                           sx={{
+                              bgcolor: '#EBF2FA',
+                              color: '#4C6FFF',
+                              paddingX: '24px',
+                           }}
+                        >
+                           Sign in
+                        </NavButton>
+                     )}
+
+                     {/* Sign up */}
+                     {!user.email && (
+                        <NavButton
+                           onClick={() => setSignUpOpened(true)}
+                           sx={{ bgcolor: '#EBF2FA', color: '#4C6FFF' }}
+                        >
+                           Create an Account
+                        </NavButton>
+                     )}
+                  </Stack>
                </div>
 
-               {/* Buttons */}
-               <Stack spacing={3} direction='row'>
-                  {/* sign in */}
-                  {!user.email && (
-                     <NavButton
-                        onClick={() => setSignInOpened(true)}
-                        sx={{
-                           bgcolor: '#EBF2FA',
-                           color: '#4C6FFF',
-                           paddingX: '24px',
-                        }}
-                     >
-                        Sign in
-                     </NavButton>
-                  )}
+               {/* Sign in modal */}
+               <SigninModal
+                  setSignInOpened={setSignInOpened}
+                  signInOpened={signInOpened}
+               />
 
-                  {/* Sign up */}
-                  {!user.email && (
-                     <NavButton
-                        onClick={() => setSignUpOpened(true)}
-                        sx={{ bgcolor: '#EBF2FA', color: '#4C6FFF' }}
-                     >
-                        Create an Account
-                     </NavButton>
-                  )}
-               </Stack>
-            </div>
-
-            {/* Sign in modal */}
-            <SigninModal
-               setSignInOpened={setSignInOpened}
-               signInOpened={signInOpened}
-            />
-
-            {/* Sign in modal */}
-            <SignupModal
-               setSignUpOpened={setSignUpOpened}
-               signUpOpened={signUpOpened}
-            />
+               {/* Sign in modal */}
+               <SignupModal
+                  setSignUpOpened={setSignUpOpened}
+                  signUpOpened={signUpOpened}
+               />
+            </NavDiv>
          </Nav>
       </div>
    );
@@ -186,7 +186,8 @@ const NavButton = styled(Button)({
 });
 
 // Tailwind styles
-const Nav = tw.nav`mb-16 flex items-center lg:(px-10) xl:(space-x-[115px]) pt-5`;
+const Nav = tw.nav`mb-16 flex items-center lg:(px-10) xl:(space-x-[115px]) pt-5 transition-all duration-300`;
+const NavDiv = tw.div`max-w-[1920px] mx-auto w-full flex items-center xl:(space-x-[115px]) transition-all duration-300`;
 const LogoAnchor = tw.a`ml-4`;
 const InputWrapper = tw.div`bg-[#EBF2FA] space-x-3 py-3 px-4 rounded-full flex items-center lg:(w-[350px])`;
 const Input = tw.input`bg-transparent text-dark-black focus:(outline-none) text-[13px] w-full`;
