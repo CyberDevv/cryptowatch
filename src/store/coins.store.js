@@ -57,10 +57,6 @@ export const fetchCoins = createAsyncThunk('coins/fetchCoins', async () => {
       };
    });
 
-   // const url = 'https://api.coingecko.com/api/v3/coins/list';
-
-   // const coins = await (await axios(url)).data;
-
    return coins;
 });
 

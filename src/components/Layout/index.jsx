@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import NavBar from './NavBar.jsx';
 import SideBar from './SideBar.jsx';
 import { fetchCoins } from '../../store/coins.store';
+import {fetchCoinsWithNoData} from '../../store/coinsWithNoData.store'
 
 const Layout = ({ children }) => {
    const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Layout = ({ children }) => {
 
    useEffect(() => {
       dispatch(fetchCoins());
+      dispatch(fetchCoinsWithNoData());
    }, [dispatch]);
 
    return (

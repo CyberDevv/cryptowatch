@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
-import { Avatar, Button, ListItemText, Skeleton, Stack } from '@mui/material';
+import { Avatar, Button, ListItemText, Stack } from '@mui/material';
 
 import SigninModal from './SignInModal.jsx';
 import SignupModal from './SignupModal.jsx';
@@ -19,8 +19,8 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
 
    // Gets the user from the store
    const user = useSelector((state) => state.user.value);
-   const coins = useSelector((state) => state.coins.coins);
-   const coinsLoading = useSelector((state) => state.coins.loading);
+   const coins = useSelector((state) => state.coinsWithNoData.coinsWithNoData);
+   const coinsLoading = useSelector((state) => state.coinsWithNoData.loading);
 
    useEffect(() => {
       const navBarr = navBar.current;
@@ -77,8 +77,8 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
                         <SearchPanel>
                            {coins
                               .filter((coinsss) => {
-                                 if (coinss === '') {
-                                    return coinsss;
+                                 if (coinsss.length === 0) {
+                                    return { name: 'None' };
                                  } else if (
                                     coinsss.name
                                        .toLowerCase()
@@ -87,7 +87,7 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
                                     return coinsss;
                                  }
                               })
-                              .map(({ image, name, id, symbol }) => {
+                              .map(({ name, id, symbol }) => {
                                  return (
                                     <li
                                        key={id}
@@ -105,14 +105,6 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
                                                    tw`flex items-center space-x-2`,
                                                 ]}
                                              >
-                                                <Avatar
-                                                   sx={{
-                                                      width: 24,
-                                                      height: 24,
-                                                   }}
-                                                   src={image}
-                                                   alt={name}
-                                                 />
                                                 <ListItemText primary={name} />
                                              </div>
                                              <p
