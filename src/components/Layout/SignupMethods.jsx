@@ -30,7 +30,11 @@ const SignupMethodsComponent = ({ setWithEmailModal }) => {
                   <GoogleSVG />
                </div>
                <Divider orientation='vertical' flexItem />
-               <SignupButton fullWidth sx={{ color: '#000' }}>
+               <SignupButton
+                  onClick={handleGoogleSignIn}
+                  fullWidth
+                  sx={{ color: '#000' }}
+               >
                   Sign up with Google
                </SignupButton>
             </ButtonWrapper>
@@ -45,7 +49,11 @@ const SignupMethodsComponent = ({ setWithEmailModal }) => {
                   flexItem
                   sx={{ bgcolor: '#fff' }}
                />
-               <SignupButton fullWidth sx={{ color: '#fff' }}>
+               <SignupButton
+                  onClick={handleFacebookSignIn}
+                  fullWidth
+                  sx={{ color: '#fff' }}
+               >
                   Sign up with Facebook
                </SignupButton>
             </ButtonWrapper>

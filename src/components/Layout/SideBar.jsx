@@ -4,20 +4,29 @@ import { useSelector } from 'react-redux';
 import { SVGIcons } from '../SVG-Icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useState } from 'react';
+import { signOut } from '../../utils/auth';
+import { logout } from '../../store/user.store';
+import { useDispatch } from 'react-redux';
 
 const SideBar = ({ setSignInOpened }) => {
    const { asPath } = useRouter();
+
+   const dispatch = useDispatch();
+
    // Gets the user from the store
    const user = useSelector((state) => state.user.value);
 
    const handleLogout = (e) => {
       e.preventDefault();
+
+      signOut().then((res) => {
+         res && dispatch(logout());
+      });
    };
 
    const handleLinkClick = () => {
       !user.email && setSignInOpened(true);
-   }
+   };
 
    const NavItemComponent = ({ label, svg, link, className }) => {
       return (

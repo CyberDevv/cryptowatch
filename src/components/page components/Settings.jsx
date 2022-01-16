@@ -22,11 +22,11 @@ const SettingsComponent = () => {
    const [newPassword, setNewPassword] = useState('');
    const [confirmPassword, setConfirmPassword] = useState('');
 
-   const handleSaveSettings = (e) => {
+   const handleSaveSettings = React.useCallback((e) => {
       e.preventDefault();
 
       // Your code should be here
-   };
+   }, []);
 
    return (
       <Layout>

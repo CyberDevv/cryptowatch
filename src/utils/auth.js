@@ -6,11 +6,9 @@ export function signInWthGoogle() {
    axios
       .get(`${process.env.NEXT_APP_API_URL}/auth/google`)
       .then((res) => {
-         
          toast.success('Google sign in successful');
       })
       .catch((err) => {
-         
          toast.error('Google sign in failed');
       });
 }
@@ -19,11 +17,9 @@ export function signInWithFacebook() {
    axios
       .get(`${process.env.NEXT_APP_API_URL}/auth/facebook`)
       .then((res) => {
-         
          toast.success('Facebook sign in successful');
       })
       .catch((err) => {
-         
          toast.error('Facebook sign in failed');
       });
 }
@@ -34,7 +30,7 @@ export async function signInWithEmail(email, password, rememberMe) {
          `${process.env.NEXT_APP_API_URL}/auth/email`,
          { email, password, rememberMe }
       );
-      
+
       toast.success('Sign in successful');
    } catch (err) {
       console.log(err);
@@ -50,11 +46,11 @@ export async function ForgotPassword(email) {
             email,
          }
       );
-      
+
       toast.success('Check your email for OTP');
    } catch (err) {
       console.log(err);
-      toast.error('error');
+      toast.error('Please try again');
    }
 }
 
@@ -62,11 +58,9 @@ export function ResendOTP() {
    axios
       .get(`${process.env.NEXT_APP_API_URL}/auth/resend-otp`)
       .then((res) => {
-         
          toast.success('OTP sent successfully');
       })
       .catch((err) => {
-         
          toast.error('OTP sending failed');
       });
 }
@@ -79,7 +73,7 @@ export async function VerifyOTP(otp) {
             otp,
          }
       );
-      
+
       toast.success('OTP verified');
    } catch (err) {
       console.log(err);
@@ -100,10 +94,46 @@ export async function setNewPassword(newPassword, confirmPassword) {
             newPassword,
          }
       );
-      
+
       toast.success('Password changed successfully');
    } catch (err) {
       console.log(err);
       toast.error('Password change failed');
+   }
+}
+
+export async function signOut() {
+   try {
+      const res = await axios.get(
+         `${process.env.NEXT_APP_API_URL}/auth/sign-out`
+      );
+      toast.success('Sign out successful');
+      return true;
+   } catch (err) {
+      console.log(err);
+      toast.error('Sign out failed');
+   }
+}
+
+export async function signUp(email, password, confirmPassword) {
+   if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+   }
+
+   try {
+      const res = await axios.post(
+         `${process.env.NEXT_APP_API_URL}/auth/sign-up`,
+         {
+            email,
+            password,
+         }
+      );
+
+      toast.success('Sign up successful');
+      return true;
+   } catch (err) {
+      console.log(err);
+      toast.error('Sign up failed');
    }
 }

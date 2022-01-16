@@ -2,6 +2,7 @@ import { Button } from '@mui/material';
 import { useState } from 'react';
 import tw from 'twin.macro';
 import FormField from '../FormField';
+import { signUp } from '../../utils/auth';
 
 const EmailSignupMethod = ({ setWithEmailModal, setSignUpOpened }) => {
    const [email, setEmail] = useState('');
@@ -11,7 +12,9 @@ const EmailSignupMethod = ({ setWithEmailModal, setSignUpOpened }) => {
    const handleCreateAccount = (e) => {
       e.preventDefault();
 
-      setSignUpOpened(false);
+      signUp({ email, password, confirmPassword }).then(
+         (res) => res && setSignUpOpened(false)
+      );
    };
 
    return (
@@ -43,7 +46,6 @@ const EmailSignupMethod = ({ setWithEmailModal, setSignUpOpened }) => {
 
             {/* Button */}
             <Button
-               oncli
                type='submit'
                fullWidth
                sx={{
