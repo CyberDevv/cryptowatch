@@ -168,7 +168,7 @@ const SettingsComponent = () => {
 
             {/* Download section */}
             <DownnloadPannel>
-               <a css={[tw`xl:max-w-md 2xl:max-w-lg`]} href='https://www.centuryleap.com'>
+               <a css={[tw`lg:max-w-xs xl:max-w-md 2xl:max-w-lg`]} href='https://www.centuryleap.com'>
                   <Image
                      src='/images/download app.png'
                      width={504}

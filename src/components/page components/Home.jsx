@@ -17,7 +17,6 @@ const Home = ({ coins, page }) => {
    const coinss = useSelector((state) => state.coins.coins);
    const coinsLoading = useSelector((state) => state.coins.loading);
 
-   
    return (
       <Layout>
          {/* Watchlist */}
@@ -71,7 +70,7 @@ const Home = ({ coins, page }) => {
                      />
                   </Stack>
                )}
-               
+
                <Wishlist>
                   {coinss.map(({ id, name, symbol, current_price, image }) =>
                      watchListS.slice(0, 5).map(({ coinId }) => {
@@ -113,8 +112,7 @@ const Home = ({ coins, page }) => {
 
 // Tailwind Styles
 const WishlistWrapper = tw.div`space-y-8 lg:(mb-14)`;
-const Wishlist = tw.div`grid grid-cols-5 gap-6`;
+const Wishlist = tw.div`grid grid-cols-5 lg:gap-4 xl:gap-6`;
 const CoinWrapper = tw.div`bg-white rounded-[20px] overflow-hidden hover:(shadow-lg) transition-shadow duration-300 `;
-const LoaderWrapper = tw.div`flex`;
 
 export default Home;

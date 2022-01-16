@@ -13,16 +13,28 @@ import { StarSVG } from './SVG-Icons';
 
 const Watchlist = ({ id, name, symbol, formattedPrice, image }) => {
    return (
-      <div css={[tw` cursor-pointer px-5 py-4 h-full`]}>
+      <div css={[tw` cursor-pointer px-3 xl:px-5 py-4 h-full`]}>
          <Link href={`coins/${id}`}>
             <a>
                <div css={[tw`text-right mb-1`]}>
                   <StarSVG />
                </div>
 
-               <ListItem sx={{ padding: 0, marginBottom: '10px' }}>
+               <ListItem
+                  sx={{
+                     padding: 0,
+                     marginBottom: '10px',
+                     flexDirection: { lg: 'column', xl: 'row' },
+                     textAlign: { lg: 'center', xl: 'left' },
+                  }}
+               >
                   <ListItemAvatar>
-                     <Avatar sx={{ bgcolor: 'transparent' }}>
+                     <Avatar
+                        sx={{
+                           bgcolor: 'transparent',
+                           marginX: { lg: 'auto', xl: '0' },
+                        }}
+                     >
                         <Image src={image} alt={name} layout='fill' />
                      </Avatar>
                   </ListItemAvatar>
@@ -42,6 +54,6 @@ const Watchlist = ({ id, name, symbol, formattedPrice, image }) => {
 // Tailwind styles
 const CoinName = tw.p`text-[18px] text-dark-darker leading-[28px]`;
 const CoinABBR = tw.p`uppercase text-[#505780] text-[14px] leading-[17px] tracking-[-0.025em]`;
-const Price = tw.p`text-[24px] leading-[29px] tracking-[-0.025em] text-dark-darker mb-2`;
+const Price = tw.p`lg:(text-xl text-center) xl:(text-[24px] leading-[29px] tracking-[-0.025em] text-left) text-dark-darker xl:mb-2`;
 
 export default Watchlist;
