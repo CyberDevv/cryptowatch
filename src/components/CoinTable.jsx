@@ -159,7 +159,7 @@ const CoinTable = ({ coins }) => {
                   parseInt(page) === 1 || page === undefined ? true : false
                }
             >
-               <Link href={`?page=${+page - 1}`}>
+               <Link href={`?page=${Number(page) - 1}`}>
                   <a>Previous</a>
                </Link>
             </LinkButton>
@@ -167,7 +167,7 @@ const CoinTable = ({ coins }) => {
             <LinkButton>
                <Link
                   href={`?${
-                     page === undefined ? 'page=2' : `page=${+page + 1}`
+                     page === undefined ? 'page=2' : `page=${Number(page) + 1}`
                   }`}
                >
                   <a>Next</a>
