@@ -218,7 +218,7 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
                            tw`h-full absolute top-0 bg-gray-600 rounded-full`,
                         ]}
                         style={{ width: `${HighLowPercent}%` }}
-                     ></div>
+                      />
                   </div>
                </div>
 
