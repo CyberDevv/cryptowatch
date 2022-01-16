@@ -17,7 +17,7 @@ const Home = ({ coins, page }) => {
    const coinss = useSelector((state) => state.coins.coins);
    const coinsLoading = useSelector((state) => state.coins.loading);
 
-   console.log(coinss);
+   
    return (
       <Layout>
          {/* Watchlist */}

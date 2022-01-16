@@ -27,7 +27,7 @@ const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
       e.preventDefault();
 
       signInWithEmail(email, password, rememberMe).then((res) => {
-         console.log(res);
+         
          res && setSignInOpened(false);
       });
    };
@@ -37,7 +37,7 @@ const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
       e.preventDefault();
 
       ForgotPassword(email).then((res) => {
-         console.log(res);
+         
          res && setForgotPinSent(true);
       });
    };
@@ -53,7 +53,7 @@ const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
       // INput youir codes in here
 
       VerifyOTP(otp).then((res) => {
-         console.log(res);
+         
          res && setResetPIN(true);
       });
    };

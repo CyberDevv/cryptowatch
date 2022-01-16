@@ -6,11 +6,11 @@ export function signInWthGoogle() {
    axios
       .get(`${process.env.NEXT_APP_API_URL}/auth/google`)
       .then((res) => {
-         console.log(res);
+         
          toast.success('Google sign in successful');
       })
       .catch((err) => {
-         console.log(err);
+         
          toast.error('Google sign in failed');
       });
 }
@@ -19,11 +19,11 @@ export function signInWithFacebook() {
    axios
       .get(`${process.env.NEXT_APP_API_URL}/auth/facebook`)
       .then((res) => {
-         console.log(res);
+         
          toast.success('Facebook sign in successful');
       })
       .catch((err) => {
-         console.log(err);
+         
          toast.error('Facebook sign in failed');
       });
 }
@@ -34,7 +34,7 @@ export async function signInWithEmail(email, password, rememberMe) {
          `${process.env.NEXT_APP_API_URL}/auth/email`,
          { email, password, rememberMe }
       );
-      console.log(res);
+      
       toast.success('Sign in successful');
    } catch (err) {
       console.log(err);
@@ -50,7 +50,7 @@ export async function ForgotPassword(email) {
             email,
          }
       );
-      console.log(res);
+      
       toast.success('Check your email for OTP');
    } catch (err) {
       console.log(err);
@@ -62,11 +62,11 @@ export function ResendOTP() {
    axios
       .get(`${process.env.NEXT_APP_API_URL}/auth/resend-otp`)
       .then((res) => {
-         console.log(res);
+         
          toast.success('OTP sent successfully');
       })
       .catch((err) => {
-         console.log(err);
+         
          toast.error('OTP sending failed');
       });
 }
@@ -79,7 +79,7 @@ export async function VerifyOTP(otp) {
             otp,
          }
       );
-      console.log(res);
+      
       toast.success('OTP verified');
    } catch (err) {
       console.log(err);
@@ -100,7 +100,7 @@ export async function setNewPassword(newPassword, confirmPassword) {
             newPassword,
          }
       );
-      console.log(res);
+      
       toast.success('Password changed successfully');
    } catch (err) {
       console.log(err);
