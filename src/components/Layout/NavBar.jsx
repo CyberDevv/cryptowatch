@@ -112,7 +112,7 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
                                                    }}
                                                    src={image}
                                                    alt={name}
-                                                ></Avatar>
+                                                 />
                                                 <ListItemText primary={name} />
                                              </div>
                                              <p

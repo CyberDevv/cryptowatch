@@ -146,7 +146,7 @@ const CoinTable = ({ coins }) => {
                            data-srcset={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline 1x`}
                            src={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline`}
                            srcSet={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline 1x`}
-                        ></img>
+                         />
                      </TableBody>
                   );
                }
