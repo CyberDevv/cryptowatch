@@ -94,7 +94,7 @@ const SideBar = ({ setSignInOpened }) => {
 };
 
 // tailwind Styles
-const Nav = tw.nav`lg:(w-[180px] min-w-[180px] ml-8) xl:(w-[211px] min-w-[211px]) fixed z-40`;
+const Nav = tw.nav`lg:(w-[180px] min-w-[180px] ml-8) xl:(w-[181px] min-w-[181px]) 2xl:(w-[211px] min-w-[211px]) fixed z-40`;
 const NavMenu = tw.ul`lg:(space-y-10)`;
 const NavItem = tw.li``;
 // const Anchor = tw.a``;

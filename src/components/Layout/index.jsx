@@ -35,6 +35,6 @@ const Layout = ({ children }) => {
 // Tailwind styles
 const MainWrapper = tw.div`pb-5 overflow-x-hidden max-w-[1920px] mx-auto`;
 const Div = tw.main`flex`;
-const Main = tw.main`w-full lg:(px-[40px] ml-[180px]) xl:(px-[40px] ml-[240px])`;
+const Main = tw.main`w-full lg:(px-[40px] ml-[180px]) xl:(px-[30px] ml-[210px]) 2xl:(px-[40px] ml-[240px])`;
 
 export default Layout;

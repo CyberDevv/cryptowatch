@@ -1,3 +1,4 @@
+import React from 'react'
 import tw from 'twin.macro';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -167,7 +168,7 @@ const SettingsComponent = () => {
 
             {/* Download section */}
             <DownnloadPannel>
-               <a href='https://www.centuryleap.com'>
+               <a css={[tw`xl:max-w-md 2xl:max-w-lg`]} href='https://www.centuryleap.com'>
                   <Image
                      src='/images/download app.png'
                      width={504}
