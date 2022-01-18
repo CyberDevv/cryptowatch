@@ -355,7 +355,7 @@ const Sparkline = ({ sevenDres, oneMonthRes, oneDayRes }) => {
 };
 
 // Tailwind styles
-const MainWrapper = tw.div`max-w-[100%] mt-[22px] bg-white p-6`;
+const MainWrapper = tw.div`max-w-[100%] mt-[22px] bg-white px-2 py-6 lg:px-6`;
 const TimePanelWrapper = tw.div`flex items-center ml-4`;
 const P = tw.p`text-dark-black text-sm mr-4`;
 const CustomButton = tw(Button)`normal-case`;

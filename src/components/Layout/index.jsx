@@ -10,6 +10,7 @@ import {fetchCoinsWithNoData} from '../../store/coinsWithNoData.store'
 const Layout = ({ children }) => {
    const dispatch = useDispatch();
 
+   const [sideBarOpened, setSideBarOpened] = useState(false);
    const [signInOpened, setSignInOpened] = useState(false);
 
    useEffect(() => {
@@ -24,7 +25,7 @@ const Layout = ({ children }) => {
             setSignInOpened={setSignInOpened}
          />
          <Div>
-            <SideBar setSignInOpened={setSignInOpened} />
+            <SideBar setSignInOpened={setSignInOpened} sideBarOpened= {sideBarOpened} />
 
             <Main>{children}</Main>
          </Div>
@@ -35,6 +36,6 @@ const Layout = ({ children }) => {
 // Tailwind styles
 const MainWrapper = tw.div`pb-5 overflow-x-hidden max-w-[1920px] mx-auto`;
 const Div = tw.main`flex`;
-const Main = tw.main`w-full lg:(px-[20px] ml-[180px]) xl:(px-[30px] ml-[210px]) 2xl:(px-[40px] ml-[240px])`;
+const Main = tw.main`w-full mt-8 px-6 lg:(px-[20px] ml-[180px] mt-0) xl:(px-[30px] ml-[210px]) 2xl:(px-[40px] ml-[240px])`;
 
 export default Layout;

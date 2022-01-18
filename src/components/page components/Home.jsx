@@ -96,7 +96,7 @@ const Home = ({ coins, page }) => {
          )}
 
          {/* All coins */}
-         <div>
+         <div css={[tw`mt-8 lg:mt-0`]}>
             {/* Section title */}
 
             <p css={[tw`mb-10`]} className='bodyBold'>
@@ -111,8 +111,8 @@ const Home = ({ coins, page }) => {
 };
 
 // Tailwind Styles
-const WishlistWrapper = tw.div`space-y-8 lg:(mb-14)`;
-const Wishlist = tw.div`grid grid-cols-5 lg:gap-4 xl:gap-6`;
+const WishlistWrapper = tw.div`space-y-4 lg:(mb-14 mt-0 space-y-8)`;
+const Wishlist = tw.div`grid grid-cols-3 lg:grid-cols-5 gap-4 xl:gap-6`;
 const CoinWrapper = tw.div`bg-white rounded-[20px] overflow-hidden hover:(shadow-lg) transition-shadow duration-300 `;
 
 export default Home;

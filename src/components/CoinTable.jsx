@@ -73,7 +73,7 @@ const CoinTable = ({ coins }) => {
 
                         {/* Currency */}
                         <Link href={`/coins/${id}`}>
-                           <a>
+                           <a css={[tw`hover:(underline)`]}>
                               <div css={[tw`flex items-center space-x-4`]}>
                                  <Avatar
                                     sx={{
@@ -146,7 +146,7 @@ const CoinTable = ({ coins }) => {
                            data-srcset={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline 1x`}
                            src={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline`}
                            srcSet={`https://www.coingecko.com/coins/${forImageUrlToSparkline}/sparkline 1x`}
-                         />
+                        />
                      </TableBody>
                   );
                }
@@ -184,7 +184,9 @@ const TableGrid = tw.ul`grid justify-items-start divide-dark-gray items-center g
 const TableHeader = tw(TableGrid)``;
 const TableHeaderText = tw.p`text-[14px] text-dark-black leading-[17px]`;
 const TableBodyWrapper = tw.div`py-3.5 space-y-9`;
-const TableBody = tw(TableGrid)`transition-colors duration-300 hover:(bg-gray-100)`;
+const TableBody = tw(
+   TableGrid
+)`transition-colors duration-300 hover:(bg-gray-100)`;
 const TableBodyText = tw.p`text-[14px] text-black leading-[17px]`;
 const ButtonWrapper = tw.div`flex items-center justify-center space-x-10 text-gray-500 py-10 `;
 const LinkButton = tw(Button)`text-dark-black text-transform[none]`;

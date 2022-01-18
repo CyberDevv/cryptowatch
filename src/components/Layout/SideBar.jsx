@@ -8,7 +8,7 @@ import { signOut } from '../../utils/auth';
 import { logout } from '../../store/user.store';
 import { useDispatch } from 'react-redux';
 
-const SideBar = ({ setSignInOpened }) => {
+const SideBar = ({ setSignInOpened, sideBarOpened }) => {
    const { asPath } = useRouter();
 
    const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const SideBar = ({ setSignInOpened }) => {
                   <a
                      className={className}
                      css={[
-                        tw`text-dark-gray hover:(text-dark-black transition-colors duration-300) cursor-pointer flex items-center lg:(space-x-4) letter-spacing[-0.025em]`,
+                        tw`text-dark-gray hover:(text-dark-black transition-colors duration-300) cursor-pointer flex items-center space-x-4 letter-spacing[-0.025em]`,
                      ]}
                   >
                      {svg}
@@ -49,7 +49,7 @@ const SideBar = ({ setSignInOpened }) => {
    };
 
    return (
-      <Nav>
+      <Nav css={[sideBarOpened ? tw`translate-x-0` : tw`-translate-x-full`]}>
          {/* NavMenu */}
          <NavMenu>
             <NavItemComponent
@@ -94,8 +94,8 @@ const SideBar = ({ setSignInOpened }) => {
 };
 
 // tailwind Styles
-const Nav = tw.nav`lg:(w-[180px] min-w-[180px] ml-8) xl:(w-[181px] min-w-[181px]) 2xl:(w-[211px] min-w-[211px]) fixed z-40`;
-const NavMenu = tw.ul`lg:(space-y-10)`;
+const Nav = tw.nav`bg-[#fafafa] transition-transform transform h-full w-[180px] px-6 shadow-lg py-16 lg:(bg-transparent transform-none py-0 shadow-none px-0 w-[180px] min-w-[180px] ml-8) xl:(w-[181px] min-w-[181px]) 2xl:(w-[211px] min-w-[211px]) fixed z-40`;
+const NavMenu = tw.ul`space-y-10`;
 const NavItem = tw.li``;
 // const Anchor = tw.a``;
 

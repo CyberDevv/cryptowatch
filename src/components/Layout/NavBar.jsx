@@ -47,7 +47,7 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
    }, [setSearchOpeend]);
 
    return (
-      <div css={[tw`relative h-32`]}>
+      <div css={[tw`relative h-16 lg:h-32`]}>
          <Nav className='navBar' ref={navBar}>
             <NavDiv>
                {/* Logo */}
@@ -178,8 +178,8 @@ const NavButton = styled(Button)({
 });
 
 // Tailwind styles
-const Nav = tw.nav`mb-16 flex items-center lg:(px-5) xl:(px-10) pt-5 transition-all duration-300`;
-const NavDiv = tw.div`max-w-[1920px] mx-auto w-full flex items-center lg:(space-x-[55px]) xl:(space-x-[75px]) 2xl:(space-x-[115px]) transition-all duration-300`;
+const Nav = tw.nav`mb-16 flex items-center px-5 xl:(px-10) pt-5 transition-all duration-300`;
+const NavDiv = tw.div`max-w-[1920px] mx-auto w-full flex items-center space-x-[40px] lg:(space-x-[55px]) xl:(space-x-[75px]) 2xl:(space-x-[115px]) transition-all duration-300`;
 const LogoAnchor = tw.a`ml-4`;
 const InputWrapper = tw.div`bg-[#EBF2FA] space-x-3 py-3 px-4 rounded-full flex items-center lg:(w-[350px])`;
 const Input = tw.input`bg-transparent text-dark-black focus:(outline-none) text-[13px] w-full`;

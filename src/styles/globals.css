@@ -160,6 +160,10 @@ h6 {
    z-index: 40;
 }
 
+.StatsWrapper::-webkit-scrollbar {
+   visibility: hidden;
+}
+
 /* Fonts */
 @font-face {
    font-family: 'SF Pro Display Regular';

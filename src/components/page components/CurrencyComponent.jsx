@@ -114,7 +114,11 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
 
          {/* Coin dashboard */}
          <CoinDashboard>
-            <div css={[tw`flex justify-between items-center`]}>
+            <div
+               css={[
+                  tw`flex flex-col space-y-14 lg:(flex-row justify-between items-center space-y-0)`,
+               ]}
+            >
                <div>
                   <CoinName className='body'>{name}</CoinName>
 
@@ -182,11 +186,11 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
                </div>
 
                {/* 24 hours volume */}
-               <div css={[tw`space-y-8 `]}>
+               <div css={[tw`space-y-8 max-w-sm`]}>
                   <div css={[tw`space-y-8 `]}>
                      <VolumeTitle className='body'>24H Volume</VolumeTitle>
 
-                     <div css={[tw`flex space-x-40`]}>
+                     <div css={[tw`flex justify-between lg:space-x-40`]}>
                         {/* Low */}
                         <div css={[tw`space-y-4`]}>
                            <VolumeText className='small'>Low</VolumeText>
@@ -218,15 +222,13 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
                            tw`h-full absolute top-0 bg-gray-600 rounded-full`,
                         ]}
                         style={{ width: `${HighLowPercent}%` }}
-                      />
+                     />
                   </div>
                </div>
-
-               {/* <p className= "tiny">{description.en}</p> */}
             </div>
 
             {/* coins stats */}
-            <StatsWrapper>
+            <StatsWrapper className='StatsWrapper'>
                <EachStat>
                   <StatHeaderText className='bodyBold'>
                      Market Cap
@@ -483,15 +485,15 @@ const DateFormatter = (date) => {
 };
 
 // Tailwind Styles
-const CoinDashboard = tw.div`bg-white px-8 py-9 mt-8 flex justify-between flex-col space-y-10`;
+const CoinDashboard = tw.div`bg-white px-4 lg:px-8 py-9 mt-8 flex justify-between flex-col space-y-10`;
 const CoinName = tw.p`uppercase text-dark-gray`;
 const CoinPrice = tw.p`text-[24px] text-dark-darker`;
 const ButtonWrapper = tw.div`space-x-5 mt-7`;
 const VolumeTitle = tw.p`text-dark-gray`;
 const VolumeText = tw.p`text-dark-black`;
 const Description = tw.p`text-dark-gray mt-3 mb-8`;
-const StatsWrapper = tw.div`flex justify-between items-center`;
-const EachStat = tw.div`py-8`;
+const StatsWrapper = tw.div`overflow-x-scroll space-x-2 flex justify-between items-center`;
+const EachStat = tw.div`py-8 min-w-[180px]`;
 const StatHeaderText = tw.p`text-dark-black tracking-wider`;
 const StatText = tw.p`text-dark-gray mt-2`;
 const SecondaryText = tw.p`text-gray-300`;
