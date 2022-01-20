@@ -25,7 +25,7 @@ const Home = ({ coins, page }) => {
                {/* Section title */}
                <div css={[tw`flex items-center justify-between`]}>
                   <p
-                     css={[tw`flex items-center space-x-5`]}
+                     css={[tw`flex items-center space-x-3 lg:space-x-5`]}
                      className='bodyBold'
                   >
                      <span>Watchlist</span> <StarSVG />
@@ -71,27 +71,32 @@ const Home = ({ coins, page }) => {
                   </Stack>
                )}
 
-               <Wishlist>
-                  {coinss.map(({ id, name, symbol, current_price, image }) =>
-                     watchListS.slice(0, 5).map(({ coinId }) => {
-                        if (coinId === id) {
-                           const FormattedPrice =
-                              CurrentcyFormatter(current_price);
-                           return (
-                              <CoinWrapper key={id}>
-                                 <Watchlist
-                                    name={name}
-                                    symbol={symbol}
-                                    formattedPrice={FormattedPrice}
-                                    image={image}
-                                    id={id}
-                                 />
-                              </CoinWrapper>
-                           );
-                        }
-                     })
-                  )}
-               </Wishlist>
+               <div
+                  className='scrollHidden'
+                  css={[tw`overflow-x-scroll lg:h-[190px]`]}
+               >
+                  <Wishlist>
+                     {coinss.map(({ id, name, symbol, current_price, image }) =>
+                        watchListS.slice(0, 5).map(({ coinId }) => {
+                           if (coinId === id) {
+                              const FormattedPrice =
+                                 CurrentcyFormatter(current_price);
+                              return (
+                                 <CoinWrapper key={id}>
+                                    <Watchlist
+                                       name={name}
+                                       symbol={symbol}
+                                       formattedPrice={FormattedPrice}
+                                       image={image}
+                                       id={id}
+                                    />
+                                 </CoinWrapper>
+                              );
+                           }
+                        })
+                     )}
+                  </Wishlist>
+               </div>
             </WishlistWrapper>
          )}
 
@@ -99,7 +104,7 @@ const Home = ({ coins, page }) => {
          <div css={[tw`mt-8 lg:mt-0`]}>
             {/* Section title */}
 
-            <p css={[tw`mb-10`]} className='bodyBold'>
+            <p css={[tw`mb-5 lg:mb-10`]} className='bodyBold'>
                All Coins
             </p>
 
@@ -111,8 +116,8 @@ const Home = ({ coins, page }) => {
 };
 
 // Tailwind Styles
-const WishlistWrapper = tw.div`space-y-4 lg:(mb-14 mt-0 space-y-8)`;
-const Wishlist = tw.div`grid grid-cols-3 lg:grid-cols-5 gap-4 xl:gap-6`;
+const WishlistWrapper = tw.div`space-y-3 lg:(mb-14 mt-0 space-y-8)`;
+const Wishlist = tw.div`min-w-[720px] grid grid-cols-5 gap-4 xl:gap-6`;
 const CoinWrapper = tw.div`bg-white rounded-[20px] overflow-hidden hover:(shadow-lg) transition-shadow duration-300 `;
 
 export default Home;

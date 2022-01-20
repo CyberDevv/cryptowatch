@@ -228,7 +228,7 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
             </div>
 
             {/* coins stats */}
-            <StatsWrapper className='StatsWrapper'>
+            <StatsWrapper className='scrollHidden'>
                <EachStat>
                   <StatHeaderText className='bodyBold'>
                      Market Cap

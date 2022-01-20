@@ -160,8 +160,84 @@ h6 {
    z-index: 40;
 }
 
-.StatsWrapper::-webkit-scrollbar {
+.scrollHidden::-webkit-scrollbar {
    visibility: hidden;
+}
+
+@media only screen and (max-width: 640px) {
+   h1 {
+      font-size: 56px;
+      line-height: 76px;
+   }
+
+   h2 {
+      font-size: 48px;
+      line-height: 67px;
+   }
+
+   h3 {
+      font-size: 40px;
+      line-height: 57px;
+   }
+
+   h4 {
+      font-size: 32px;
+      line-height: 48px;
+   }
+
+   h5 {
+      font-size: 24px;
+      line-height: 38px;
+   }
+
+   h6 {
+      font-size: 20px;
+      line-height: 29px;
+   }
+
+   .h7 {
+      font-size: 16px;
+      line-height: 24px;
+   }
+
+   .spreadText {
+      font-size: 16px;
+      line-height: 23px;
+   }
+
+   .bodyBold {
+      font-size: 14px;
+      line-height: 19px;
+   }
+
+   .body {
+      font-size: 14px;
+      line-height: 19px;
+   }
+
+   .smallBold {
+      font-size: 12px;
+      line-height: 17px;
+   }
+
+   .small {
+      font-size: 12px;
+      line-height: 17px;
+   }
+
+   .tinyBold {
+      font-size: 10px;
+      line-height: 14px;
+   }
+
+   .tiny {
+      font-size: 10px;
+      line-height: 14px;
+   }
+
+   .navScrolled {
+      padding: 0.7rem 16px 0.7rem 0px;
+   }
 }
 
 /* Fonts */
