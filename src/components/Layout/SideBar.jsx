@@ -7,8 +7,9 @@ import Link from 'next/link';
 import { signOut } from '../../utils/auth';
 import { logout } from '../../store/user.store';
 import { useDispatch } from 'react-redux';
+import { Backdrop } from '@mui/material';
 
-const SideBar = ({ setSignInOpened, sideBarOpened }) => {
+const SideBar = ({ setSignInOpened, sideBarOpened, setSideBarOpened }) => {
    const { asPath } = useRouter();
 
    const dispatch = useDispatch();
@@ -49,52 +50,63 @@ const SideBar = ({ setSignInOpened, sideBarOpened }) => {
    };
 
    return (
-      <Nav css={[sideBarOpened ? tw`translate-x-0` : tw`-translate-x-full`]}>
-         {/* NavMenu */}
-         <NavMenu>
-            <NavItemComponent
-               link='/'
-               svg={<SVGIcons home />}
-               label='Home'
-               className={asPath === '/' ? 'active' : ''}
-            />
+      // <>
+      <>
+         <Nav css={[sideBarOpened ? tw`translate-x-0` : tw`-translate-x-full`]}>
+            {/* NavMenu */}
+            <NavMenu>
+               <NavItemComponent
+                  link='/'
+                  svg={<SVGIcons home />}
+                  label='Home'
+                  className={asPath === '/' ? 'active' : ''}
+               />
 
-            <NavItemComponent
-               link='/watchList'
-               svg={<SVGIcons watchlist />}
-               label='Watchlist'
-               className={asPath === '/watchList' ? 'active' : ''}
-            />
+               <NavItemComponent
+                  link='/watchList'
+                  svg={<SVGIcons watchlist />}
+                  label='Watchlist'
+                  className={asPath === '/watchList' ? 'active' : ''}
+               />
 
-            <NavItemComponent
-               link='/priceAlerts'
-               svg={<SVGIcons priceAlerts />}
-               label='Price Alerts'
-               className={asPath === '/priceAlerts' ? 'active' : ''}
-            />
+               <NavItemComponent
+                  link='/priceAlerts'
+                  svg={<SVGIcons priceAlerts />}
+                  label='Price Alerts'
+                  className={asPath === '/priceAlerts' ? 'active' : ''}
+               />
 
-            <NavItemComponent
-               link='/settings'
-               svg={<SVGIcons settings />}
-               label='Settings'
-               className={asPath === '/settings' ? 'active' : ''}
-            />
-            {user.email && (
-               <button onClick={handleLogout}>
-                  <NavItemComponent
-                     link=''
-                     svg={<SVGIcons logout />}
-                     label='Log out'
-                  />
-               </button>
-            )}
-         </NavMenu>
-      </Nav>
-   );
+               <NavItemComponent
+                  link='/settings'
+                  svg={<SVGIcons settings />}
+                  label='Settings'
+                  className={asPath === '/settings' ? 'active' : ''}
+               />
+               {user.email && (
+                  <button onClick={handleLogout}>
+                     <NavItemComponent
+                        link=''
+                        svg={<SVGIcons logout />}
+                        label='Log out'
+                     />
+                  </button>
+               )}
+            </NavMenu>
+         </Nav>
+
+         {/* Backdrop */}
+         <Backdrop
+            open={sideBarOpened}
+            onClick={() => setSideBarOpened(!sideBarOpened)}
+            sx={{ zIndex: '30' }}
+         ></Backdrop>
+      </>
+      // </>
+   );transform - none;
 };
 
 // tailwind Styles
-const Nav = tw.nav`bg-[#fafafa] transition-transform transform h-full w-[180px] px-6 shadow-lg py-16 lg:(bg-transparent transform-none py-0 shadow-none px-0 w-[180px] min-w-[180px] ml-8) xl:(w-[181px] min-w-[181px]) 2xl:(w-[211px] min-w-[211px]) fixed z-40`;
+const Nav = tw.nav`bg-[#fafafa] transition-transform transform h-full w-[180px] px-6 shadow-lg py-16 lg:(bg-transparent transform-none py-0 shadow-none px-0 w-[180px] min-w-[180px] ml-8) xl:(w-[181px] min-w-[181px]) 2xl:(w-[211px] min-w-[211px]) fixed top-0 z-40`;
 const NavMenu = tw.ul`space-y-10`;
 const NavItem = tw.li``;
 // const Anchor = tw.a``;

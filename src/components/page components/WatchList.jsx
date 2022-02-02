@@ -1,15 +1,15 @@
 import tw from 'twin.macro';
 import { useSelector } from 'react-redux';
+import { Skeleton, Stack } from '@mui/material';
 
 import Layout from '../Layout';
 import { StarSVG } from '../SVG-Icons';
 import Watchlist from '../Watchlist.jsx';
 import CurrentcyFormatter from '../../utils/CurrencyFormatter';
-import { Skeleton, Stack } from '@mui/material';
 
 const WatchList = () => {
-   const watchListS = useSelector((state) => state.watchList);
    const coins = useSelector((state) => state.coins.coins);
+   const watchListS = useSelector((state) => state.watchList);
    const coinsLoading = useSelector((state) => state.coins.loading);
 
    return (
@@ -86,6 +86,6 @@ const WatchList = () => {
 const WishlistWrapper = tw.div`space-y-8 lg:(mb-14)`;
 const NoCoinText = tw.p`text-dark-gray`;
 const Wishlist = tw.div`grid grid-cols-3 lg:grid-cols-5 gap-4 xl:gap-6`;
-const CoinWrapper = tw.div`bg-white rounded-[20px] overflow-hidden hover:(shadow-lg) transition-shadow duration-300 `;
+const CoinWrapper = tw.div`bg-white rounded-2xl lg:rounded-[20px] overflow-hidden hover:(shadow-lg) transition-shadow duration-300 `;
 
 export default WatchList;

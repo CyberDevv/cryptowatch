@@ -23,9 +23,15 @@ const Layout = ({ children }) => {
          <NavBar
             signInOpened={signInOpened}
             setSignInOpened={setSignInOpened}
+            setSideBarOpened={setSideBarOpened}
+            sideBarOpened={sideBarOpened}
          />
          <Div>
-            <SideBar setSignInOpened={setSignInOpened} sideBarOpened= {sideBarOpened} />
+            <SideBar
+               setSignInOpened={setSignInOpened}
+               sideBarOpened={sideBarOpened}
+               setSideBarOpened={setSideBarOpened}
+            />
 
             <Main>{children}</Main>
          </Div>

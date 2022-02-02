@@ -1,15 +1,20 @@
 import tw from 'twin.macro';
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
+import { useState, useEffect, useRef } from 'react';
 import { Avatar, Button, ListItemText, Stack } from '@mui/material';
 
 import SigninModal from './SignInModal.jsx';
 import SignupModal from './SignupModal.jsx';
-import { Logo, SearchSVG, SpinnerSVG } from '../SVG-Icons';
+import { Logo, SearchSVG, SpinnerSVG, LineHamburgerSVG } from '../SVG-Icons';
 
-const NavBar = ({ signInOpened, setSignInOpened }) => {
+const NavBar = ({
+   signInOpened,
+   setSignInOpened,
+   setSideBarOpened,
+   sideBarOpened,
+}) => {
    const [signUpOpened, setSignUpOpened] = useState(false);
    const [coinss, setCoins] = useState('');
    const [searchOpened, setSearchOpeend] = useState(false);
@@ -46,20 +51,34 @@ const NavBar = ({ signInOpened, setSignInOpened }) => {
       };
    }, [setSearchOpeend]);
 
+   const handleSidebarToOpen = () => {
+      setSideBarOpened(!sideBarOpened);
+   };
+
    return (
-      <div css={[tw`relative h-12 lg:h-32`]}>
+      <div css={[tw`relative h-6 lg:h-32`]}>
          <Nav className='navBar' ref={navBar}>
             <NavDiv>
-               {/* Logo */}
-               <Link href='/' passHref>
-                  <LogoAnchor>
-                     <Logo />
-                  </LogoAnchor>
-               </Link>
+               <div css={[tw`flex items-center justify-between `]}>
+                  {/* Logo */}
+                  <Link href='/' passHref>
+                     <LogoAnchor>
+                        <Logo />
+                     </LogoAnchor>
+                  </Link>
+
+                  {/* Hamburger */}
+                  <button onClick={handleSidebarToOpen}>
+                     <LineHamburgerSVG />
+                  </button>
+               </div>
 
                <div css={[tw`flex justify-between items-center w-full`]}>
                   {/* Search input */}
-                  <div css={[tw`relative`]} ref={searchPanel}>
+                  <div
+                     css={[tw`hidden lg:block relative w-full`]}
+                     ref={searchPanel}
+                  >
                      <InputWrapper>
                         <SearchSVG />
                         <Input
@@ -179,11 +198,11 @@ const NavButton = styled(Button)({
 
 // Tailwind styles
 const Nav = tw.nav`mb-16 flex items-center px-0 pr-4 xl:(px-10) pt-5 transition-all duration-300`;
-const NavDiv = tw.div`max-w-[1920px] mx-auto w-full flex items-center space-x-[40px] lg:(space-x-[55px]) xl:(space-x-[75px]) 2xl:(space-x-[115px]) transition-all duration-300`;
+const NavDiv = tw.div` max-w-[1920px] mx-auto w-full lg:flex items-center lg:(space-x-[55px]) xl:(space-x-[75px]) 2xl:(space-x-[115px]) transition-all duration-300`;
 const LogoAnchor = tw.a`ml-4`;
 const InputWrapper = tw.div`bg-[#EBF2FA] space-x-3 py-3 px-4 rounded-full flex items-center lg:(w-[350px])`;
 const Input = tw.input`bg-transparent text-dark-black focus:(outline-none) text-[13px] w-full`;
-const SearchPanel = tw.ul`h-96 overflow-y-scroll divide-y-2 divide-gray-200 overflow-x-hidden absolute w-[350px] max-w-[350px] bg-white shadow-xl z-40`;
+const SearchPanel = tw.ul`h-96 overflow-y-scroll divide-y-2 divide-gray-200 overflow-x-hidden absolute w-[350px] max-w-[350px] bg-white shadow-xl z-30`;
 const CoinAnchor = tw.a`flex items-center cursor-pointer justify-between w-full`;
 
 export default NavBar;

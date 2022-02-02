@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import tw from 'twin.macro';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -32,7 +32,10 @@ const SettingsComponent = () => {
    return (
       <Layout>
          {/* Page title */}
-         <p css={[tw`flex items-center space-x-5`]} className='bodyBold'>
+         <p
+            css={[tw`flex items-center space-x-3 lg:space-x-5`]}
+            className='bodyBold'
+         >
             <span>Settihgs</span> <SettingsComponentSVG />
          </p>
 
@@ -168,7 +171,12 @@ const SettingsComponent = () => {
 
             {/* Download section */}
             <DownnloadPannel>
-               <a css={[tw`md:max-w-[300px] lg:max-w-xs xl:max-w-md 2xl:max-w-lg`]} href='https://www.centuryleap.com'>
+               <a
+                  css={[
+                     tw`md:max-w-[300px] lg:max-w-xs xl:max-w-md 2xl:max-w-lg`,
+                  ]}
+                  href='https://www.centuryleap.com'
+               >
                   <Image
                      src='/images/download app.png'
                      width={504}
@@ -183,7 +191,7 @@ const SettingsComponent = () => {
 };
 
 // Tailwind styles
-const Main = tw.div`flex space-y-8 flex-col sm:my-8 md:(flex-row space-y-0) lg:my-14`;
+const Main = tw.div`flex space-y-8 flex-col my-2 sm:my-8 md:(flex-row space-y-0) lg:my-14`;
 const SettingsPannel = tw.div`space-y-14 md:w-1/2`;
 const DownnloadPannel = tw.div`w-3/4 md:w-1/2 md:flex justify-center`;
 const Form = tw.form`max-w-md`;

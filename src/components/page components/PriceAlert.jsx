@@ -131,8 +131,8 @@ const PriceAlert = () => {
                            <div css={[tw`flex items-center space-x-4`]}>
                               <Avatar
                                  sx={{
-                                    width: '32px',
-                                    height: '32px',
+                                    height: { xs: '22px', xl: '32px' },
+                                    width: { xs: '22px', xl: '32px' },
                                     // bgcolor: 'transparent',
                                  }}
                               >
@@ -216,8 +216,8 @@ const coinsDetails = [
 ];
 
 // tailwind styles
-const TableWrapper = tw.div`divide-y-2 space-y-2 mt-8`;
-const TableGrid = tw.ul`grid justify-items-start divide-dark-gray items-center grid-template-columns[50px 0.3fr 2.5fr 1fr 1fr 1fr 1fr 0.7fr 0.2fr ]`;
+const TableWrapper = tw.div`divide-y-2 space-y-2 mt-2 lg:mt-8 overflow-x-scroll`;
+const TableGrid = tw.ul`min-w-[788px] grid justify-items-start divide-dark-gray items-center grid-template-columns[50px 0.3fr 2.5fr 1.2fr 1.2fr 1.2fr 1.2fr 0.7fr 0.2fr ]`;
 const TableHeader = tw(TableGrid)``;
 const TableHeaderText = tw.p`text-[14px] text-dark-black leading-[17px]`;
 const TableBodyWrapper = tw.div`py-3.5 space-y-9`;

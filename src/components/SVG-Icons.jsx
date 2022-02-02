@@ -377,3 +377,17 @@ export const SpinnerSVG = () => {
       </SvgIcon>
    );
 };
+
+export const LineHamburgerSVG = () => {
+   return (
+      <SvgIcon
+         sx={{ width: '20px', height: '20px', fill: '#191919' }}
+         viewBox='0 0 100 80'
+         color='#3f51b5'
+      >
+         <rect width='100' height='10'></rect>
+         <rect y='30' width='100' height='10'></rect>
+         <rect y='60' width='100' height='10'></rect>
+      </SvgIcon>
+   );
+};
