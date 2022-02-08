@@ -85,7 +85,7 @@ const PriceAlert = () => {
    return (
       <Layout>
          {/* Section title */}
-         <p className='bodyBold'>Price Alerts</p>
+         <p className='bodyBold' css={[tw`pb-2`]}>Price Alerts</p>
          <TableWrapper>
             <TableHeader>
                {/* Star */}

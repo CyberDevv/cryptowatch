@@ -36,7 +36,7 @@ const SettingsComponent = () => {
             css={[tw`flex items-center space-x-3 lg:space-x-5`]}
             className='bodyBold'
          >
-            <span>Settihgs</span> <SettingsComponentSVG />
+            <span>Settings</span> <SettingsComponentSVG />
          </p>
 
          <Main>
@@ -44,7 +44,7 @@ const SettingsComponent = () => {
             <SettingsPannel>
                {/* Notification section */}
                <div>
-                  <p className='small'>Notifications</p>
+                  <p className='small' css={[tw`pb-2`]}>Notifications</p>``
 
                   {/* settings */}
                   <FormGroup>
@@ -99,7 +99,7 @@ const SettingsComponent = () => {
                         }
                         label={
                            <Typography sx={{ fontSize: '14px' }}>
-                              Receive notificatio whenn watchlisted coin reaches
+                              Receive notification when watchlisted coin reaches
                               all time high
                            </Typography>
                         }
@@ -191,8 +191,8 @@ const SettingsComponent = () => {
 };
 
 // Tailwind styles
-const Main = tw.div`flex space-y-8 flex-col my-2 sm:my-8 md:(flex-row space-y-0) lg:my-14`;
-const SettingsPannel = tw.div`space-y-14 md:w-1/2`;
+const Main = tw.div`flex space-y-8 flex-col my-2 sm:my-8 md:(flex-row space-y-0) lg:my-10`;
+const SettingsPannel = tw.div`space-y-14 md:w-1/2 pt-4 sm:(pt-0)`;
 const DownnloadPannel = tw.div`w-3/4 md:w-1/2 md:flex justify-center`;
 const Form = tw.form`max-w-md`;
 

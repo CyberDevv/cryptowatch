@@ -56,6 +56,6 @@ const Watchlist = ({ id, name, symbol, formattedPrice, image }) => {
 // Tailwind styles
 const CoinName = tw.p` text-[14px] lg:(text-[18px]) text-dark-darker leading-[28px]`;
 const CoinABBR = tw.p`uppercase text-[#505780] text-xs lg:(text-[14px] leading-[17px] tracking-[-0.025em])`;
-const Price = tw.p`text-[14px] text-center lg:(text-xl) xl:(text-[24px] leading-[29px] tracking-[-0.025em] text-left) text-dark-darker xl:mb-2`;
+const Price = tw.p`text-[14px] text-center lg:(text-xl) xl:(text-[22px] leading-[29px] tracking-[-0.025em] text-left py-2) text-dark-darker xl:mb-2`;
 
 export default Watchlist;

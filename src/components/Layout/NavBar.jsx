@@ -59,7 +59,7 @@ const NavBar = ({
       <div css={[tw`relative h-6 lg:h-32`]}>
          <Nav className='navBar' ref={navBar}>
             <NavDiv>
-               <div css={[tw`flex items-center justify-between `]}>
+               <div css={[tw`flex items-center justify-between`]}>
                   {/* Logo */}
                   <Link href='/' passHref>
                      <LogoAnchor>
@@ -68,7 +68,7 @@ const NavBar = ({
                   </Link>
 
                   {/* Hamburger */}
-                  <button onClick={handleSidebarToOpen}>
+                  <button onClick={handleSidebarToOpen} css={[tw`lg:hidden`]}>
                      <LineHamburgerSVG />
                   </button>
                </div>
@@ -197,7 +197,7 @@ const NavButton = styled(Button)({
 });
 
 // Tailwind styles
-const Nav = tw.nav`mb-16 flex items-center px-0 pr-4 xl:(px-10) pt-5 transition-all duration-300`;
+const Nav = tw.nav`mb-16 flex items-center px-0 pr-4 xl:(px-2)  pt-5 transition-all duration-300`;
 const NavDiv = tw.div` max-w-[1920px] mx-auto w-full lg:flex items-center lg:(space-x-[55px]) xl:(space-x-[75px]) 2xl:(space-x-[115px]) transition-all duration-300`;
 const LogoAnchor = tw.a`ml-4`;
 const InputWrapper = tw.div`bg-[#EBF2FA] space-x-3 py-3 px-4 rounded-full flex items-center lg:(w-[350px])`;

@@ -73,7 +73,8 @@ const Home = ({ coins, page }) => {
 
                <div
                   className='scrollHidden'
-                  css={[tw`overflow-x-scroll lg:h-[190px]`]}
+                  css={[tw`overflow-x-scroll`]}
+                  // lg:h-[190px] removed width cause it affecting wishlist heigth
                >
                   <Wishlist>
                      {coinss.map(({ id, name, symbol, current_price, image }) =>
@@ -117,7 +118,7 @@ const Home = ({ coins, page }) => {
 
 // Tailwind Styles
 const WishlistWrapper = tw.div`space-y-3 lg:(mb-14 mt-0 space-y-8)`;
-const Wishlist = tw.div`min-w-[720px] grid grid-cols-5 gap-4 xl:gap-6`;
-const CoinWrapper = tw.div`bg-white rounded-2xl lg:rounded-[20px] overflow-hidden hover:(shadow-lg) transition-shadow duration-300 `;
+const Wishlist = tw.div`min-w-[720px] h-full grid grid-cols-5 gap-4 xl:gap-6`;
+const CoinWrapper = tw.div`bg-white rounded-2xl lg:rounded-[20px] overflow-hidden hover:(shadow-lg) transition-shadow duration-300`;
 
 export default Home;
