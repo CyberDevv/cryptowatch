@@ -85,7 +85,7 @@ const WatchList = () => {
 // Tailwind Styles
 const WishlistWrapper = tw.div`space-y-8 lg:(mb-14)`;
 const NoCoinText = tw.p`text-dark-gray`;
-const Wishlist = tw.div`grid grid-cols-3 lg:grid-cols-5 gap-4 xl:gap-6`;
+const Wishlist = tw.div`grid grid-cols-2 lg:grid-cols-5 gap-4 xl:gap-6`;
 const CoinWrapper = tw.div`bg-white rounded-2xl lg:rounded-[20px] overflow-hidden hover:(shadow-lg) transition-shadow duration-300 `;
 
 export default WatchList;

@@ -284,7 +284,7 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
             open={priceAlertModalOpened}
             sx={{ textAlign: 'center' }}
          >
-            <div css={[tw`p-7 pt-[58px]`]}>
+            <div css={[tw`py-7 px-5 lg:py-7  pt-[58px]`]}>
                <h6 css={[tw`text-dark-black letter-spacing[0]`]}>
                   Add Price Alert
                </h6>
@@ -294,7 +294,7 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
                </Description>
 
                {/* predefined prices */}
-               <Stack direction='row' spacing='48px'>
+               <Stack direction={{xs:'column',sm:'row'}} spacing={{xs:'15px',sm:'48px'}}>
                   <Stack direction='row' spacing='8px'>
                      <PreDefinedPriceButton
                         onClick={() => handlePricePercentSetters(-50)}
@@ -485,10 +485,10 @@ const DateFormatter = (date) => {
 };
 
 // Tailwind Styles
-const CoinDashboard = tw.div`bg-white px-4 lg:px-8 py-9 mt-8 flex justify-between flex-col space-y-10`;
+const CoinDashboard = tw.div`bg-white px-2 lg:px-8 py-9 mt-8 flex justify-between flex-col space-y-10`;
 const CoinName = tw.p`uppercase text-dark-gray`;
-const CoinPrice = tw.p`text-[24px] text-dark-darker`;
-const ButtonWrapper = tw.div`space-x-5 mt-7`;
+const CoinPrice = tw.p`text-[20px] text-dark-darker sm:text-[24px]`;
+const ButtonWrapper = tw.div`space-x-2 sm:space-x-5 mt-7`;
 const VolumeTitle = tw.p`text-dark-gray`;
 const VolumeText = tw.p`text-dark-black`;
 const Description = tw.p`text-dark-gray mt-3 mb-8`;
