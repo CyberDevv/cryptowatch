@@ -106,8 +106,8 @@ const SideBar = ({ setSignInOpened, sideBarOpened, setSideBarOpened }) => {
 };
 
 // tailwind Styles
-const Nav = tw.nav`bg-[#fafafa] transition-transform transform h-full w-[180px] px-6 shadow-lg py-16 lg:(bg-transparent transform-none py-0 shadow-none px-0 w-[180px] min-w-[180px] ml-8) xl:(w-[181px] min-w-[181px]) 2xl:(w-[211px] min-w-[211px]) fixed top-0 z-40`;
-const NavMenu = tw.ul`space-y-10`;
+const Nav = tw.nav`bg-[#fafafa] transition-transform transform h-full w-[180px] px-6 shadow-lg py-16 lg:(bg-transparent transform-none shadow-none py-24 px-2 w-[180px] min-w-[180px] ml-3) xl:(w-[181px] min-w-[181px] px-4) 2xl:(w-[211px] min-w-[211px]) fixed top-0 z-40`;
+const NavMenu = tw.ul`space-y-9`;
 const NavItem = tw.li``;
 // const Anchor = tw.a``;
 
