@@ -295,7 +295,7 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
 
                {/* predefined prices */}
                <Stack direction={{xs:'column',sm:'row'}} spacing={{xs:'15px',sm:'48px'}}>
-                  <Stack direction='row' spacing='8px'>
+                  <Stack direction='row' spacing='8px' justifyContent='center'>
                      <PreDefinedPriceButton
                         onClick={() => handlePricePercentSetters(-50)}
                      >
@@ -317,7 +317,7 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
                         -5%
                      </PreDefinedPriceButton>
                   </Stack>
-                  <Stack direction='row' spacing='8px'>
+                  <Stack direction='row' spacing='8px' justifyContent='center'>
                      <ButtonGreen onClick={() => handlePricePercentSetters(5)}>
                         5%
                      </ButtonGreen>
@@ -338,7 +338,7 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
                   direction='row'
                   justifyContent='center'
                   spacing='8px'
-                  sx={{ marginTop: '60px' }}
+                  sx={{ marginTop: '60px', }}
                >
                   <FormControl>
                      <Select
@@ -395,20 +395,44 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
                   Current BTC Price: {CurrentcyFormatter(current_price.usd)}
                </Description>
 
-               <Button
+               <div css={[tw`relative`]}>
+                  <Button
+                     sx={{
+                        paddingX: '24px',
+                        paddingY: '12px',
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        textTransform: 'none',
+                        borderRadius: '8px',
+                        boxShadow: 'none',
+                     }}
+                     variant='contained'
+                  >
+                     Save
+                  </Button>
+                  <DialogActions
                   sx={{
-                     paddingX: '24px',
-                     paddingY: '12px',
-                     fontSize: '14px',
-                     fontWeight: 'bold',
-                     textTransform: 'none',
-                     borderRadius: '8px',
-                     boxShadow: 'none',
+                     padding: 0,
                   }}
-                  variant='contained'
-               >
-                  Save
-               </Button>
+                  >  
+                  <Button
+                     sx={{
+                        position: 'absolute',
+                        borderRadius: '999px',
+                        height: '25px',
+                        minWidth: 25,
+                        right: 0,
+                        bottom: 10,
+                     }}
+                     onClick={() => setPriceAlertModalOpened(false)}
+                  >
+                     
+                     <Link href='/priceAlerts'>
+                        <a>View all</a>
+                     </Link>
+                  </Button>
+               </DialogActions>
+               </div>
 
                {/* Close button */}
                <DialogActions
@@ -428,22 +452,6 @@ const CurrencyComponent = ({ res, sevenDres, oneMonthRes, oneDayRes }) => {
                      onClick={() => setPriceAlertModalOpened(false)}
                   >
                      <CloseSVG />
-                  </Button>
-
-                  <Button
-                     sx={{
-                        position: 'absolute',
-                        borderRadius: '999px',
-                        height: '25px',
-                        minWidth: 25,
-                        right: 26,
-                        bottom: 35,
-                     }}
-                     onClick={() => setPriceAlertModalOpened(false)}
-                  >
-                     <Link href='/priceAlerts'>
-                        <a>View all</a>
-                     </Link>
                   </Button>
                </DialogActions>
             </div>
