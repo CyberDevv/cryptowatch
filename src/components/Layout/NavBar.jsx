@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import { useState, useEffect, useRef } from 'react';
-import { Avatar, Button, ListItemText, Stack } from '@mui/material';
+import {  Button, ListItemText, Stack } from '@mui/material';
 
 import SigninModal from './SignInModal.jsx';
 import SignupModal from './SignupModal.jsx';
@@ -143,7 +143,12 @@ const NavBar = ({
                   </div>
 
                   {/* Buttons */}
-                  <Stack spacing={3} direction='row'>
+                  <Stack
+                     justifyContent='end'
+                     spacing={3}
+                     direction='row'
+                     tw='w-full hidden lg:flex'
+                  >
                      {/* sign in */}
                      {!user.email && (
                         <NavButton
