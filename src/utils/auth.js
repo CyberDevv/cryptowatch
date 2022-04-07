@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 // TODO: setup the function for better UX handling both on success and error when backend is ready
 export function signInWthGoogle() {
    axios
-      .get(`${process.env.NEXT_APP_API_URL}/auth/google`)
+      .get(`${process.env.BASE_API_URL}/auth/google`)
       .then((res) => {
          toast.success('Google sign in successful');
       })
@@ -15,7 +15,7 @@ export function signInWthGoogle() {
 
 export function signInWithFacebook() {
    axios
-      .get(`${process.env.NEXT_APP_API_URL}/auth/facebook`)
+      .get(`${process.env.BASE_API_URL}/auth/facebook`)
       .then((res) => {
          toast.success('Facebook sign in successful');
       })
@@ -26,10 +26,11 @@ export function signInWithFacebook() {
 
 export async function signInWithEmail(email, password, rememberMe) {
    try {
-      const res = await axios.post(
-         `${process.env.NEXT_APP_API_URL}/auth/email`,
-         { email, password, rememberMe }
-      );
+      const res = await axios.post(`${process.env.BASE_API_URL}/auth/email`, {
+         email,
+         password,
+         rememberMe,
+      });
 
       toast.success('Sign in successful');
    } catch (err) {
@@ -41,7 +42,7 @@ export async function signInWithEmail(email, password, rememberMe) {
 export async function ForgotPassword(email) {
    try {
       const res = await axios.post(
-         `${process.env.NEXT_APP_API_URL}/auth/forgot-password`,
+         `${process.env.BASE_API_URL}/auth/forgot-password`,
          {
             email,
          }
@@ -56,7 +57,7 @@ export async function ForgotPassword(email) {
 
 export function ResendOTP() {
    axios
-      .get(`${process.env.NEXT_APP_API_URL}/auth/resend-otp`)
+      .get(`${process.env.BASE_API_URL}/auth/resend-otp`)
       .then((res) => {
          toast.success('OTP sent successfully');
       })
@@ -68,7 +69,7 @@ export function ResendOTP() {
 export async function VerifyOTP(otp) {
    try {
       const res = await axios.post(
-         `${process.env.NEXT_APP_API_URL}/auth/verify-otp`,
+         `${process.env.BASE_API_URL}/auth/verify-otp`,
          {
             otp,
          }
@@ -89,7 +90,7 @@ export async function setNewPassword(newPassword, confirmPassword) {
 
    try {
       const res = await axios.post(
-         `${process.env.NEXT_APP_API_URL}/auth/set-new-password`,
+         `${process.env.BASE_API_URL}/auth/set-new-password`,
          {
             newPassword,
          }
@@ -104,9 +105,7 @@ export async function setNewPassword(newPassword, confirmPassword) {
 
 export async function signOut() {
    try {
-      const res = await axios.get(
-         `${process.env.NEXT_APP_API_URL}/auth/sign-out`
-      );
+      const res = await axios.get(`${process.env.BASE_API_URL}/auth/sign-out`);
       toast.success('Sign out successful');
       return true;
    } catch (err) {
@@ -122,13 +121,10 @@ export async function signUp(email, password, confirmPassword) {
    }
 
    try {
-      const res = await axios.post(
-         `${process.env.NEXT_APP_API_URL}/auth/sign-up`,
-         {
-            email,
-            password,
-         }
-      );
+      const res = await axios.post(`${process.env.BASE_API_URL}/auth/sign-up`, {
+         email,
+         password,
+      });
 
       toast.success('Sign up successful');
       return true;
