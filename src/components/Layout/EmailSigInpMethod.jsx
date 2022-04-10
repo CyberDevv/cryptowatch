@@ -10,6 +10,8 @@ import {
    ResendOTP,
    setNewPassword,
 } from '../../utils/auth.js';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
    const [forgotPassModal, setForgotPassModal] = useState(false);
@@ -26,10 +28,22 @@ const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
       // TODO: make a better handle of this
       e.preventDefault();
 
-      signInWithEmail(email, password, rememberMe).then((res) => {
-         
-         res && setSignInOpened(false);
-      });
+      // signInWithEmail(email, password, rememberMe).then((res) => {
+
+      //    res && setSignInOpened(false);
+      // });
+
+      axios
+         .post('/api/login', {
+            email,
+            password,
+         })
+         .then((res) => {
+            console.log(res);
+         })
+         .catch((err) => {
+            toast.error(err.response.data.message);
+         });
    };
 
    const handleForgotPass = (e) => {
@@ -37,7 +51,6 @@ const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
       e.preventDefault();
 
       ForgotPassword(email).then((res) => {
-         
          res && setForgotPinSent(true);
       });
    };
@@ -53,7 +66,6 @@ const EmailSignInMethod = ({ setWithEmailModal, setSignInOpened }) => {
       // INput youir codes in here
 
       VerifyOTP(otp).then((res) => {
-         
          res && setResetPIN(true);
       });
    };

@@ -24,19 +24,20 @@ export function signInWithFacebook() {
       });
 }
 
-export async function signInWithEmail(email, password, rememberMe) {
-   try {
-      const res = await axios.post(`${process.env.BASE_API_URL}/auth/email`, {
+export async function signInWithEmail(email, password) {
+   console.log(`${process.env.BASE_API_URL}/login`);
+   
+   await axios
+      .post(`${process.env.BASE_API_URL}/login`, {
          email,
          password,
-         rememberMe,
+      })
+      .then((res) => {
+         console(res);
+      })
+      .catch((err) => {
+         console.log(err);
       });
-
-      toast.success('Sign in successful');
-   } catch (err) {
-      console.log(err);
-      toast.error('Sign in failed');
-   }
 }
 
 export async function ForgotPassword(email) {
